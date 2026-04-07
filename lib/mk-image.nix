@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 # lib/mk-image.nix
-{ nixpkgs, system, ... }:
+{ nixpkgs, system, inputs, ... }:
 
 let
   lib = nixpkgs.lib;
@@ -12,9 +12,9 @@ in
   mkImage = modules: lib.nixosSystem {
     inherit system;
     modules = [
-      ../modules/services/common/sshd.nix
-      ../modules/services/common/pki.nix
-      ../modules/users/default.nix
+      "${inputs.self}/modules/services/common/sshd.nix"
+      "${inputs.self}/modules/services/common/pki.nix"
+      "${inputs.self}/modules/users/default.nix"
       { system.stateVersion = "25.11"; }
     ] ++ modules;
   };

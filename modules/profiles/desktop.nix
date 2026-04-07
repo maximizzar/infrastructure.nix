@@ -6,7 +6,7 @@
 { pkgs, ... }: {
   imports = [
     ./core.nix
-    ./home-bridge.nix # Alice and Bob's personal configs live here
+    ./home-bridge.nix
   ];
 
   environment.systemPackages = with pkgs; [

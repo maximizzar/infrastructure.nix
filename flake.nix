@@ -24,7 +24,7 @@
     system = "x86_64-linux";
     lib = nixpkgs.lib;
 
-    imageLib = import ./lib/mk-image.nix { inherit nixpkgs system; };
+    imageLib = import ./lib/mk-image.nix { inherit nixpkgs system inputs; };
 
   in with imageLib; {
     # Host Configurations (for deployment)

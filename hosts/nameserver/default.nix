@@ -6,6 +6,10 @@
 { pkgs, ... }: {
   imports = [
     ./hardware-configuration.nix
+
+    "${inputs.self}/modules/services/common/pki.nix"
+    "${inputs.self}/modules/users/default.nix"
+    "${inputs.self}/modules/services/powerdns/default.nix"
   ];
 
   networking.hostName = "ns";

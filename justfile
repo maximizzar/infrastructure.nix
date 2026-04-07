@@ -22,4 +22,4 @@ build-lxc:
 
 # Deploy a Forwarding BIND9 NS with Filtering
 deploy-nameserver target:
-	nix run nixpkgs#nixos-rebuild --switch --flake .#nameserver --target-host {{ target }}
+	nix run nixpkgs#nixos-rebuild -- switch --flake .#nameserver --target-host {{ target }}
