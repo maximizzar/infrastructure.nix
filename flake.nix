@@ -23,8 +23,10 @@
   outputs = { self, nixpkgs, disko, sops-nix, ... }@inputs: let
     system = "x86_64-linux";
     lib = nixpkgs.lib;
-    mkImage = import ./lib/mk-image.nix { inherit nixpkgs system; };
-  in {
+
+    imageLib = import ./lib/mk-image.nix { inherit nixpkgs system; };
+
+  in with imageLib; {
     # Host Configurations (for deployment)
     nixosConfigurations = {
       # LXC Configuration

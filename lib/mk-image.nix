@@ -9,7 +9,7 @@ let
   lib = nixpkgs.lib;
 in
 {
-  mkNixosImage = modules: lib.nixosSystem {
+  mkImage = modules: lib.nixosSystem {
     inherit system;
     modules = [
       ../modules/services/common/sshd.nix

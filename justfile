@@ -14,11 +14,11 @@ update-flake:
 
 # Build generic VM image (QCOW2)
 build-vm:
-    nix build path:.#vm-template
+    nix build .#vm-template
 
 # Build Proxmox LXC template
 build-lxc:
-    nix build path:.#lxc-template
+    nix build .#lxc-template
 
 # Deploy a Forwarding BIND9 NS with Filtering
 deploy-nameserver target:
