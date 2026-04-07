@@ -23,24 +23,22 @@
   outputs = { self, nixpkgs, disko, sops-nix, ... }@inputs: let
     system = "x86_64-linux";
     lib = nixpkgs.lib;
-
-    baseModules = [
-        ./modules/services/common/sshd.nix
-        ./modules/services/common/pki.nix
-        ./modules/users/default.nix
-    ];
-
+    mkImage = import ./lib/mk-image.nix { inherit nixpkgs system; };
   in {
     # Host Configurations (for deployment)
     nixosConfigurations = {
-      generic-guest = lib.nixosSystem {
-        inherit system;
-        modules = baseModules ++ [ ({modulesPath, ...}: {
-          imports = [ "${modulesPath}/profiles/qcow2.nix" ];
-          system.stateVersion = "25.11";
-        }) ];
-      };
+      # LXC Configuration
+      generic-lxc = mkImage [ ({ modulesPath, ... }: {
+        imports = [ "${modulesPath}/virtualisation/proxmox-lxc.nix" ];
+      }) ];
 
+      # VM Configuration
+      generic-vm = mkImage [ ({ modulesPath, ... }: {
+        # Note: In 25.11, if qcow2.nix is missing, use qcow2-config.nix
+        imports = [ "${modulesPath}/virtualisation/proxmox-image.nix" ];
+      }) ];
+
+      # Nameserver Configuration
       nameserver = lib.nixosSystem {
         inherit system;
         specialArgs = { inherit inputs; };
@@ -55,8 +53,8 @@
 
     # Map images to packages for easy building
     packages.${system} = {
-        vm-image = self.nixosConfigurations.generic-guest.config.system.build.images.qcow2;
-        proxmox-lxc = self.nixosConfigurations.generic-guest.config.system.build.images.proxmox-lxc;
+        lxc-template = self.nixosConfigurations.generic-lxc.config.system.build.image;
+        vm-template  = self.nixosConfigurations.generic-vm.config.system.build.image;
     };
   };
 }
