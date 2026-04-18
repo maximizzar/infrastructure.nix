@@ -12,18 +12,14 @@ default:
 update-flake:
 	nix flake update
 
-# Build generic VM image (QCOW2)
-build-vm:
+# Build generic VM disk (QCOW2)
+build-vm-disk:
     nix build .#vm-template
 
 # Update vma.zst to a remote
 upload-vm user sshkey host:
     curl --insecure -u {{ user }}: --key ~/.ssh/{{ sshkey }} --pubkey ~/.ssh/{{ sshkey }}.pub -T result/*.vma.zst sftp://{{ host }}/var/lib/vz/dump/
 
-# Build Proxmox LXC template
-build-lxc:
-    nix build .#lxc-template
-
-# Deploy a Forwarding BIND9 NS with Filtering
+# Deploy a Forwarding nameserver with Filtering
 deploy-nameserver target:
-	nix run nixpkgs#nixos-rebuild -- switch --flake .#nameserver --target-host {{ target }}
+	nix run nixpkgs#nixos-rebuild -- switch --flake .#ns --target-host {{ target }}

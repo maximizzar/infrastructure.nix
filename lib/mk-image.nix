@@ -9,10 +9,15 @@ in {
     mkImage = modules: lib.nixosSystem {
         inherit system;
         modules = [
+            inputs.disko.nixosModules.disko
+            "${inputs.self}/modules/hardware/proxmox-disk-layout.nix"
+            "${inputs.self}/modules/hardware/proxmox-qemu.nix"
+
             "${inputs.self}/modules/services/common/networkd.nix"
             "${inputs.self}/modules/services/common/sshd.nix"
             "${inputs.self}/modules/services/common/pki.nix"
             "${inputs.self}/modules/users/default.nix"
+
             { system.stateVersion = "25.11"; }
         ] ++ modules;
     };

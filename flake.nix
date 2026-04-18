@@ -20,7 +20,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, disko, sops-nix, ... }@inputs: let
+  outputs = { self, nixpkgs, sops-nix, ... }@inputs: let
     system = "x86_64-linux";
     lib = nixpkgs.lib;
 
@@ -29,25 +29,19 @@
   in with imageLib; {
     # Host Configurations (for deployment)
     nixosConfigurations = {
-      # LXC Configuration
-      generic-lxc = mkImage [ ({ modulesPath, ... }: {
-        imports = [ "${modulesPath}/virtualisation/proxmox-lxc.nix" ];
-      }) ];
 
-      # VM Configuration
+      # VM Image Configuration (QCow2)
       generic-vm = mkImage [ ({ modulesPath, ... }: {
-        # Note: In 25.11, if qcow2.nix is missing, use qcow2-config.nix
-        imports = [ "${modulesPath}/virtualisation/proxmox-image.nix" ];
       }) ];
 
       # Nameserver Configuration
-      nameserver = lib.nixosSystem {
+      ns = lib.nixosSystem {
         inherit system;
         specialArgs = { inherit inputs; };
 
         modules = [
-          ./hosts/nameserver/default.nix
-          disko.nixosModules.disko
+          ./hosts/ns/default.nix
+          inputs.disko.nixosModules.disko
           sops-nix.nixosModules.sops
         ];
       };
@@ -55,8 +49,7 @@
 
     # Map images to packages for easy building
     packages.${system} = {
-        lxc-template = self.nixosConfigurations.generic-lxc.config.system.build.image;
-        vm-template  = self.nixosConfigurations.generic-vm.config.system.build.image;
+        vm-template  = self.nixosConfigurations.generic-vm.config.system.build.diskoImages;
     };
   };
 }
