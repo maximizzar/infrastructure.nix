@@ -16,6 +16,10 @@ update-flake:
 build-vm:
     nix build .#vm-template
 
+# Update vma.zst to a remote
+upload-vm user sshkey host:
+    curl --insecure -u {{ user }}: --key ~/.ssh/{{ sshkey }} --pubkey ~/.ssh/{{ sshkey }}.pub -T result/*.vma.zst sftp://{{ host }}/var/lib/vz/dump/
+
 # Build Proxmox LXC template
 build-lxc:
     nix build .#lxc-template
