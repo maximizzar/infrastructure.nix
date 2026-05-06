@@ -22,4 +22,4 @@ upload-vm user sshkey host:
 
 # Deploy a Forwarding nameserver with Filtering
 deploy-nameserver target:
-	nix run nixpkgs#nixos-rebuild -- switch --flake .#ns --target-host {{ target }}
+	nix run nixpkgs#nixos-rebuild -- switch --flake .#ns --target-host {{ target }} --sudo --ask-sudo-password

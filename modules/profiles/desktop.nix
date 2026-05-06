@@ -4,17 +4,16 @@
 
 # modules/profiles/desktop.nix
 { pkgs, ... }: {
-  imports = [
-    ./core.nix
-    ./home-bridge.nix
-  ];
+    imports = [
+        ./core.nix
+    ];
 
-  environment.systemPackages = with pkgs; [
-    # --- Text Editors ---
-    neovim
+    environment.systemPackages = with pkgs; [
+        # --- Text Editors ---
+        neovim
 
-    # --- Network Tools ---
-    btop
-    bandwhich   # Bandwidth utilization by process
-  ];
+        # --- Network Tools ---
+        btop
+        bandwhich   # Bandwidth utilization by process
+    ];
 }

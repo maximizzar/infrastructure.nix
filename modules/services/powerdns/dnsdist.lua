@@ -1,15 +1,7 @@
 -- TCP/UDP Frontend (port 53)
-addLocal("0.0.0.0:53", { reusePort=true })
 addLocal("[::]:53",     { reusePort=true })
 
 -- DoT Frontend (TLS, port 853)
-addTLSLocal(
-    "0.0.0.0:853",
-    "@tlsCert@",
-    "@tlsKey@",
-    { reusePort=true, minTLSVersion="@minTLS@" }
-)
-
 addTLSLocal(
     "[::]:853",
     "@tlsCert@",
@@ -19,31 +11,6 @@ addTLSLocal(
 
 -- DOH Frontend (HTTP/2, port 443)
 addDOHLocal(
-    "0.0.0.0:443",
-    "@tlsCert@",
-    "@tlsKey@",
-    "/dns-query",
-    { reusePort=true, minTLSVersion="@minTLS@" }
-)
-
-addDOHLocal(
-    "[::]:443",
-    "@tlsCert@",
-    "@tlsKey@",
-    "/dns-query",
-    { reusePort=true, minTLSVersion="@minTLS@" }
-)
-
--- DoH3 (HTTP/3 over QUIC, port 443)
-addDOH3Local(
-    "0.0.0.0:443",
-    "@tlsCert@",
-    "@tlsKey@",
-    "/dns-query",
-    { reusePort=true, minTLSVersion="@minTLS@" }
-)
-
-addDOH3Local(
     "[::]:443",
     "@tlsCert@",
     "@tlsKey@",
@@ -75,3 +42,7 @@ newServer({
 })
 
 setServerPolicy(firstAvailable)
+
+-- Server acl rules
+addACL('0.0.0.0/0')
+addACL('::/0')

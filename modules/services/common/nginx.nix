@@ -15,4 +15,4 @@
     recommendedUwsgiSettings = true;
     recommendedBrotliSettings = true;
   };
-};
+}

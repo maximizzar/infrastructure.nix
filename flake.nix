@@ -32,6 +32,9 @@
 
       # VM Image Configuration (QCow2)
       generic-vm = mkImage [ ({ modulesPath, ... }: {
+          # Build vm image with resolvd, don't set it in module config,
+          # but in host config.
+          services.resolved.enable = true;
       }) ];
 
       # Nameserver Configuration

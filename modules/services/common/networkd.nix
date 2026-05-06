@@ -8,11 +8,24 @@
     networking.useDHCP = false;
 
     systemd.network.networks."40-ens18" = {
-            matchConfig.Name = "ens18";
+        matchConfig = {
+            Name = "ens18";
+            Virtualization = "vm";
+        };
 
-            networkConfig.DHCP = "ipv4";
-            networkConfig.IPv6AcceptRA = true;
+        linkConfig = {
+            RequiredForOnline = "routable";
+            #RequiredFamilyForOnline = "ipv6";
+        };
 
-            linkConfig.RequiredForOnline = "routable";
+        networkConfig = {
+            Description = "Main Interface";
+            DHCP = "ipv4";
+            LinkLocalAddressing = "yes";
+            IPv6LinkLocalAddressGenerationMode = "eui64";
+
+            IPv6PrivacyExtensions = false;
+            IPv6AcceptRA = true;
+        };
     };
 }

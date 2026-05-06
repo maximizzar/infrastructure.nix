@@ -4,22 +4,11 @@
 
 # hosts/ns/default.nix
 { inputs, ... }: {
-  imports = [
-    "${inputs.self}/modules/hardware/proxmox-disk-layout.nix"
-    "${inputs.self}/modules/hardware/proxmox-qemu.nix"
+    imports = [
+        "${inputs.self}/modules/profiles/guest.nix"
+        "${inputs.self}/modules/services/powerdns/default.nix"
+    ];
 
-    # Common settings
-    "${inputs.self}/modules/services/common/networkd.nix"
-    "${inputs.self}/modules/services/common/sshd.nix"
-    "${inputs.self}/modules/services/common/pki.nix"
-
-    # user setup (no home config for now)
-    "${inputs.self}/modules/users/default.nix"
-
-    # modules to configure the hosts role
-    #"${inputs.self}/modules/services/powerdns/default.nix"
-  ];
-
-  networking.hostName = "ns";
-  system.stateVersion = "25.11";
+    services.resolved.enable = false;
+    networking.hostName = "ns";
 }
