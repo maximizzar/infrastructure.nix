@@ -13,6 +13,14 @@
     dnsdistConfig = pkgs.replaceVars ./dnsdist.lua {
         inherit caStore minTLS tlsCert tlsKey;
     };
+
+    hagezi-rpz = pkgs.fetchFromGitHub {
+        owner = "hagezi";
+        repo = "dns-blocklists";
+        rev = "main";
+        sha256 = "sha256-eEt4jxQ+6PdkvS0owylLh754BiHMPyjnScQXbbxkLy0=";
+    };
+
 in {
     # TLS-cert for DoT and DoH
     security.acme.certs."${fqdn}" = {
@@ -33,6 +41,25 @@ in {
     services.dnsdist = {
         enable = true;
         extraConfig = builtins.readFile dnsdistConfig;
+    };
+
+    # DNS Recursor
+    services.pdns-recursor = {
+        enable = true;
+        dns = {
+            address = [ "127.0.0.1" ];
+            allowFrom = [ "127.0.0.0/8" ];
+            port = 5300;
+        };
+
+        dnssecValidation = "log-fail";
+        exportHosts = false;
+        forwardZonesRecurse = {
+            "." = "127.0.0.1:5353";
+        };
+
+        serveRFC1918 = true;
+        luaConfig = builtins.readFile ./rpz.lua;
     };
 
     # 4. Allow dnsdist to see the cert directory through the systemd sandbox
