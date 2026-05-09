@@ -79,7 +79,7 @@ in {
         };
     };
 
-    # TLS-cert for DoT and DoH
+    # TLS-cert for https
     security.acme.certs."${fqdn}" = {
         domain = "${fqdn}";
         group = "nginx";

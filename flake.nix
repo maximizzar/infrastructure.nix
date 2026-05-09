@@ -56,6 +56,17 @@
                 services.resolved.enable = true;
             }) ];
 
+            git-forgejo = lib.nixosSystem {
+                inherit system;
+                specialArgs = { inherit inputs; };
+
+                modules = [
+                    ./hosts/git/forgejo.nix
+                    inputs.disko.nixosModules.disko
+                    inputs.sops-nix.nixosModules.sops
+                ];
+            };
+
             # Nameserver Configuration
             ns = lib.nixosSystem {
                 inherit system;
