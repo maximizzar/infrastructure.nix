@@ -54,12 +54,16 @@ in {
 
         dnssecValidation = "log-fail";
         exportHosts = false;
+        serveRFC1918 = true;
+        luaConfig = builtins.readFile ./rpz.lua;
         forwardZonesRecurse = {
             "." = "127.0.0.1:5353";
         };
 
-        serveRFC1918 = true;
-        luaConfig = builtins.readFile ./rpz.lua;
+        forwardZones = {
+            "maximizzar.io" = "192.168.178.240:53";
+        };
+
     };
 
     # 4. Allow dnsdist to see the cert directory through the systemd sandbox
@@ -68,5 +72,5 @@ in {
     networking.firewall = {
         allowedTCPPorts = [ 53 443 853 ];
         allowedUDPPorts = [ 53 443 ];
-  };
+    };
 }
