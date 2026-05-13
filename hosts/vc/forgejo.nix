@@ -9,6 +9,7 @@ in {
     environment.systemPackages = with pkgs; [
         dnsutils
         openssl_4_0
+        mtr
     ];
 
     networking.firewall.enable = false;

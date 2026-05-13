@@ -3,8 +3,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 # hosts/core/nameserver/forwarder.nix
-{ inputs, pkgs, hostname, ns-primary, ... }: let
-    domain = "core.prod.maximizzar.org";
+{ inputs, pkgs, hostname, domain, ns-primary, ... }: let
     fqdn = hostname + "." + domain;
 
     caStore = "/etc/ssl/certs/ca-certificates.crt";

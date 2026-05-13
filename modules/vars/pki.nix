@@ -11,7 +11,7 @@ in {
             acceptTerms = true;
             defaults = {
                 email = "admin@maximizzar.org";
-                server = "https://root.ca.core.prod.maximizzar.org/acme/acme/directory";
+                server = "https://root.ca.maximizzar.org/acme/acme/directory";
             };
         };
 

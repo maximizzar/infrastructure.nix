@@ -3,8 +3,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 # hosts/core/nameserver/authoritive.nix
-{ self, pkgs, hostname, ...  }: let
-    domain = "maximizzar.org";
+{ self, pkgs, hostname, domain, ...  }: let
     fqdn = hostname + "." + domain;
 
     # SOA Record fields

@@ -53,7 +53,7 @@ deploy-nameserver:
 
 
     main() {
-      #authoritive
+      authoritive
       forwarder
     }
 
@@ -63,8 +63,3 @@ deploy-nameserver:
 _list-configs:
     @echo "❌ Deployment failed! Available NixOS configurations in this Flake:"
     @nix flake show --json 2>/dev/null | jq -r '.nixosConfigurations | keys[]' | sed 's/^/  - /' || echo "No NixOS configurations found."
-
-
-
-
-

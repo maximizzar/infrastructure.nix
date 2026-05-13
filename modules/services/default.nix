@@ -8,6 +8,8 @@ let
 
 in {
     imports = [
+        ./prometheus-client.nix
+        ./prometheus-server.nix
         ./sshd.nix
         ./nameserver
     ];

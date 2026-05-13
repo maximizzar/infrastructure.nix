@@ -44,9 +44,14 @@ in {
             system = "x86_64-linux";
             specialArgs = { inherit inputs; };
             modules = commonModules ++ [
-                { _module.args = { hostname = "ns-primary"; ns-primary = "fd80:3aa8:691a:20:be24:11ff:fee8:c513"; }; }
+                { _module.args = {
+                    hostname = "ns-primary";
+                    domain = "core.prod.maximizzar.org";
+                    ns-primary = "fd80:3aa8:691a:20:be24:11ff:fee8:c513";
+                }; }
                 self.nixosModules.services-nameserver-forwarder
                 self.nixosModules.networking-generic-interface-config
+                self.nixosModules.services-prometheus-client
             ] ++ qemuvmModules;
         };
 
@@ -54,21 +59,29 @@ in {
             system = "x86_64-linux";
             specialArgs = { inherit inputs; };
             modules = commonModules ++ [
-                { _module.args = { hostname = "ns-secondary"; ns-primary = "fd80:3aa8:691a:20:be24:11ff:fed9:139f"; }; }
+                { _module.args = {
+                    hostname = "ns-secondary";
+                    domain = "core.prod.maximizzar.org";
+                    ns-primary = "fd80:3aa8:691a:20:be24:11ff:fed9:139f";
+                }; }
                 self.nixosModules.services-nameserver-forwarder
                 self.nixosModules.networking-generic-interface-config
+                self.nixosModules.services-prometheus-client
             ] ++ qemuvmModules;
         };
-
 
 
         core-ns-authoritive-primary = inputs.nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             specialArgs = { inherit inputs self; };
             modules = commonModules ++ [
-                { _module.args = { hostname = "ns-primary"; }; }
+                { _module.args = {
+                    hostname = "ns-primary";
+                    domain = "maximizzar.org";
+                }; }
                 self.nixosModules.services-nameserver-authoritive
                 self.nixosModules.networking-generic-interface-config
+                self.nixosModules.services-prometheus-client
             ] ++ qemuvmModules;
         };
 
@@ -76,9 +89,13 @@ in {
             system = "x86_64-linux";
             specialArgs = { inherit inputs self; };
             modules = commonModules ++ [
-                { _module.args = { hostname = "ns-secondary"; }; }
+                { _module.args = {
+                    hostname = "ns-secondary";
+                    domain = "maximizzar.org";
+                }; }
                 self.nixosModules.services-nameserver-authoritive
                 self.nixosModules.networking-generic-interface-config
+                self.nixosModules.services-prometheus-client
             ] ++ qemuvmModules;
         };
 
@@ -87,7 +104,12 @@ in {
             system = "x86_64-linux";
             specialArgs = { inherit inputs; };
             modules = commonModules ++ [
+                { _module.args = {
+                    hostname = "prometheus";
+                    domain = "core.prod.maximizzar.org";
+                }; }
                 ./core/prometheus.nix
+                self.nixosModules.networking-generic-interface-config
             ] ++ qemuvmModules;
         };
 
