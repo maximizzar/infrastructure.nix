@@ -2,11 +2,8 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-# modules/users/default.nix
+# hosts/web/jellyfin.nix
 { ... }: let
 
 in {
-    imports  = [
-        ./maximizzar.nix
-    ];
 }

@@ -2,16 +2,12 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+# flake.nix
 {
-    description = "NixOS configuration for my Homelab!";
+    description = "NixOS configuration for my Homelab";
+
     inputs = {
         nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-        nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-
-        attic = {
-            url = "github:zhaofengli/attic";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
 
         # Disk Image Management
         disko = {
@@ -24,65 +20,18 @@
             url = "github:Mic92/sops-nix";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+
+        flake-parts.url = "github:hercules-ci/flake-parts";
     };
 
-    outputs = { self, nixpkgs, ... }@inputs: let
-    system = "x86_64-linux";
-    lib = nixpkgs.lib;
-
-    imageLib = import ./lib/mk-image.nix { inherit nixpkgs system inputs; };
-
-    in with imageLib; {
-        # Host Configurations (for deployment)
-        nixosConfigurations = {
-
-            # Attic: Nix Binary Cache server
-            attic = lib.nixosSystem {
-                inherit system;
-                specialArgs = { inherit inputs; };
-
-                modules = [
-                    ./hosts/attic/default.nix
-                    inputs.disko.nixosModules.disko
-                    inputs.attic.nixosModules.atticd
-                    inputs.sops-nix.nixosModules.sops
-                ];
-            };
-
-            # VM Image Configuration (QCow2)
-            generic-vm = mkImage [ ({ modulesPath, ... }: {
-                # Build vm image with resolvd, don't set it in module config,
-                # but in host config.
-                services.resolved.enable = true;
-            }) ];
-
-            git-forgejo = lib.nixosSystem {
-                inherit system;
-                specialArgs = { inherit inputs; };
-
-                modules = [
-                    ./hosts/git/forgejo.nix
-                    inputs.disko.nixosModules.disko
-                    inputs.sops-nix.nixosModules.sops
-                ];
-            };
-
-            # Nameserver Configuration
-            ns = lib.nixosSystem {
-                inherit system;
-                specialArgs = { inherit inputs; };
-
-                modules = [
-                    ./hosts/ns/default.nix
-                    inputs.disko.nixosModules.disko
-                    inputs.sops-nix.nixosModules.sops
-                ];
+    outputs = inputs@{ flake-parts, ... }:
+        flake-parts.lib.mkFlake { inherit inputs; } {
+            imports = [
+                ./hosts      # NixosConfigurations for each host
+                ./modules    # NixosModules to use in the flake
+             ];
+            systems = [ "x86_64-linux" "aarch64-linux" ];
+            perSystem = { config, self', inputs', pkgs, system, ... }: {
             };
         };
-
-        # Map images to packages for easy building
-        packages.${system} = {
-            vm-template  = self.nixosConfigurations.generic-vm.config.system.build.diskoImages;
-        };
-    };
 }

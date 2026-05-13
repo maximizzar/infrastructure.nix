@@ -1,0 +1,31 @@
+$ORIGIN a.1.9.6.8.a.a.3.0.8.d.f.ip6.arpa.
+$TTL 300
+
+@                                       IN SOA ns-primary.@DOMAIN@. admin.@DOMAIN@. (
+                                           @SERIAL@
+                                            @REFRESH@ @RETRY@ @EXPIRE@ @MINIMUM@ )
+@                                       IN  NS      ns-primary.@DOMAIN@.
+@                                       IN  NS      ns-secondary.@DOMAIN@.
+
+3.1.5.c.8.e.e.f.f.f.1.1.4.2.e.b.0.2.0.0 IN  PTR ns-primary.@DOMAIN@.
+f.9.3.1.9.d.e.f.f.f.1.1.4.2.e.b.0.2.0.0 IN  PTR ns-secondary.@DOMAIN@.
+
+; core
+2.7.3.4.9.c.e.f.f.f.1.1.4.2.e.b.0.2.0.0 IN  PTR ns-primary.core.prod.@DOMAIN@.
+4.1.8.7.b.3.e.f.f.f.1.1.4.2.e.b.0.2.0.0 IN  PTR ns-secondary.core.prod.@DOMAIN@.
+1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0 IN  PTR prometheus.core.prod.@DOMAIN@.
+
+; game
+
+1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0 IN  PTR k2se.game.prod.@DOMAIN@.
+
+; vc
+1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0 IN  PTR forgejo.vc.prod.@DOMAIN@.
+1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0 IN  PTR woodpecker.vc.prod.@DOMAIN@.
+
+; web
+1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0 IN  PTR home-assistant.web.prod.@DOMAIN@.
+1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0 IN  PTR immich.web.prod.@DOMAIN@.
+1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0 IN  PTR jellyfin.web.prod.@DOMAIN@.
+1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0 IN  PTR notes.web.prod.@DOMAIN@.
+1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0 IN  PTR tubearchivist.web.prod.@DOMAIN@.

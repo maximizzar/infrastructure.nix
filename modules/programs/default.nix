@@ -2,11 +2,9 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-# modules/users/default.nix
+# modules/programs/default.nix
 { ... }: let
 
 in {
-    imports  = [
-        ./maximizzar.nix
-    ];
+
 }

@@ -2,11 +2,13 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-# modules/users/default.nix
-{ ... }: let
+# modules/services/default.nix
+{ lib, ... }:
+let
 
 in {
-    imports  = [
-        ./maximizzar.nix
+    imports = [
+        ./sshd.nix
+        ./nameserver
     ];
 }

@@ -2,11 +2,11 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-# modules/users/default.nix
+# profiles/default.nix
 { ... }: let
 
 in {
-    imports  = [
-        ./maximizzar.nix
-    ];
+    # I currently don't use profiles,
+    # because for them to be useful,
+    # you need more hosts.
 }

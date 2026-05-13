@@ -2,11 +2,10 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-# modules/users/default.nix
-{ ... }: let
-
-in {
-    imports  = [
-        ./maximizzar.nix
+# modules/hardware/default.nix
+{ ... }: {
+    imports = [
+        ./qemuDisk10gb.nix
+        ./qemu.nix
     ];
 }
