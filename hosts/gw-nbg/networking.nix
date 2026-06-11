@@ -73,7 +73,7 @@ in
       };
       vlanConfig.Id = 10;
     };
-    networks."20-lan" = {
+    "networks"."20-lan" = {
       matchConfig.Name = "vlan10";
 
       address = [

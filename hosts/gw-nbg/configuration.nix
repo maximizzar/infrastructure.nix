@@ -27,4 +27,24 @@
     pkgs.curl
     pkgs.gitMinimal
   ];
+
+  # Test subnet behind wg with web containers
+  containers.web1 = {
+    privateNetwork = true;
+    hostAddress6 = "fd80:3aa8:691a:0101::1";
+    localAddress6 = "fd80:3aa8:691a:0101::10";
+
+    config = { ... }: {
+      services.nginx.enable = true;
+      services.nginx.virtualHosts.localhost = {
+        root = pkgs.runCommand "web" {} ''
+          mkdir -p $out
+          echo "hello container web1" > $out/index.html
+        '';
+      };
+
+      networking.firewall.allowedTCPPorts = [ 80 ];
+      system.stateVersion = "26.05";
+    };
+  };
 }

@@ -5,7 +5,7 @@
 
     router = {
       hostname = "gw-nbg";
-      wgPubkey = "...";
+      wgPubkey = "M5D6n6anAAnLazg1uSv9yst7F2hdkdbGadcAsCm/KhM=";
 
       interfaces = {
         transit.address = "fd95:948f:5cae::1";
@@ -24,7 +24,7 @@
 
     router = {
       hostname = "gw-genesis";
-      wgPubkey = "...";
+      wgPubkey = "HtZ5U/0OsQ6h0N/W9B/8YtARcMVbkKbKSDBkI8tFLmo=";
 
       interfaces = {
         transit.address = "fd95:948f:5cae::2";

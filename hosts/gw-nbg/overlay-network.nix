@@ -1,18 +1,18 @@
 {
-  config,
   inventory,
   lib,
   ...
 }:
 let
   sites = inventory.sites;
-  site = inventory.sites.nbg;
+  selfSite = inventory.sites.nbg;
 in
 {
+  networking.firewall.allowedUDPPorts = [ 51820 ];
   networking.wireguard.interfaces.wg0 = {
     # the IP address and subnet of this peer
     ips = [
-      "${site.router.interfaces.transit.address}/128"
+      "${selfSite.router.interfaces.transit.address}/128"
     ];
 
     # WireGuard Port
