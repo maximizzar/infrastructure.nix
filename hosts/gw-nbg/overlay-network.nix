@@ -1,20 +1,33 @@
-{ config, inputs, lib, ... }: let
-    ipam = inputs.self.lib.ipam;
-    sites = inputs.self.inventory.sites;
-in {
+{
+  config,
+  inventory,
+  lib,
+  ...
+}:
+let
+  sites = inventory.sites;
+  site = inventory.sites.nbg;
+in
+{
   networking.wireguard.interfaces.wg0 = {
-    peers = lib.mapAttrsToList (siteName: site:
-      let
-        router = site.routers.${site.primaryRouter};
-      in {
-        publicKey = router.wg.pubkey;
+    # the IP address and subnet of this peer
+    ips = [
+      "${site.router.interfaces.transit.address}/128"
+    ];
 
-        allowedIPs = [
-          (ipam.sitePrefix site)
-        ];
-      }
-    ) (lib.filterAttrs (name: _: name != config.networking.hostName) sites);
+    # WireGuard Port
+    listenPort = 51820;
 
-      privateKeyFile = "/etc/wireguard/wg0.key";
+    # Path to the private key file.
+    privateKeyFile = "/etc/wireguard/wg0.key";
+
+    peers = lib.mapAttrsToList (_name: site: {
+      publicKey = site.router.wgPubkey;
+
+      allowedIPs = [
+        "${site.router.interfaces.transit.address}/128"
+        site.prefix
+      ];
+    }) sites;
   };
 }

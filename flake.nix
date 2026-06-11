@@ -21,16 +21,15 @@
     let
       system = "x86_64-linux";
       lib = nixpkgs.lib;
+      inventory = import ./inventory;
       modules = [ ./modules ];
     in
     {
-      lib = import ./lib { inherit lib; };
-      inventory = import ./inventory;
 
       nixosConfigurations = {
         gw-nbg = lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs inventory; };
 
           modules = modules ++ [
             disko.nixosModules.disko
