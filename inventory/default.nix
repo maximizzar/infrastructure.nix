@@ -1,0 +1,3 @@
+{
+  sites = import ./sites;
+}

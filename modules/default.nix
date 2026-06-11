@@ -1,3 +1,7 @@
 { ... }: {
-  imports = [ ];
+  imports = [
+    ./applications
+    ./services
+    ./users
+  ];
 }

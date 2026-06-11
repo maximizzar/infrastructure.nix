@@ -1,12 +1,19 @@
-{ inputs, ...  }: let 
-        hostname = "gw-nbg";
-        domain = "core.maximizzar.org";
+# SPDX-FileCopyrightText: 2026 maximizzar <mail@maximizzar.de>
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+# gw-nbg
+{ inputs, ...  }: let
+
 in {
     imports = [
-        ./configuration.nix
-	./disk-config.nix
+      ./configuration.nix
+      inputs.nixos-facter-modules.nixosModules.facter
+      { hardware.facter.reportPath = ./facter.json; }
+	  ./disk-config.nix
 
-        inputs.nixos-facter-modules.nixosModules.facter
-        { hardware.facter.reportPath = ./facter.json; }
+	  ./networking.nix
+	  ./routing.nix
+	  ./overlay-network.nix
     ];
 }

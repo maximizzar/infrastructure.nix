@@ -7,10 +7,7 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixos-facter-modules = {
-      url = "github:numtide/nixos-facter-modules";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
   };
 
   outputs =
@@ -27,10 +24,14 @@
       modules = [ ./modules ];
     in
     {
+      lib = import ./lib { inherit lib; };
+      inventory = import ./inventory;
+
       nixosConfigurations = {
         gw-nbg = lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
+
           modules = modules ++ [
             disko.nixosModules.disko
             ./hosts/gw-nbg
