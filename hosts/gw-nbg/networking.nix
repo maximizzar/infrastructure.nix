@@ -3,9 +3,12 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 # gw-nbg/networking
-{ ... }: let
+{ inventory, ... }:
+let
   wan = "eth0";
-in {
+  site = inventory.sites.nbg;
+in
+{
   networking = {
     firewall.enable = false;
     useNetworkd = true;
@@ -28,7 +31,7 @@ in {
     };
   };
 
-  systemd.network.networks."40-${wan}" = {
+  systemd.network.networks."30-${wan}" = {
     matchConfig.Name = wan;
 
     linkConfig = {
@@ -49,11 +52,33 @@ in {
       "2a01:4f8:c2c:bd86::1/64"
     ];
 
+    vlan = [ "vlan10" ];
+
     routes = [
-      { Gateway = "fe80::1"; }
+      {
+        Gateway = "fe80::1";
+        GatewayOnLink = true;
+      }
     ];
 
     dhcpV4Config.UseDNS = false;
     ipv6AcceptRAConfig.UseDNS = false;
+  };
+  # Subnet configuration
+  systemd.network = {
+    netdevs."vlan10" = {
+      netdevConfig = {
+        Kind = "vlan";
+        Name = "vlan10";
+      };
+      vlanConfig.Id = 10;
+    };
+    networks."20-lan" = {
+      matchConfig.Name = "vlan10";
+
+      address = [
+        site.router.interfaces.lan.address
+      ];
+    };
   };
 }
