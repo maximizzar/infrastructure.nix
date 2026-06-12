@@ -73,12 +73,12 @@ in
       };
       vlanConfig.Id = 10;
     };
-    "networks"."20-lan" = {
-      matchConfig.Name = "vlan10";
+      networks."20-lan" = {
+        matchConfig.Name = "vlan10";
 
-      address = [
-        site.router.interfaces.lan.address
-      ];
-    };
+        address = [
+          site.router.interfaces.lan.address
+        ];
+      };
   };
 }

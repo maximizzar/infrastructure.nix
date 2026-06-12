@@ -1,4 +1,8 @@
 {
+
+  disko.devices.disk.main.imageSize = "8G";
+  disko.imageBuilder.imageFormat = "qcow2";
+
   disko.devices.disk.main = {
     type = "disk";
     device = "/dev/vda";
@@ -9,7 +13,7 @@
       partitions = {
         esp = {
           priority = 1;
-          size = "500M";
+          size = "512M";
           type = "EF00";
 
           content = {
