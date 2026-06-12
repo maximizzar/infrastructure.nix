@@ -36,6 +36,20 @@
             ./hosts/gw-nbg
           ];
         };
+        gw-genesis = lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs inventory; };
+
+          modules = modules ++ [
+            disko.nixosModules.disko
+            ./hosts/gw-genesis
+          ];
+        };
+      };
+
+      packages.${system} = {
+        gw-nbg = self.nixosConfigurations.gw-nbg.config.system.build.diskoImages;
+        gw-genesis = self.nixosConfigurations.gw-genesis.config.system.build.diskoImages;
       };
     };
 }
