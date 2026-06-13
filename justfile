@@ -9,5 +9,6 @@ build-disk-image flake:
 push-disk-image host:
     scp result/main.qcow2 {{ host }}
 
+# Deploy a flake target to a remote
 deploy flake host:
-    nix run nixpkgs#nixos-rebuild -- switch --flake .#{{ flake }} --target-host {{ host }} --sudo
+    nix run nixpkgs#nixos-rebuild -- switch --flake .#{{ flake }} --target-host "{{ host }}" --sudo
