@@ -2,8 +2,11 @@
   modulesPath,
   lib,
   pkgs,
+  inventory,
   ...
-}@args:
+}@args: let
+nbg-lan-hosts = inventory.sites.nbg.router.interfaces.lan.hosts;
+in
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -29,21 +32,33 @@
   ];
 
   # Test subnet behind wg with web containers
-  containers.web1 = {
+  containers.ns1 = {
     privateNetwork = true;
-    hostAddress6 = "fd80:3aa8:691a:0101::1";
-    localAddress6 = "fd80:3aa8:691a:0101::10";
+    extraVeths.veth0.hostBridge = "br-lan";
+
+    specialArgs = {
+      inventory = inventory;
+    };
 
     config = { ... }: {
-      services.nginx.enable = true;
-      services.nginx.virtualHosts.localhost = {
-        root = pkgs.runCommand "web" {} ''
-          mkdir -p $out
-          echo "hello container web1" > $out/index.html
-        '';
+      networking.useDHCP = false;
+      networking.useNetworkd = true;
+
+      systemd.network.enable = true;
+      services.resolved.enable = false;
+
+      systemd.network.networks."10-veth0" = {
+        matchConfig.Name = "veth0";
+
+        address = [ "${nbg-lan-hosts.ns1.ip}/64" ];
+        routes = [{ Gateway = nbg-lan-hosts.gw.ip; }];
+
+        networkConfig = {
+          IPv6AcceptRA = false;
+        };
       };
 
-      networking.firewall.allowedTCPPorts = [ 80 ];
+      imports = [ ./nameserver.nix ];
       system.stateVersion = "26.05";
     };
   };

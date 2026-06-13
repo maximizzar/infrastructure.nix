@@ -52,8 +52,6 @@ in
       "2a01:4f8:c2c:bd86::1/64"
     ];
 
-    vlan = [ "vlan10" ];
-
     routes = [
       {
         Gateway = "fe80::1";
@@ -64,21 +62,33 @@ in
     dhcpV4Config.UseDNS = false;
     ipv6AcceptRAConfig.UseDNS = false;
   };
-  # Subnet configuration
-  systemd.network = {
-    netdevs."vlan10" = {
-      netdevConfig = {
-        Kind = "vlan";
-        Name = "vlan10";
-      };
-      vlanConfig.Id = 10;
-    };
-      networks."20-lan" = {
-        matchConfig.Name = "vlan10";
 
-        address = [
-          site.router.interfaces.lan.address
-        ];
-      };
+  # Bridge for Containers
+  systemd.network.netdevs."20-br-lan" = {
+    netdevConfig = {
+      Name = "br-lan";
+      Kind = "bridge";
+    };
+  };
+
+  # assign IP to bridge (router role)
+  systemd.network.networks."30-br-lan" = {
+    matchConfig.Name = "br-lan";
+
+    networkConfig = {
+      IPv6AcceptRA = false;
+      IPv6Forwarding = true;
+    };
+
+    address = [
+      "fd80:3aa8:691a:101::1/64"
+    ];
+  };
+  systemd.network.networks."40-veth-to-bridge" = {
+    matchConfig.Name = "veth*";
+
+    networkConfig = {
+      Bridge = "br-lan";
+    };
   };
 }

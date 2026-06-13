@@ -12,7 +12,9 @@
         lan = {
           address = "fd80:3aa8:691a:0101::1/64";
           network = "fd80:3aa8:691a:0101::/64";
+          ip-arpa = "0.0.1.0.a.1.9.6.8.a.a.3.0.8.d.f.ip6.arpa.";
 
+          hosts = import ./hosts/nbg-lan.nix;
         };
       };
     };
