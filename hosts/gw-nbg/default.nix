@@ -8,6 +8,7 @@
 in {
     imports = [
       ./configuration.nix
+      ./containers.nix
       inputs.nixos-facter-modules.nixosModules.facter
       { hardware.facter.reportPath = ./facter.json; }
 	  ./disk-config.nix

@@ -11,6 +11,7 @@
     ./disk-config.nix
 
     ./networking.nix
+    ./routing.nix
     ./vpn.nix
   ];
 }

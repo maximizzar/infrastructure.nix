@@ -6,6 +6,7 @@
 { inventory, ... }:
 let
   wan = "ens18";
+  lan = "ens19";
   site = inventory.sites.genesis;
 in
 {
@@ -21,6 +22,7 @@ in
       RequiredForOnline = "routable";
       RequiredFamilyForOnline = "ipv6";
     };
+
     networkConfig = {
       Description = "Main Interface";
       DHCP = "no";
@@ -28,6 +30,10 @@ in
 
       IPv6PrivacyExtensions = false;
       IPv6AcceptRA = true;
+
+      # send ULA into lan
+      IPv6SendRA = true;
+      IPv6Forwarding = true;
     };
 
     dhcpV4Config.UseDNS = false;

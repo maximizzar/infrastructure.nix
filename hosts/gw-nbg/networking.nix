@@ -7,6 +7,8 @@
 let
   wan = "eth0";
   site = inventory.sites.nbg;
+
+  hosts-nbg-lan = inventory.sites.nbg.router.interfaces.lan.hosts;
 in
 {
   networking = {
@@ -16,11 +18,12 @@ in
 
     hostName = "gw-nbg";
     nameservers = [
-      "2a01:4ff:ff00::add:2"
-      "2a01:4ff:ff00::add:1"
-      "185.12.64.2"
+      "${hosts-nbg-lan.ns1.ip}"
+      "2606:4700:4700::1111"
     ];
   };
+
+  services.resolved.enable = true;
 
   systemd.network.links."10-${wan}" = {
     matchConfig.MACAddress = "92:00:08:2a:50:ae";
@@ -41,6 +44,8 @@ in
 
     networkConfig = {
       Description = "Hetzner Uplink";
+
+      Bridge = "br-lan";
 
       DHCP = "ipv4";
 
@@ -83,12 +88,5 @@ in
     address = [
       "fd80:3aa8:691a:101::1/64"
     ];
-  };
-  systemd.network.networks."40-veth-to-bridge" = {
-    matchConfig.Name = "veth*";
-
-    networkConfig = {
-      Bridge = "br-lan";
-    };
   };
 }
