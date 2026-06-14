@@ -6,8 +6,8 @@
 { inventory, ... }:
 let
   wan = "eth0";
-  site = inventory.sites.nbg;
 
+  site = inventory.sites.nbg;
   hosts-nbg-lan = inventory.sites.nbg.router.interfaces.lan.hosts;
 in
 {
@@ -45,8 +45,6 @@ in
     networkConfig = {
       Description = "Hetzner Uplink";
 
-      Bridge = "br-lan";
-
       DHCP = "ipv4";
 
       IPv6PrivacyExtensions = false;
@@ -82,11 +80,10 @@ in
 
     networkConfig = {
       IPv6AcceptRA = false;
+      IPv6SendRA = true;
       IPv6Forwarding = true;
     };
 
-    address = [
-      "fd80:3aa8:691a:101::1/64"
-    ];
+    address = [ site.router.interfaces.lan.address ];
   };
 }

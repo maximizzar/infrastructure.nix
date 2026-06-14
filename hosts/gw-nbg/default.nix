@@ -3,9 +3,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 # gw-nbg
-{ inputs, ...  }: let
-
-in {
+{ inputs, ...  }: {
     imports = [
       ./configuration.nix
       ./containers.nix
@@ -15,6 +13,6 @@ in {
 
 	  ./networking.nix
 	  ./routing.nix
-	  ./overlay-network.nix
+	  ./wireguard.nix
     ];
 }

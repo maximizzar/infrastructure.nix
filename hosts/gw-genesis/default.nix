@@ -12,6 +12,6 @@
 
     ./networking.nix
     ./routing.nix
-    ./vpn.nix
+    ./wireguard.nix
   ];
 }

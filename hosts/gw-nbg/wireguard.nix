@@ -11,9 +11,7 @@ in
   networking.firewall.allowedUDPPorts = [ 51820 ];
   networking.wireguard.interfaces.wg0 = {
     # the IP address and subnet of this peer
-    ips = [
-      "${selfSite.router.interfaces.transit.address}/128"
-    ];
+    ips = [ "${selfSite.router.interfaces.transit.address}/128" ];
 
     # WireGuard Port
     listenPort = 51820;

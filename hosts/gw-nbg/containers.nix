@@ -1,5 +1,9 @@
+# SPDX-FileCopyrightText: 2026 maximizzar <mail@maximizzar.de>
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 { inventory, ... }: let
-hosts-nbg-lan = inventory.sites.nbg.router.interfaces.lan.hosts;
+  hosts-nbg-lan = inventory.sites.nbg.router.interfaces.lan.hosts;
 
 in {
   containers.ns1 = {
@@ -25,6 +29,10 @@ in {
         matchConfig.Name = "eth0";
 
         address = [ "${hosts-nbg-lan.ns1.ip}/64" ];
+        routes = [{
+          Destination = "::/0";
+          Gateway = hosts-nbg-lan.gw.ip;
+        }];
         networkConfig.IPv6AcceptRA = false;
       };
 
@@ -34,9 +42,15 @@ in {
   };
 
   containers.proxy = {
+    # Container behavior
     autoStart = true;
-    privateNetwork = false;
-    extraVeths.veth0.hostBridge = "br-lan";
+    restartIfChanged = true;
+
+    # Network
+    privateNetwork = true;
+    hostBridge = "br-lan";
+
+    # inject inventory
     specialArgs.inventory = inventory;
 
     config = { ... }: {
@@ -45,7 +59,6 @@ in {
         useNetworkd = true;
         nameservers = [
           "${hosts-nbg-lan.ns1.ip}"
-          "${hosts-nbg-lan.ns2.ip}"
         ];
       };
 
@@ -56,6 +69,10 @@ in {
         matchConfig.Name = "eth0";
 
         address = [ "${hosts-nbg-lan.proxy.ip}/64" ];
+        routes = [{
+          Destination = "::/0";
+          Gateway = hosts-nbg-lan.gw.ip;
+        }];
         networkConfig.IPv6AcceptRA = false;
 
       };

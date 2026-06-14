@@ -18,7 +18,7 @@ in
   };
 
   services.openssh.enable = true;
-  services.qemuGuest.enable = true; # config.facter.virtualisation == "kvm";
+  services.qemuGuest.enable = true;
 
   security.sudo.wheelNeedsPassword = false;
 
