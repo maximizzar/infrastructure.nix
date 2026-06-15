@@ -17,13 +17,7 @@ in
     useDHCP = false;
 
     hostName = "gw-nbg";
-    nameservers = [
-      "${hosts-nbg-lan.ns1.ip}"
-      "2606:4700:4700::1111"
-    ];
   };
-
-  services.resolved.enable = true;
 
   systemd.network.links."10-${wan}" = {
     matchConfig.MACAddress = "92:00:08:2a:50:ae";
@@ -53,6 +47,7 @@ in
 
     address = [
       "2a01:4f8:c2c:bd86::1/64"
+      "fd80:3aa8:691a:100::1/64"
     ];
 
     routes = [

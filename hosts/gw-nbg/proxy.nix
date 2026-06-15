@@ -18,19 +18,6 @@
     virtualHosts."static.maximizzar.org" = {
       enableACME = false;
       forceSSL = false;
-
-      root = "/srv/static";
-
-      locations."/music/" = {
-        extraConfig = ''
-          autoindex on;
-          autoindex_exact_size off;
-          autoindex_localtime on;
-
-          limit_conn conn_limit 20;
-          limit_req zone=req_limit burst=50;
-        '';
-      };
     };
   };
 }

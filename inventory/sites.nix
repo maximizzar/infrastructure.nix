@@ -8,7 +8,7 @@
     prefix = "fd80:3aa8:691a:100::/56";
 
     router = {
-      hostname = "gw-nbg";
+      hostname = "gw";
       wgPubkey = "M5D6n6anAAnLazg1uSv9yst7F2hdkdbGadcAsCm/KhM=";
 
       interfaces = {
@@ -29,7 +29,7 @@
     prefix = "fd80:3aa8:691a:200::/56";
 
     router = {
-      hostname = "gw-genesis";
+      hostname = "gw";
       wgPubkey = "HtZ5U/0OsQ6h0N/W9B/8YtARcMVbkKbKSDBkI8tFLmo=";
 
       interfaces = {

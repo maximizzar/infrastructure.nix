@@ -14,5 +14,7 @@
 	  ./networking.nix
 	  ./routing.nix
 	  ./wireguard.nix
+
+	  ../zones.nix
     ];
 }
