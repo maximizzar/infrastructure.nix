@@ -29,4 +29,11 @@
     ip = "fd80:3aa8:691a:201::8080:2";
     ip6-arpa = "2.0.0.0.0.8.0.8.0.0.0.0.0.0.0.0.1.0.2.0";
   };
+  static = {
+    name = "static.genesis";
+    fqdn = "static.genesis.maximizzar.org";
+
+    ip = "fd80:3aa8:691a:201::8080:3";
+    ip6-arpa = "3.0.0.0.0.8.0.8.0.0.0.0.0.0.0.0.1.0.2.0";
+  };
 }

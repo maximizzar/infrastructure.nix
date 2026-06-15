@@ -18,6 +18,8 @@ in {
 
       ns1 IN AAAA fd80:3aa8:691a:100::1
 
+      root.ca IN AAAA fd19:38bc:a21d:1abf:be24:11ff:fe6c:5622
+
       ; transit network
       nbg.transit IN AAAA ${sites.nbg.router.interfaces.transit.address}
       genesis.transit IN AAAA ${sites.genesis.router.interfaces.transit.address}
@@ -34,6 +36,7 @@ in {
 
       ${genesis.hosts.navidrome.name} IN AAAA ${genesis.hosts.navidrome.ip}
       ${genesis.hosts.jellyfin.name} IN AAAA ${genesis.hosts.jellyfin.ip}
+      ${genesis.hosts.static.name} IN AAAA ${genesis.hosts.static.ip}
 
     '';
   };
@@ -75,6 +78,7 @@ in {
 
       ${genesis.hosts.navidrome.ip6-arpa} IN PTR ${genesis.hosts.navidrome.fqdn}.
       ${genesis.hosts.jellyfin.ip6-arpa} IN PTR ${genesis.hosts.jellyfin.fqdn}.
+      ${genesis.hosts.static.ip6-arpa} IN PTR ${genesis.hosts.static.fqdn}.
 
     '';
   };
