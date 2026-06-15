@@ -5,27 +5,27 @@
 # modules/services/sshd.nix
 { ... }: {
   services.openssh = {
-      enable = true;
-      openFirewall = true;
-      settings = {
-          X11Forwarding = false;
-          UsePAM = true;
-          UseDns = false;
-          StrictModes = true;
-          PrintMotd = false;
-          PermitRootLogin = "no";
-          PasswordAuthentication = false;
-          LogLevel = "VERBOSE";
-      };
-      extraConfig = ''
-          MaxAuthTries 3
-          MaxSessions 2
-          PubkeyAuthentication yes
-          AllowAgentForwarding no
-          AllowTcpForwarding no
-          TCPKeepAlive no
-          ClientAliveCountMax 2
-      '';
+    enable = true;
+    openFirewall = true;
+    settings = {
+      X11Forwarding = false;
+      UsePAM = true;
+      UseDns = false;
+      StrictModes = true;
+      PrintMotd = false;
+      PermitRootLogin = "no";
+      PasswordAuthentication = false;
+      LogLevel = "VERBOSE";
+    };
+    extraConfig = ''
+      MaxAuthTries 3
+      MaxSessions 2
+      PubkeyAuthentication yes
+      AllowAgentForwarding no
+      AllowTcpForwarding no
+      TCPKeepAlive no
+      ClientAliveCountMax 2
+    '';
   };
 
 }

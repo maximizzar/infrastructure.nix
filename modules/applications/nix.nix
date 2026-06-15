@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 maximizzar <mail@maximizzar.de>
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 { ... }: {
   nix = {
     enable = true;
@@ -21,8 +25,14 @@
 
   nix.settings = {
     auto-optimise-store = true;
-    experimental-features = [ "nix-command" "flakes" ];
-    trusted-users = [ "root" "maximizzar" ];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    trusted-users = [
+      "root"
+      "maximizzar"
+    ];
 
   };
 

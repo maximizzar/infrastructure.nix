@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2026 maximizzar <mail@maximizzar.de>
+
+SPDX-License-Identifier: GPL-3.0-or-later
+-->
+
 # Infrastructure.nix: Homelab but complicated
 
 ## Shit I know that's not done (there's more I guess)

@@ -2,11 +2,13 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-{ ... }: {
+{
   imports = [
-    ./applications
-    ./hardware
-    ./services
-    ./users
+    ./boot-systemd.nix
+    ./boot.grub.nix
+
+    ./hardware-configuration-kvm.nix
+
+    ./root-disk.nix
   ];
 }
