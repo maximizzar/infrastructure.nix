@@ -12,6 +12,7 @@
     kdePackages.ksshaskpass
     home-manager
     keepassxc
+    translate-shell
 
     jellyfin-desktop
     steam

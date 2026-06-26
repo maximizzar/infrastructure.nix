@@ -51,6 +51,20 @@
           ];
         };
 
+        resolver = lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs inventory; };
+
+          modules = modules ++ [
+            disko.nixosModules.disko
+            ./hosts/resolver
+          ];
+        };
+
+        #
+        # Client Computers
+        #
+
         mip3 = lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs inventory; };
@@ -65,6 +79,7 @@
       packages.${system} = {
         gw-nbg = self.nixosConfigurations.gw-nbg.config.system.build.diskoImages;
         gw-genesis = self.nixosConfigurations.gw-genesis.config.system.build.diskoImages;
+        resolver = self.nixosConfigurations.resolver.config.system.build.diskoImages;
       };
     };
 }

@@ -5,9 +5,8 @@
 {
   modulesPath,
   lib,
-  pkgs,
   ...
-}@args:
+}:
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -16,6 +15,8 @@
 
   # Hardware configuration
   maximizzar.modules.hardware.bootSystemd.enable = lib.mkDefault true;
+  maximizzar.modules.hardware.configuration.qemu.enable = lib.mkDefault true;
+  maximizzar.modules.hardware.rootDisk.enable = lib.mkDefault true;
 
   # Core Services
   services.openssh.enable = lib.mkDefault true;
@@ -26,30 +27,4 @@
   maximizzar.modules.users.maximizzar.enable = lib.mkDefault true;
 
   system.stateVersion = "26.05";
-
-  # BIND9 directly on gw as dns "proxy"
-  services.resolved.enable = false;
-
-  networking.firewall.allowedTCPPorts = [
-    53
-    80
-  ];
-  networking.firewall.allowedUDPPorts = [ 53 ];
-
-  services.bind = {
-    enable = true;
-
-    extraOptions = ''
-      recursion yes;
-    '';
-
-    listenOnIpv6 = [
-      "fd80:3aa8:691a:200::1"
-    ];
-
-    forwarders = [
-      "2620:fe::11"
-      "2620:fe::fe:11"
-    ];
-  };
 }
