@@ -20,3 +20,18 @@ deploy flake host:
 # Deploy a flake to local system
 deploy-local flake:
     sudo nixos-rebuild switch --flake .#{{ flake }}
+
+# Updates Lockfile and generates git commit with changes
+update:
+    @echo "Saving current workspace state..."
+    git stash push -m "temp-stash-for-update"
+
+    @echo "Updating flake.lock..."
+    nix flake update
+
+    @echo "Committing lockfile..."
+    git add flake.lock
+    git commit -m "chore: update flake.lock"
+
+    @echo "Restoring workspace..."
+    git stash pop
