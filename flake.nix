@@ -12,6 +12,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
+    hagezi-rpz = {
+      url = "github:hagezi/dns-blocklists";
+      flake = false;
+    };
   };
 
   outputs =

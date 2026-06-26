@@ -2,9 +2,9 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-# gw-genesis
 { ... }: {
   imports = [
     ./configuration.nix
+    ./recursor.nix
   ];
 }
