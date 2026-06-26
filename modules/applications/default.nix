@@ -5,7 +5,7 @@
 { ... }: {
   imports = [
     ./acme.nix
+    ./locale-de.nix
     ./nix.nix
   ];
 }
-

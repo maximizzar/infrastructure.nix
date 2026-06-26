@@ -1,16 +1,14 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+# SPDX-FileCopyrightText: 2026 maximizzar <mail@maximizzar.de>
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
 
 { pkgs, ... }:
 
 {
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
+  maximizzar.modules.hardware.bootSystemd.enable = true;
   boot.initrd.luks.devices."luks-35770c58-e4d0-40c2-ac88-8586d43fb541".device =
     "/dev/disk/by-uuid/35770c58-e4d0-40c2-ac88-8586d43fb541";
+
   networking.hostName = "mip3"; # Define your hostname.
   networking.wireless.enable = true; # Enables wireless support via wpa_supplicant.
 
@@ -21,23 +19,8 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
-  time.timeZone = "Europe/Berlin";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "de_DE.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "de_DE.UTF-8";
-    LC_IDENTIFICATION = "de_DE.UTF-8";
-    LC_MEASUREMENT = "de_DE.UTF-8";
-    LC_MONETARY = "de_DE.UTF-8";
-    LC_NAME = "de_DE.UTF-8";
-    LC_NUMERIC = "de_DE.UTF-8";
-    LC_PAPER = "de_DE.UTF-8";
-    LC_TELEPHONE = "de_DE.UTF-8";
-    LC_TIME = "de_DE.UTF-8";
-  };
+  # Enable German locale settings
+  maximizzar.modules.applications.deLocale.enable = true;
 
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
@@ -67,8 +50,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    jack.enable = true;
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
