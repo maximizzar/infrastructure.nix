@@ -40,6 +40,7 @@
             ./hosts/gw-nbg
           ];
         };
+
         gw-genesis = lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs inventory; };
@@ -47,6 +48,16 @@
           modules = modules ++ [
             disko.nixosModules.disko
             ./hosts/gw-genesis
+          ];
+        };
+
+        mip3 = lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs inventory; };
+
+          modules = modules ++ [
+            disko.nixosModules.disko
+            ./hosts/mip3
           ];
         };
       };

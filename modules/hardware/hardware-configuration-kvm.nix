@@ -4,7 +4,6 @@
 
 {
   config,
-  inputs,
   lib,
   ...
 }:
@@ -14,9 +13,6 @@ in
 {
   options.maximizzar.modules.hardware.configuration.qemu.enable = lib.mkEnableOption "qemu-config";
   config = lib.mkIf cfg.enable {
-    imports = [
-      inputs.nixos-facter-modules.nixosModules.facter
-      { hardware.facter.reportPath = ./facter.json; }
-    ];
+    hardware.facter.reportPath = ./facter.json;
   };
 }

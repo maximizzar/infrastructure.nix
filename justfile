@@ -16,3 +16,7 @@ push-disk-image host:
 # Deploy a flake target to a remote
 deploy flake host:
     nix run nixpkgs#nixos-rebuild -- switch --flake .#{{ flake }} --target-host "{{ host }}" --sudo
+
+# Deploy a flake to local system
+deploy-local flake:
+    sudo nixos-rebuild switch --flake .#{{ flake }}
