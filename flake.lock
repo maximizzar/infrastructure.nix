@@ -23,11 +23,11 @@
     "hagezi-rpz": {
       "flake": false,
       "locked": {
-        "lastModified": 1782504610,
-        "narHash": "sha256-iYcE7mf4KoiW7f/JHFJAvuzwl2+Isiw+j8vOmhMEHRI=",
+        "lastModified": 1782547822,
+        "narHash": "sha256-r/x/eDQ/Qu7kiVe3lAIqhTqZ9/ssm3MduuJikEUy2XE=",
         "owner": "hagezi",
         "repo": "dns-blocklists",
-        "rev": "9221fe415f7fb3f6faea0a2b9c02c8e58baadf5e",
+        "rev": "8ce1918c4e7d9ea22e9a4aeb91531bcc84dc8a67",
         "type": "github"
       },
       "original": {
