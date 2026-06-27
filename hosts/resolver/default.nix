@@ -6,5 +6,6 @@
   imports = [
     ./configuration.nix
     ./recursor.nix
+    ./networking.nix
   ];
 }

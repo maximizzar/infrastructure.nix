@@ -5,6 +5,7 @@
 {
   modulesPath,
   lib,
+  pkgs,
   ...
 }:
 {
@@ -25,6 +26,12 @@
   # User Settings
   security.sudo.wheelNeedsPassword = lib.mkDefault false;
   maximizzar.modules.users.maximizzar.enable = lib.mkDefault true;
+
+  services.resolved.enable = false;
+
+  environment.systemPackages = with pkgs; [
+    dnsutils
+  ];
 
   system.stateVersion = "26.05";
 }

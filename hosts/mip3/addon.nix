@@ -15,7 +15,6 @@
     translate-shell
 
     jellyfin-desktop
-    steam
     itch
 
     maple-mono.NF-CN

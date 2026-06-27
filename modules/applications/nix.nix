@@ -38,6 +38,7 @@
 
   nix.settings.substituters = [
     "https://cache.nixos.org"
+    "https://nix-community.cachix.org"
   ];
 
   system.stateVersion = "26.05";

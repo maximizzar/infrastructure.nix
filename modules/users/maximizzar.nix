@@ -3,15 +3,17 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 # users/maximizzar
-{ config, lib, ... }: let
+{ config, lib, ... }:
+let
   cfg = config.maximizzar.modules.users.maximizzar;
 
   user = "maximizzar";
   ssh_keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDgHDCy2Ba2v4p71bY5pFr3YcYEbZi2ND9IMPrYMCgsc maximizzar@workstation"
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBMx9Dq1TdIjLkxme+ZcYk0Gg5O94y1zZQGbba6k1j34 maximizzar@mip3"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBf+m/7QKIAIRwNP1UmUOhVhB3nQqd0ig+oXtUD4FN0L maximizzar@mip3"
   ];
-in {
+in
+{
   options.maximizzar.modules.users.maximizzar.enable = lib.mkEnableOption user;
 
   config = lib.mkIf cfg.enable {

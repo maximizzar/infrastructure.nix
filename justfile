@@ -10,8 +10,8 @@ build-disk-image flake:
     nix build .#{{ flake }}
 
 # Push a QCow2 Disk-Image to a remote
-push-disk-image host:
-    scp result/main.qcow2 {{ host }}
+push-disk-image host remote_path:
+    scp result/main.qcow2 {{ host }}:{{ remote_path }}
 
 # Deploy a flake target to a remote
 deploy flake host:
