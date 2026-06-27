@@ -21,6 +21,7 @@
 
   # Networking
   networking.hostName = "prometheus";
+  maximizzar.networking.ipForwarding.enable = true;
   maximizzar.networking.vmWanInterface.enable = true;
 
   # User Settings
