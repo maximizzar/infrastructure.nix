@@ -46,8 +46,10 @@ in
 
     # Handle all layer-3 traffic on the bridge interface
     systemd.network.networks."40-${cfg.bridge}" = {
+      matchConfig.Name = cfg.bridge;
+
       networkConfig = {
-        IPv6AcceptRA = true;
+        IPv6AcceptRA = "yes";
         IPv6PrivacyExtensions = false;
         IPv6LinkLocalAddressGenerationMode = "eui64";
         DHCP = "ipv4";
