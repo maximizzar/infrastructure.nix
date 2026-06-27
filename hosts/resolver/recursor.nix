@@ -1,7 +1,11 @@
 # SPDX-FileCopyrightText: 2026 maximizzar <mail@maximizzar.de>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  ...
+}:
 let
   rpz = pkgs.replaceVars ./rpz.lua {
     hagezi-rpz = "${inputs.hagezi-rpz}";
@@ -31,6 +35,22 @@ in
     luaConfig = builtins.readFile rpz;
 
     settings = {
+      recursor.forward_zones = [
+        {
+          zone = "maximizzar.org";
+          forwarders = [
+            "[fd19:38bc:a21d:1abf:52e5:75ff:fe61:13c7]:53"
+          ];
+        }
+
+        {
+          zone = "maximizzar.io";
+          forwarders = [
+            "[fd19:38bc:a21d:1abf:fcd4:d2ff:fe1d:db65]:53"
+          ];
+        }
+      ];
+
       recursor.forward_zones_recurse = [
         {
           zone = ".";
@@ -52,6 +72,10 @@ in
           validate_certificate = true;
         }
       ];
+      webservice = {
+        webserver = true;
+        address = "[::1]";
+      };
     };
   };
 }
