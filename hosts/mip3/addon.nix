@@ -31,6 +31,13 @@
     SSH_ASKPASS_REQUIRE = "prefer";
   };
 
+  programs.steam = {
+    enable = true;
+    protontricks.enable = true;
+    remotePlay.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = true;
+  };
+
   programs.ssh.knownHosts = {
     #
     # Git remotes
