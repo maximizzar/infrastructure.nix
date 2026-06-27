@@ -64,4 +64,22 @@ in
 
     address = [ site.router.interfaces.lan.address ];
   };
+
+  # lan Network
+  systemd.network.networks."30-${lan}" = {
+    Description = "DMZ for VMs";
+    DHCP = "no";
+    IPv6LinkLocalAddressGenerationMode = "eui64";
+
+    IPv6PrivacyExtensions = false;
+    IPv6AcceptRA = true;
+
+    IPv6SendRA = true;
+    IPv6Forwarding = true;
+
+    address = [
+      "fd80:3aa8:691a:201::1/64"
+    ];
+
+  };
 }

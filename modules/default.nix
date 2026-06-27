@@ -6,6 +6,7 @@
   imports = [
     ./applications
     ./hardware
+    ./networking
     ./services
     ./users
   ];

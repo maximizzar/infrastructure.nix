@@ -65,6 +65,16 @@
           ];
         };
 
+        prometheus = lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs inventory; };
+
+          modules = modules ++ [
+            disko.nixosModules.disko
+            ./hosts/prometheus
+          ];
+        };
+
         #
         # Client Computers
         #
@@ -84,6 +94,7 @@
         gw-nbg = self.nixosConfigurations.gw-nbg.config.system.build.diskoImages;
         gw-genesis = self.nixosConfigurations.gw-genesis.config.system.build.diskoImages;
         resolver = self.nixosConfigurations.resolver.config.system.build.diskoImages;
+        prometheus = self.nixosConfigurations.prometheus.config.system.build.diskoImages;
       };
     };
 }
