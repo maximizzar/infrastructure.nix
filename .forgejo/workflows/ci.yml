@@ -6,9 +6,24 @@ on:
   push:
 
 jobs:
-  test:
+  build-disk-image-matrix:
     runs-on: nixos
-    steps:
-      - uses: actions/checkout@v4
+    strategy:
+      matrix:
+        image: [ "resolverImage" ]
 
-      - run: nix flake check
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Build QCOW2 Image 
+        run: |
+          nix build .#${{ matrix.image }} -o result-${{ matrix.image }}     
+
+      - name: Upload QCOW2 Artifact
+        uses: forgejo/upload-artifact@v4
+        with:
+          name: qcow2-${{ matrix.image }}
+          path: result-${{ matrix.image }}/main.qcow2
+          overwrite: true
+
