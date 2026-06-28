@@ -10,7 +10,7 @@ jobs:
     runs-on: nixos
     strategy:
       matrix:
-        image: [ "resolverImage" ]
+        image: [ "resolver" ]
 
     steps:
       - name: Checkout Code
@@ -18,7 +18,7 @@ jobs:
 
       - name: Build QCOW2 Image 
         run: |
-          nix build .#${{ matrix.image }} -o result-${{ matrix.image }}     
+          nix build path:.#${{ matrix.image }} -o result-${{ matrix.image }}     
 
       - name: Upload QCOW2 Artifact
         uses: forgejo/upload-artifact@v4
