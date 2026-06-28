@@ -13,10 +13,12 @@
       $ORIGIN maximizzar.org.
       $TTL 300
 
-      @ IN SOA ns1.maximizzar.org. hostmaster.maximizzar.org. ( 2 3h 1h 1w 1h )
+      @ IN SOA ns1.maximizzar.org. hostmaster.maximizzar.org. ( 3 3h 1h 1w 1h )
       @ IN NS ns1
 
       ns1 IN AAAA fd19:38bc:a21d:1abf:52e5:75ff:fe61:13c7
+      root.ca IN AAAA fd19:38bc:a21d:1abf:be24:11ff:fe6c:5622
+      prometheus IN AAAA fd19:38bc:a21d:1abf:2ce9:7ff:fe11:23b8
     '';
   };
 }

@@ -7,6 +7,7 @@
     ./applications
     ./hardware
     ./networking
+    ./security
     ./services
     ./users
   ];

@@ -8,6 +8,18 @@ rpzFile("@hagezi-rpz@/rpz/doh.txt", {
     tags = {"hagezi"}
 })
 
+rpzFile("@hagezi-rpz@/rpz/gambling.txt", {
+    policyName = "hagezi-block-gambling",
+    defpol = Policy.NXDOMAIN,
+    tags = { "hagezi" }
+})
+
+rpzFile("@hagezi-rpz@/rpz/hoster.txt", {
+    policyName = "hagezi-block-hoster",
+    defpol = Policy.NXDOMAIN,
+    tags = {"hagezi"}
+})
+
 rpzFile("@hagezi-rpz@/rpz/native.amazon.txt", {
     policyName = "hagezi-block-amazon",
     defpol = Policy.NXDOMAIN,

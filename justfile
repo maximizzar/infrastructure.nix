@@ -15,7 +15,19 @@ push-disk-image host remote_path:
 
 # Deploy a flake target to a remote
 deploy flake host:
-    nix run nixpkgs#nixos-rebuild -- switch --flake .#{{ flake }} --target-host "{{ host }}" --sudo
+    #!/usr/bin/env bash
+    source "$HOME/.config/user-dirs.dirs"
+    source "$XDG_PROJECTS_DIR/scripts/lib/print-functions.sh"
+    source "$XDG_PROJECTS_DIR/scripts/lib/read-os-release.sh"
+
+    declare -A arr
+    read_os_release arr
+
+    if [[ "${arr[ID]}" == "NixOS" ]]; then
+        nixos-rebuild switch --flake .#{{ flake }} --target-host "{{ host }}" --sudo
+    else
+        nix run nixpkgs#nixos-rebuild -- switch --flake .#{{ flake }} --target-host "{{ host }}" --sudo
+    fi
 
 # Deploy a flake to local system
 deploy-local flake:

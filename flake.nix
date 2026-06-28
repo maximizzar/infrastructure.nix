@@ -28,6 +28,7 @@
     }@inputs:
     let
       system = "x86_64-linux";
+      stateVersion = "26.05";
       lib = nixpkgs.lib;
       inventory = import ./inventory;
       modules = [ ./modules ];
@@ -37,7 +38,7 @@
       nixosConfigurations = {
         gw-nbg = lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs inventory; };
+          specialArgs = { inherit inputs stateVersion inventory; };
 
           modules = modules ++ [
             disko.nixosModules.disko
@@ -47,7 +48,7 @@
 
         gw-genesis = lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs inventory; };
+          specialArgs = { inherit inputs stateVersion inventory; };
 
           modules = modules ++ [
             disko.nixosModules.disko
@@ -57,7 +58,7 @@
 
         resolver = lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs inventory; };
+          specialArgs = { inherit inputs stateVersion inventory; };
 
           modules = modules ++ [
             disko.nixosModules.disko
@@ -67,7 +68,7 @@
 
         prometheus = lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs inventory; };
+          specialArgs = { inherit inputs stateVersion inventory; };
 
           modules = modules ++ [
             disko.nixosModules.disko
@@ -81,7 +82,7 @@
 
         mip3 = lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs inventory; };
+          specialArgs = { inherit inputs stateVersion inventory; };
 
           modules = modules ++ [
             disko.nixosModules.disko
