@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: 2026 maximizzar <mail@maximizzar.de>
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+name: ci
+on:
+  push:
+
+jobs:
+  test:
+    runs-on: nixos
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: nix flake check
