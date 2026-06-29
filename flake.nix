@@ -12,11 +12,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
-    # TODO: Replace with nvfetcher!
-    hagezi-rpz = {
-      url = "github:hagezi/dns-blocklists";
-      flake = false;
-    };
   };
 
   outputs =
@@ -32,6 +27,7 @@
       stateVersion = "26.05";
       lib = nixpkgs.lib;
       inventory = import ./inventory;
+      sources = nixpkgs.legacyPackages.${system}.callPackage ./_sources/generated.nix { };
       modules = [ ./modules ];
     in
     {
@@ -59,7 +55,14 @@
 
         resolver = lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs stateVersion inventory; };
+          specialArgs = {
+            inherit
+              inputs
+              stateVersion
+              inventory
+              sources
+              ;
+          };
 
           modules = modules ++ [
             disko.nixosModules.disko

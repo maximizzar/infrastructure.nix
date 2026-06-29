@@ -1,0 +1,55 @@
+[hagezi-doh]
+src.manual = "latest"
+fetch.url = "https://github.com/hagezi/dns-blocklists/raw/refs/heads/main/rpz/doh.txt"
+
+[hagezi-gambling]
+src.manual = "latest"
+fetch.url = "https://github.com/hagezi/dns-blocklists/raw/refs/heads/main/rpz/gambling.txt"
+
+[hagezi-hoster]
+src.manual = "latest"
+fetch.url = "https://github.com/hagezi/dns-blocklists/raw/refs/heads/main/rpz/hoster.txt"
+
+[hagezi-native-amazon]
+src.manual = "latest"
+fetch.url = "https://github.com/hagezi/dns-blocklists/raw/refs/heads/main/rpz/native.amazon.txt"
+
+[hagezi-native-apple]
+src.manual = "latest"
+fetch.url = "https://github.com/hagezi/dns-blocklists/raw/refs/heads/main/rpz/native.apple.txt"
+
+[hagezi-native-huawei]
+src.manual = "latest"
+fetch.url = "https://github.com/hagezi/dns-blocklists/raw/refs/heads/main/rpz/native.huawei.txt"
+
+[hagezi-native-lgwebos]
+src.manual = "latest"
+fetch.url = "https://github.com/hagezi/dns-blocklists/raw/refs/heads/main/rpz/native.lgwebos.txt"
+
+[hagezi-native-oppo-realme]
+src.manual = "latest"
+fetch.url = "https://github.com/hagezi/dns-blocklists/raw/refs/heads/main/rpz/native.oppo-realme.txt"
+
+[hagezi-native-roku]
+src.manual = "latest"
+fetch.url = "https://github.com/hagezi/dns-blocklists/raw/refs/heads/main/rpz/native.roku.txt"
+
+[hagezi-native-samsung]
+src.manual = "latest"
+fetch.url = "https://github.com/hagezi/dns-blocklists/raw/refs/heads/main/rpz/native.samsung.txt"
+
+[hagezi-native-tiktok]
+src.manual = "latest"
+fetch.url = "https://github.com/hagezi/dns-blocklists/raw/refs/heads/main/rpz/native.tiktok.extended.txt"
+
+[hagezi-native-vivo]
+src.manual = "latest"
+fetch.url = "https://github.com/hagezi/dns-blocklists/raw/refs/heads/main/rpz/native.vivo.txt"
+
+[hagezi-native-winoffice]
+src.manual = "latest"
+fetch.url = "https://github.com/hagezi/dns-blocklists/raw/refs/heads/main/rpz/native.winoffice.txt"
+
+[hagezi-native-xiaomi]
+src.manual = "latest"
+fetch.url = "https://github.com/hagezi/dns-blocklists/raw/refs/heads/main/rpz/native.xiaomi.txt"

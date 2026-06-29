@@ -2,93 +2,86 @@
 --
 -- SPDX-License-Identifier: GPL-3.0-or-later
 
-rpzFile("@hagezi-rpz@/rpz/doh.txt", {
+rpzFile("/etc/dns-blocklists/doh.txt", {
     policyName = "hagezi-block-doh",
     defpol = Policy.NXDOMAIN,
     tags = {"hagezi"}
 })
 
-rpzFile("@hagezi-rpz@/rpz/gambling.txt", {
+rpzFile("/etc/dns-blocklists/gambling.txt", {
     policyName = "hagezi-block-gambling",
     defpol = Policy.NXDOMAIN,
     tags = { "hagezi" }
 })
 
-rpzFile("@hagezi-rpz@/rpz/hoster.txt", {
+rpzFile("/etc/dns-blocklists/hoster.txt", {
     policyName = "hagezi-block-hoster",
     defpol = Policy.NXDOMAIN,
     tags = {"hagezi"}
 })
 
-rpzFile("@hagezi-rpz@/rpz/native.amazon.txt", {
+rpzFile("/etc/dns-blocklists/native.amazon.txt", {
     policyName = "hagezi-block-amazon",
     defpol = Policy.NXDOMAIN,
     tags = {"hagezi"}
 })
 
-rpzFile("@hagezi-rpz@/rpz/native.apple.txt", {
+rpzFile("/etc/dns-blocklists/native.apple.txt", {
     policyName = "hagezi-block-apple",
     defpol = Policy.NXDOMAIN,
     tags = {"hagezi"}
 })
 
-rpzFile("@hagezi-rpz@/rpz/native.huawei.txt", {
+rpzFile("/etc/dns-blocklists/native.huawei.txt", {
     policyName = "hagezi-block-huawei",
     defpol = Policy.NXDOMAIN,
     tags = {"hagezi"}
 })
 
-rpzFile("@hagezi-rpz@/rpz/native.lgwebos.txt", {
+rpzFile("/etc/dns-blocklists/native.lgwebos.txt", {
     policyName = "hagezi-block-lgwebos",
     defpol = Policy.NXDOMAIN,
     tags = {"hagezi"}
 })
 
-rpzFile("@hagezi-rpz@/rpz/native.oppo-realme.txt", {
+rpzFile("/etc/dns-blocklists/native.oppo-realme.txt", {
     policyName = "hagezi-block-oppo-realme",
     defpol = Policy.NXDOMAIN,
     tags = {"hagezi"}
 })
 
-rpzFile("@hagezi-rpz@/rpz/native.roku.txt", {
+rpzFile("/etc/dns-blocklists/native.roku.txt", {
     policyName = "hagezi-block-roku",
     defpol = Policy.NXDOMAIN,
     tags = {"hagezi"}
 })
 
-rpzFile("@hagezi-rpz@/rpz/native.samsung.txt", {
+rpzFile("/etc/dns-blocklists/native.samsung.txt", {
     policyName = "hagezi-block-samsung",
     defpol = Policy.NXDOMAIN,
     tags = {"hagezi"}
 })
 
-rpzFile("@hagezi-rpz@/rpz/native.tiktok.extended.txt", {
+rpzFile("/etc/dns-blocklists/native.tiktok.extended.txt", {
     policyName = "hagezi-block-tiktok",
     defpol = Policy.NXDOMAIN,
     tags = {"hagezi"}
 })
 
-rpzFile("@hagezi-rpz@/rpz/native.tiktok.txt", {
-    policyName = "hagezi-block-tiktok",
-    defpol = Policy.NXDOMAIN,
-    tags = {"hagezi"}
-})
-
-rpzFile("@hagezi-rpz@/rpz/native.vivo.txt", {
+rpzFile("/etc/dns-blocklists/native.vivo.txt", {
     policyName = "hagezi-block-vivo",
     defpol = Policy.NXDOMAIN,
     tags = {"hagezi"}
 })
 
-rpzFile("@hagezi-rpz@/rpz/native.winoffice.txt", {
+rpzFile("/etc/dns-blocklists/native.winoffice.txt", {
     policyName = "hagezi-block-winoffice",
     defpol = Policy.NXDOMAIN,
     tags = {"hagezi"}
 })
 
-rpzFile("@hagezi-rpz@/rpz/native.xiaomi.txt", {
+rpzFile("/etc/dns-blocklists/native.xiaomi.txt", {
     policyName = "hagezi-block-xiaomi",
     defpol = Policy.NXDOMAIN,
     tags = {"hagezi"}
 })
-

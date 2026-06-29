@@ -6,6 +6,7 @@
   modulesPath,
   lib,
   pkgs,
+  sources,
   ...
 }:
 {

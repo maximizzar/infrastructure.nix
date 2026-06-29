@@ -33,6 +33,10 @@ deploy flake host:
 deploy-local flake:
     sudo nixos-rebuild switch --flake .#{{ flake }}
 
+# Run nvfetcher
+nvfetcher:
+    nix run nixpkgs#nvfetcher
+
 # Updates Lockfile and generates git commit with changes
 update:
     @echo "Saving current workspace state..."
