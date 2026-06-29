@@ -14,6 +14,10 @@
   maximizzar.modules.hardware.bootSystemd.enable = lib.mkDefault true;
   maximizzar.modules.hardware.configuration.qemu.enable = lib.mkDefault true;
   maximizzar.modules.hardware.rootDisk.enable = lib.mkDefault true;
+  disko.devices.disk.main.imageSize = "16G";
+
+  boot.growPartition = true;
+  fileSystems."/".autoResize = true;
 
   # Core Services
   services.openssh.enable = lib.mkDefault true;

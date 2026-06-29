@@ -9,7 +9,7 @@ in
 {
   options.maximizzar.modules.hardware.rootDisk.enable = lib.mkEnableOption "root-disk";
   config = lib.mkIf cfg.enable {
-    disko.devices.disk.main.imageSize = "8G";
+    disko.devices.disk.main.imageSize = lib.mkDefault "8G";
     disko.imageBuilder.imageFormat = "qcow2";
 
     disko.devices.disk.main = {

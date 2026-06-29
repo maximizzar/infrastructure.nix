@@ -10,7 +10,7 @@ jobs:
     runs-on: nixos
     strategy:
       matrix:
-        image: [ "resolver" ]
+        image: [ "gw-genesis", "prometheus", "resolver", "runner" ]
 
     steps:
       - name: Checkout Code
@@ -23,7 +23,7 @@ jobs:
       - name: Upload QCOW2 Artifact
         uses: forgejo/upload-artifact@v4
         with:
-          name: qcow2-${{ matrix.image }}
+          name: ${{ matrix.image }}.qcow2
           path: result-${{ matrix.image }}/main.qcow2
           overwrite: true
 
