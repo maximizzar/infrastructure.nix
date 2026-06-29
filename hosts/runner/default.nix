@@ -15,10 +15,13 @@
       git
       nodejs
       pkgs.forgejo-runner
+      nix
+      "/run/current-system/sw"
     ];
 
     environment = {
       FORGEJO_INSTANCE_URL = "https://forgejo.maximizzar.io";
+      NIX_REMOTE = "daemon";
     };
 
     serviceConfig = {

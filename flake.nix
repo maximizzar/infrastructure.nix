@@ -12,6 +12,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
+    # TODO: Replace with nvfetcher!
     hagezi-rpz = {
       url = "github:hagezi/dns-blocklists";
       flake = false;
@@ -76,6 +77,16 @@
           ];
         };
 
+        runner = lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs stateVersion inventory; };
+
+          modules = modules ++ [
+            disko.nixosModules.disko
+            ./hosts/runner
+          ];
+        };
+
         #
         # Client Computers
         #
@@ -96,6 +107,7 @@
         gw-genesis = self.nixosConfigurations.gw-genesis.config.system.build.diskoImages;
         resolver = self.nixosConfigurations.resolver.config.system.build.diskoImages;
         prometheus = self.nixosConfigurations.prometheus.config.system.build.diskoImages;
+        runner = self.nixosConfigurations.runner.config.system.build.diskoImages;
       };
     };
 }
