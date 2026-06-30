@@ -24,11 +24,22 @@
     }@inputs:
     let
       system = "x86_64-linux";
+      pkgs = import nixpkgs { inherit system; };
       stateVersion = "26.05";
       lib = nixpkgs.lib;
       inventory = import ./inventory;
       sources = nixpkgs.legacyPackages.${system}.callPackage ./_sources/generated.nix { };
       modules = [ ./modules ];
+
+      release-script = pkgs.writeShellApplication {
+        name = "release";
+        runtimeInputs = [
+          pkgs.goreleaser
+          pkgs.git
+          pkgs.bash
+        ];
+        text = builtins.readFile ./scripts/release.sh;
+      };
     in
     {
 
@@ -106,11 +117,21 @@
       };
 
       packages.${system} = {
+        default = self.packages.${system}.release;
+        release = release-script;
+
         gw-nbg = self.nixosConfigurations.gw-nbg.config.system.build.diskoImages;
         gw-genesis = self.nixosConfigurations.gw-genesis.config.system.build.diskoImages;
         resolver = self.nixosConfigurations.resolver.config.system.build.diskoImages;
         prometheus = self.nixosConfigurations.prometheus.config.system.build.diskoImages;
         runner = self.nixosConfigurations.runner.config.system.build.diskoImages;
+      };
+
+      apps.${system} = {
+        release = {
+          type = "app";
+          program = "${self.packages.${system}.release}/bin/release";
+        };
       };
     };
 }

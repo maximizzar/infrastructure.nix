@@ -1,0 +1,40 @@
+# .goreleaser.yaml
+version: 2
+
+builds:
+  - skip: true
+  
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+  groups:
+    - title: '🚀 Features'
+      regexp: '^feat(\(.*\))??!?:'
+      order: 0
+    - title: '🐛 Bug Fixes'
+      regexp: '^fix(\(.*\))??!?:'
+      order: 1
+    - title: '🧰 Maintenance & Refactoring'
+      regexp: '^(chore|refactor|perf)(\(.*\))??!?:'
+      order: 2
+    - title: '🔄 CI/CD & Build'
+      regexp: '^(ci|build)(\(.*\))??!?:'
+      order: 3
+
+release:
+  gitea:
+    owner: maximizzar
+    name: infrastructure.nix
+
+  draft: true
+
+  header: |
+    ## Changelog für dieses Release
+
+gitea_urls:
+  api: https://forgejo.maximizzar.io/api/v1
+
+
