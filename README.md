@@ -4,35 +4,19 @@ SPDX-FileCopyrightText: 2026 maximizzar <mail@maximizzar.de>
 SPDX-License-Identifier: GPL-3.0-or-later
 -->
 
-# Nix-OS Configuration for my IT Infrastructure
+# Infrastructure.nix: Homelab but complicated
 
-This Repo will contain my Nix-OS configuration for my IT Infrastructre.
-
+Documentation for my Homelab!
 
 ## Hosts
 
-Currently not working. 
-Dev is done on a single Nix VM. 
-
-- navidrome (WIP)
-- jellyfin (WIP)
-
-
-## Modules
-
-Contains all Nix Modules that are only defined for this Repository.
-
-### Modules / home
-
-Here are Modules for NixOS and Home-manager to get working user configs.
-It includes configuration and user only packages.
-
-### Modules / Services
-
-Here are Modules for NixOS to get various Services Setup Correctly.
-It includes small common services like avahi or sshd
-and higherlevel services like a jellyfin server.
-
-
-
-
+- auth: Contains authelia for sso
+- forgejo: Hosts a forgejo server for everything sourcecode
+- gw-genesis: connects my homeserver to the cloud(tm)
+- gw-nbg: the cloud(tm) with site-to-site VPN
+- hrattic: a client-pc
+- mip3: a client-pc
+- prometheus: wip monitoring
+- resolver: dns resolution for my home
+- runner: WIP forgejo-runner
+- vaultwarden: WIP password manager Host
