@@ -2,18 +2,18 @@ version = 1
 
 # computer-generated files
 [[annotations]]
-path = [
-    "flake.lock",
-	".gitignore",
-	".idea/**"
-]
-SPDX-FileCopyrightText = "NONE"
+path                    = ["flake.lock", ".gitignore", "**/facter.json", "_sources/**"]
+SPDX-FileCopyrightText  = "NONE"
+SPDX-License-Identifier = "CC0-1.0"
+
+# computer-generated files (sops)
+[[annotations]]
+path                    = [".sops.yaml", "**/secrets.yaml"]
+SPDX-FileCopyrightText  = "NONE"
 SPDX-License-Identifier = "CC0-1.0"
 
 # config files
 [[annotations]]
-path = [
-    "modules/**/*.lua"
-]
-SPDX-FileCopyrightText = "2026 maximizzar <mail@maximizzar.de>"
+path                    = ["modules/**/*.lua"]
+SPDX-FileCopyrightText  = "2026 maximizzar <mail@maximizzar.de>"
 SPDX-License-Identifier = "GPL-3.0-or-later"

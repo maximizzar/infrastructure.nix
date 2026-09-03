@@ -1,0 +1,86 @@
+# SPDX-FileCopyrightText: 2026 maximizzar <mail@maximizzar.de>
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+[hagezi-doh]
+src.git    = "https://gitlab.com/hagezi/mirror"
+src.branch = "main"
+
+fetch.url = "https://gitlab.com/hagezi/mirror/-/raw/$ver/dns-blocklists/rpz/doh.txt"
+
+[hagezi-gambling]
+src.git    = "https://gitlab.com/hagezi/mirror"
+src.branch = "main"
+
+fetch.url = "https://gitlab.com/hagezi/mirror/-/raw/$ver/dns-blocklists/rpz/gambling.txt"
+
+[hagezi-hoster]
+src.git    = "https://gitlab.com/hagezi/mirror"
+src.branch = "main"
+
+fetch.url = "https://gitlab.com/hagezi/mirror/-/raw/$ver/dns-blocklists/rpz/hoster.txt"
+
+[hagezi-native-amazon]
+src.git    = "https://gitlab.com/hagezi/mirror"
+src.branch = "main"
+
+fetch.url = "https://gitlab.com/hagezi/mirror/-/raw/$ver/dns-blocklists/rpz/native.amazon.txt"
+
+[hagezi-native-apple]
+src.git    = "https://gitlab.com/hagezi/mirror"
+src.branch = "main"
+
+fetch.url = "https://gitlab.com/hagezi/mirror/-/raw/$ver/dns-blocklists/rpz/native.apple.txt"
+
+[hagezi-native-huawei]
+src.git    = "https://gitlab.com/hagezi/mirror"
+src.branch = "main"
+
+fetch.url = "https://gitlab.com/hagezi/mirror/-/raw/$ver/dns-blocklists/rpz/native.huawei.txt"
+
+[hagezi-native-lgwebos]
+src.git    = "https://gitlab.com/hagezi/mirror"
+src.branch = "main"
+
+fetch.url = "https://gitlab.com/hagezi/mirror/-/raw/$ver/dns-blocklists/rpz/native.lgwebos.txt"
+
+[hagezi-native-oppo-realme]
+src.git    = "https://gitlab.com/hagezi/mirror"
+src.branch = "main"
+
+fetch.url = "https://gitlab.com/hagezi/mirror/-/raw/$ver/dns-blocklists/rpz/native.oppo-realme.txt"
+
+[hagezi-native-roku]
+src.git    = "https://gitlab.com/hagezi/mirror"
+src.branch = "main"
+
+fetch.url = "https://gitlab.com/hagezi/mirror/-/raw/$ver/dns-blocklists/rpz/native.roku.txt"
+
+[hagezi-native-samsung]
+src.git    = "https://gitlab.com/hagezi/mirror"
+src.branch = "main"
+
+fetch.url = "https://gitlab.com/hagezi/mirror/-/raw/$ver/dns-blocklists/rpz/native.samsung.txt"
+
+[hagezi-native-tiktok]
+src.git    = "https://gitlab.com/hagezi/mirror"
+src.branch = "main"
+
+fetch.url = "https://gitlab.com/hagezi/mirror/-/raw/$ver/dns-blocklists/rpz/native.tiktok.extended.txt"
+
+[hagezi-native-vivo]
+src.git    = "https://gitlab.com/hagezi/mirror"
+src.branch = "main"
+
+fetch.url = "https://gitlab.com/hagezi/mirror/-/raw/$ver/dns-blocklists/rpz/native.vivo.txt"
+
+[hagezi-native-winoffice]
+src.git    = "https://gitlab.com/hagezi/mirror"
+src.branch = "main"
+
+fetch.url = "https://gitlab.com/hagezi/mirror/-/raw/$ver/dns-blocklists/rpz/native.winoffice.txt"
+
+[hagezi-native-xiaomi]
+src.git    = "https://gitlab.com/hagezi/mirror"
+src.branch = "main"
+
+fetch.url = "https://gitlab.com/hagezi/mirror/-/raw/$ver/dns-blocklists/rpz/native.xiaomi.txt"

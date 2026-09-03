@@ -1,0 +1,28 @@
+keys:
+  - &workstation age1gfcez3w4rnjslewnuj4w9lct4gs2rvw0tkejlgqltml9wzqh398s7y73ev
+
+  - &gw-genesis age1ltkwfnrm22hsptmqszkz0ln5x2trsyhgmf8jxfgk73q0vxhtvqcqzqcf3z
+  - &gw-nbg age1aqu6m6uggfjm9w7v8tcmg9j4c3cazwm6vfsflzvuev64sucm5yzsr9cgvm
+  - &forgejo age1ckewh7qqxhmdknr7ctm5t3tmcjv996mhkwh3x5vq6vn66yqkn36q4ksjc4
+  - &auth age1ppt46rmrw5lzaphhq3cwqpmkrfkhadhv6qtn2s9e74z0360aap3qwwm64z
+
+creation_rules:
+  - path_regex: hosts/gw-genesis/secrets\.yaml$
+    age:
+      - *workstation
+      - *gw-genesis
+
+  - path_regex: hosts/gw-nbg/secrets\.yaml$
+    age:
+      - *workstation
+      - *gw-nbg
+
+  - path_regex: hosts/forgejo/secrets\.yaml$
+    age:
+      - *workstation
+      - *forgejo
+
+  - path_regex: hosts/auth/secrets\.yaml$
+    age:
+      - *workstation
+      - *auth

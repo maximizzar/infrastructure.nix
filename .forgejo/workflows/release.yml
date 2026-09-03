@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: 2026 maximizzar <mail@maximizzar.de>
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+name: Release for nix flakes without Artifacts
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: nixos
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Use Flake output 'release'
+        run: nix run .#release
+        env:
+          FORGEJO_TOKEN: ${{ secrets.RELEASE_TOKEN }}
