@@ -17,6 +17,8 @@ in
       IPv6LinkLocalAddressGenerationMode = "eui64";
 
       IPv6SendRA = true;
+      DHCP = "ipv6";
+      DHCPPrefixDelegation = true;
     };
 
     ipv6SendRAConfig = {
