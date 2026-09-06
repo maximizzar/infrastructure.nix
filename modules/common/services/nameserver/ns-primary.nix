@@ -39,6 +39,8 @@ in
         gw.dmz.genesis.prod           IN AAAA fd80:3aa8:691a:ff01:be24:11ff:feee:cfc8
         ca.dmz.genesis.prod           IN AAAA fd80:3aa8:691a:ff01:2558:9eb0:8a8f:ddb7
         auth.dmz.genesis.prod         IN AAAA fd80:3aa8:691a:ff01:be24:11ff:feb7:63dd
+        factorio.dmz.genesis.prod     IN AAAA fd80:3aa8:691a:ff01:be24:11ff:fec7:8b2b
+        factorio                      IN CNAME factorio.dmz.genesis.prod
 
         ;; genesis srv (21)
         gw.srv.genesis.prod           IN AAAA fd80:3aa8:691a:ff02:be24:11ff:febe:1cf

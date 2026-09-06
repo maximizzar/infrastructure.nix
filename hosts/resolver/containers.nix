@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 let
   bridge = "br-container";
-  serial = "24";
+  serial = "25";
 in
 {
   containers.nameserver = {

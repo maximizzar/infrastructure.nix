@@ -26,3 +26,7 @@ creation_rules:
     age:
       - *workstation
       - *auth
+
+  - path_regex: hosts/factorio/secrets\.yaml$
+    age:
+      - *workstation

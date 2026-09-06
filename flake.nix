@@ -105,6 +105,12 @@
           modules = modules ++ [ ./hosts/auth ];
         };
 
+        factorio = lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs inventory; };
+          modules = modules ++ [ ./hosts/factorio ];
+        };
+
         #
         # Client Computers
         #
@@ -136,6 +142,7 @@
         runner = self.nixosConfigurations.runner.config.system.build.diskoImages;
         vaultwarden = self.nixosConfigurations.vaultwarden.config.system.build.diskoImages;
         auth = self.nixosConfigurations.auth.config.system.build.diskoImages;
+        factorio = self.nixosConfigurations.factorio.config.system.build.diskoImages;
       };
 
       apps.${system} = {

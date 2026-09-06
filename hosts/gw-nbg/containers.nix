@@ -63,7 +63,7 @@ in
         openFirewall = true;
 
         primary = true;
-        serialNumber = "1";
+        serialNumber = "2";
       };
 
     };
@@ -113,9 +113,49 @@ in
         streamConfig = ''
           server {
             listen [::]:22;
+
             proxy_connect_timeout 10s;
             proxy_timeout 20s;
+
             proxy_pass forgejo.srv.genesis.prod.maximizzar.org:22;
+          }
+        '';
+
+      };
+
+    };
+  };
+
+  containers.pfactorio = {
+    autoStart = true;
+    restartIfChanged = true;
+    privateNetwork = true;
+    hostBridge = bridge;
+
+    localMacAddress = "02:ca:ad:a5:34:f6";
+
+    config = { ... }: {
+      imports = [ ../../modules/default-ct.nix ];
+
+      networking.nameservers = nameservers;
+      maximizzar.modules.networking.containerInterface = {
+        enable = true;
+        dns = true;
+      };
+
+      # Proxy logic
+      services.openssh.enable = false;
+      networking.firewall.allowedUDPPorts = [ 34197 ];
+      services.nginx = {
+        enable = true;
+        streamConfig = ''
+          server {
+            listen [::]:34197 udp reuseport;
+
+            proxy_connect_timeout 10s;
+            proxy_timeout 20s;
+
+            proxy_pass factorio.dmz.genesis.prod.maximizzar.org:34197;
           }
         '';
 
