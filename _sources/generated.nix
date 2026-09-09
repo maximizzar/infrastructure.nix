@@ -8,128 +8,128 @@
 {
   hagezi-doh = {
     pname = "hagezi-doh";
-    version = "fb4432a9d86f6260c5da4240908534d1fca89508";
+    version = "6125ed68fba6e9b8e665b4777421575923ffbf23";
     src = fetchurl {
-      url = "https://gitlab.com/hagezi/mirror/-/raw/fb4432a9d86f6260c5da4240908534d1fca89508/dns-blocklists/rpz/doh.txt";
-      sha256 = "sha256-/jvsKpedAOH0WRjMWq0aYxHYHwR0gc/fweDyaYf0prU=";
+      url = "https://gitlab.com/hagezi/mirror/-/raw/6125ed68fba6e9b8e665b4777421575923ffbf23/dns-blocklists/rpz/doh.txt";
+      sha256 = "sha256-wQK9Qb4q97/PJM4tYdV9UnzrO//u0tmuqcrw9fJk1gs=";
     };
-    date = "2026-09-08";
+    date = "2026-09-09";
   };
   hagezi-gambling = {
     pname = "hagezi-gambling";
-    version = "fb4432a9d86f6260c5da4240908534d1fca89508";
+    version = "6125ed68fba6e9b8e665b4777421575923ffbf23";
     src = fetchurl {
-      url = "https://gitlab.com/hagezi/mirror/-/raw/fb4432a9d86f6260c5da4240908534d1fca89508/dns-blocklists/rpz/gambling.txt";
-      sha256 = "sha256-6kyXNBL7ErN1ZIjQwXSodlv7NuAMal6Ep8ogiDvrjU8=";
+      url = "https://gitlab.com/hagezi/mirror/-/raw/6125ed68fba6e9b8e665b4777421575923ffbf23/dns-blocklists/rpz/gambling.txt";
+      sha256 = "sha256-8T9FE36Pz8afsrLIwRqEugRCr6ojeWmsGVCSQvowA4o=";
     };
-    date = "2026-09-08";
+    date = "2026-09-09";
   };
   hagezi-hoster = {
     pname = "hagezi-hoster";
-    version = "fb4432a9d86f6260c5da4240908534d1fca89508";
+    version = "6125ed68fba6e9b8e665b4777421575923ffbf23";
     src = fetchurl {
-      url = "https://gitlab.com/hagezi/mirror/-/raw/fb4432a9d86f6260c5da4240908534d1fca89508/dns-blocklists/rpz/hoster.txt";
+      url = "https://gitlab.com/hagezi/mirror/-/raw/6125ed68fba6e9b8e665b4777421575923ffbf23/dns-blocklists/rpz/hoster.txt";
       sha256 = "sha256-uJMzWRxZINICxwgPBi1R80yE1PDn+NPZ2+g5AjtpHc8=";
     };
-    date = "2026-09-08";
+    date = "2026-09-09";
   };
   hagezi-native-amazon = {
     pname = "hagezi-native-amazon";
-    version = "fb4432a9d86f6260c5da4240908534d1fca89508";
+    version = "6125ed68fba6e9b8e665b4777421575923ffbf23";
     src = fetchurl {
-      url = "https://gitlab.com/hagezi/mirror/-/raw/fb4432a9d86f6260c5da4240908534d1fca89508/dns-blocklists/rpz/native.amazon.txt";
+      url = "https://gitlab.com/hagezi/mirror/-/raw/6125ed68fba6e9b8e665b4777421575923ffbf23/dns-blocklists/rpz/native.amazon.txt";
       sha256 = "sha256-b9L0SW0hjR9r50/08RDBBmO+7SnVhveGwBJZJbRURjk=";
     };
-    date = "2026-09-08";
+    date = "2026-09-09";
   };
   hagezi-native-apple = {
     pname = "hagezi-native-apple";
-    version = "fb4432a9d86f6260c5da4240908534d1fca89508";
+    version = "6125ed68fba6e9b8e665b4777421575923ffbf23";
     src = fetchurl {
-      url = "https://gitlab.com/hagezi/mirror/-/raw/fb4432a9d86f6260c5da4240908534d1fca89508/dns-blocklists/rpz/native.apple.txt";
+      url = "https://gitlab.com/hagezi/mirror/-/raw/6125ed68fba6e9b8e665b4777421575923ffbf23/dns-blocklists/rpz/native.apple.txt";
       sha256 = "sha256-I95ItYsK3o8HcfrBiWVzyaITZtb6Dh8CgA+hyAu9bWY=";
     };
-    date = "2026-09-08";
+    date = "2026-09-09";
   };
   hagezi-native-huawei = {
     pname = "hagezi-native-huawei";
-    version = "fb4432a9d86f6260c5da4240908534d1fca89508";
+    version = "6125ed68fba6e9b8e665b4777421575923ffbf23";
     src = fetchurl {
-      url = "https://gitlab.com/hagezi/mirror/-/raw/fb4432a9d86f6260c5da4240908534d1fca89508/dns-blocklists/rpz/native.huawei.txt";
+      url = "https://gitlab.com/hagezi/mirror/-/raw/6125ed68fba6e9b8e665b4777421575923ffbf23/dns-blocklists/rpz/native.huawei.txt";
       sha256 = "sha256-+jR98EJoacOmjJXeKXQ6urXWAA2Elw9YkrkEYj94MrI=";
     };
-    date = "2026-09-08";
+    date = "2026-09-09";
   };
   hagezi-native-lgwebos = {
     pname = "hagezi-native-lgwebos";
-    version = "fb4432a9d86f6260c5da4240908534d1fca89508";
+    version = "6125ed68fba6e9b8e665b4777421575923ffbf23";
     src = fetchurl {
-      url = "https://gitlab.com/hagezi/mirror/-/raw/fb4432a9d86f6260c5da4240908534d1fca89508/dns-blocklists/rpz/native.lgwebos.txt";
+      url = "https://gitlab.com/hagezi/mirror/-/raw/6125ed68fba6e9b8e665b4777421575923ffbf23/dns-blocklists/rpz/native.lgwebos.txt";
       sha256 = "sha256-EEUnZm1Aood/bJlTC84hVuV6VrRULk1xIqJdsfbmogA=";
     };
-    date = "2026-09-08";
+    date = "2026-09-09";
   };
   hagezi-native-oppo-realme = {
     pname = "hagezi-native-oppo-realme";
-    version = "fb4432a9d86f6260c5da4240908534d1fca89508";
+    version = "6125ed68fba6e9b8e665b4777421575923ffbf23";
     src = fetchurl {
-      url = "https://gitlab.com/hagezi/mirror/-/raw/fb4432a9d86f6260c5da4240908534d1fca89508/dns-blocklists/rpz/native.oppo-realme.txt";
+      url = "https://gitlab.com/hagezi/mirror/-/raw/6125ed68fba6e9b8e665b4777421575923ffbf23/dns-blocklists/rpz/native.oppo-realme.txt";
       sha256 = "sha256-jXHIOmSiooLLD6abRKRyPlvzAcPO79kH5MiAyoHqZS4=";
     };
-    date = "2026-09-08";
+    date = "2026-09-09";
   };
   hagezi-native-roku = {
     pname = "hagezi-native-roku";
-    version = "fb4432a9d86f6260c5da4240908534d1fca89508";
+    version = "6125ed68fba6e9b8e665b4777421575923ffbf23";
     src = fetchurl {
-      url = "https://gitlab.com/hagezi/mirror/-/raw/fb4432a9d86f6260c5da4240908534d1fca89508/dns-blocklists/rpz/native.roku.txt";
+      url = "https://gitlab.com/hagezi/mirror/-/raw/6125ed68fba6e9b8e665b4777421575923ffbf23/dns-blocklists/rpz/native.roku.txt";
       sha256 = "sha256-PZiiMbpCEMBgM95QcHNdVbiM6KzfakVweAAtv4/NJCw=";
     };
-    date = "2026-09-08";
+    date = "2026-09-09";
   };
   hagezi-native-samsung = {
     pname = "hagezi-native-samsung";
-    version = "fb4432a9d86f6260c5da4240908534d1fca89508";
+    version = "6125ed68fba6e9b8e665b4777421575923ffbf23";
     src = fetchurl {
-      url = "https://gitlab.com/hagezi/mirror/-/raw/fb4432a9d86f6260c5da4240908534d1fca89508/dns-blocklists/rpz/native.samsung.txt";
+      url = "https://gitlab.com/hagezi/mirror/-/raw/6125ed68fba6e9b8e665b4777421575923ffbf23/dns-blocklists/rpz/native.samsung.txt";
       sha256 = "sha256-ofSgKMWQV8howqyucJSWWQWNsTZR+8SmOYqkDdLbPR4=";
     };
-    date = "2026-09-08";
+    date = "2026-09-09";
   };
   hagezi-native-tiktok = {
     pname = "hagezi-native-tiktok";
-    version = "fb4432a9d86f6260c5da4240908534d1fca89508";
+    version = "6125ed68fba6e9b8e665b4777421575923ffbf23";
     src = fetchurl {
-      url = "https://gitlab.com/hagezi/mirror/-/raw/fb4432a9d86f6260c5da4240908534d1fca89508/dns-blocklists/rpz/native.tiktok.extended.txt";
+      url = "https://gitlab.com/hagezi/mirror/-/raw/6125ed68fba6e9b8e665b4777421575923ffbf23/dns-blocklists/rpz/native.tiktok.extended.txt";
       sha256 = "sha256-IleyYs3CFVZAAekLJS6B0uHZZO/AFVKBLZ9BFcLgRp4=";
     };
-    date = "2026-09-08";
+    date = "2026-09-09";
   };
   hagezi-native-vivo = {
     pname = "hagezi-native-vivo";
-    version = "fb4432a9d86f6260c5da4240908534d1fca89508";
+    version = "6125ed68fba6e9b8e665b4777421575923ffbf23";
     src = fetchurl {
-      url = "https://gitlab.com/hagezi/mirror/-/raw/fb4432a9d86f6260c5da4240908534d1fca89508/dns-blocklists/rpz/native.vivo.txt";
+      url = "https://gitlab.com/hagezi/mirror/-/raw/6125ed68fba6e9b8e665b4777421575923ffbf23/dns-blocklists/rpz/native.vivo.txt";
       sha256 = "sha256-DfAsD27obXWQqizTST4/Tx5uiDfL5GofuH8/cGA46q4=";
     };
-    date = "2026-09-08";
+    date = "2026-09-09";
   };
   hagezi-native-winoffice = {
     pname = "hagezi-native-winoffice";
-    version = "fb4432a9d86f6260c5da4240908534d1fca89508";
+    version = "6125ed68fba6e9b8e665b4777421575923ffbf23";
     src = fetchurl {
-      url = "https://gitlab.com/hagezi/mirror/-/raw/fb4432a9d86f6260c5da4240908534d1fca89508/dns-blocklists/rpz/native.winoffice.txt";
+      url = "https://gitlab.com/hagezi/mirror/-/raw/6125ed68fba6e9b8e665b4777421575923ffbf23/dns-blocklists/rpz/native.winoffice.txt";
       sha256 = "sha256-170DH0HLj4Ithx3LP3sWVZGBQtE/xZK4v8ZusUz03Ok=";
     };
-    date = "2026-09-08";
+    date = "2026-09-09";
   };
   hagezi-native-xiaomi = {
     pname = "hagezi-native-xiaomi";
-    version = "fb4432a9d86f6260c5da4240908534d1fca89508";
+    version = "6125ed68fba6e9b8e665b4777421575923ffbf23";
     src = fetchurl {
-      url = "https://gitlab.com/hagezi/mirror/-/raw/fb4432a9d86f6260c5da4240908534d1fca89508/dns-blocklists/rpz/native.xiaomi.txt";
+      url = "https://gitlab.com/hagezi/mirror/-/raw/6125ed68fba6e9b8e665b4777421575923ffbf23/dns-blocklists/rpz/native.xiaomi.txt";
       sha256 = "sha256-HkhmxaVSzZbmga68zpyoUraZ5XqDJ8sfQCxKliL589U=";
     };
-    date = "2026-09-08";
+    date = "2026-09-09";
   };
 }
