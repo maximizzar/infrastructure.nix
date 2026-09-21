@@ -21,7 +21,11 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    virtualisation.libvirtd.enable = true;
+    virtualisation.libvirtd = {
+      enable = true;
+      qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
+    };
+
     programs.virt-manager.enable = true;
 
     users.users = lib.genAttrs cfg.users (_u: {
