@@ -5,6 +5,7 @@
   description = "NixOS configuration for my Homelab!";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
 
     disko = {
@@ -23,12 +24,14 @@
     {
       self,
       nixpkgs,
+      nixpkgs-unstable,
       nixos-facter-modules,
       ...
     }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
+      pkgsUnstable = import nixpkgs-unstable { inherit system; };
       lib = nixpkgs.lib;
       inventory = import ./inventory;
       sources = nixpkgs.legacyPackages.${system}.callPackage ./_sources/generated.nix { };
@@ -111,6 +114,18 @@
           modules = modules ++ [ ./hosts/factorio ];
         };
 
+        paperless = lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs inventory; };
+          modules = modules ++ [ ./hosts/paperless ];
+        };
+
+        immich = lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs pkgsUnstable inventory; };
+          modules = modules ++ [ ./hosts/immich ];
+        };
+
         #
         # Client Computers
         #
@@ -143,6 +158,8 @@
         vaultwarden = self.nixosConfigurations.vaultwarden.config.system.build.diskoImages;
         auth = self.nixosConfigurations.auth.config.system.build.diskoImages;
         factorio = self.nixosConfigurations.factorio.config.system.build.diskoImages;
+        paperless = self.nixosConfigurations.paperless.config.system.build.diskoImages;
+        immich = self.nixosConfigurations.immich.config.system.build.diskoImages;
       };
 
       apps.${system} = {

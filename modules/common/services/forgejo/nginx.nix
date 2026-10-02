@@ -28,10 +28,6 @@ in
         add_header Alt-Svc 'h3=":443"; ma=86400' always;
       '';
 
-      locations."= /".extraConfig = ''
-        return 302 /explore/repos;
-      '';
-
       locations."/".proxyPass = "http://unix:${config.services.forgejo.settings.server.HTTP_ADDR}:";
     };
   };

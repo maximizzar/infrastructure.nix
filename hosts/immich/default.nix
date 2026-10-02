@@ -3,9 +3,8 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 {
   imports = [
-    ./bytedream.nix
-    ./kurt.nix
-    ./maximizzar.nix
-    ./peter.nix
+    ./configuration.nix
+    ./immich.nix
+    #./secrets.nix
   ];
 }

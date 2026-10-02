@@ -25,7 +25,7 @@
 
   security.sudo.wheelNeedsPassword = false;
 
-  # enable maximizzar user
+  # enable users
   users.users.maximizzar.enable = true;
 
   environment.systemPackages = map lib.lowPrio [
