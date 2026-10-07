@@ -2,8 +2,10 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 {
-  imports = [
-    ./forgejo.nix
-    ./mealie.nix
-  ];
+  sops = {
+    defaultSopsFile = ./secrets.yaml;
+    secrets = {
+      "credentialsFile" = { };
+    };
+  };
 }

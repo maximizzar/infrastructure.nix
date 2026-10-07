@@ -49,6 +49,7 @@ in
         forgejo                       IN CNAME @
         ssh.forgejo                   IN CNAME forgejo.srv.genesis.prod
         immich.srv.genesis.prod       IN AAAA fd80:3aa8:691a:ff02:be24:11ff:fe96:80d5
+        mealie.srv.genesis.prod       IN AAAA fd80:3aa8:691a:ff02:be24:11ff:fe97:9eb9
 
       '';
     };

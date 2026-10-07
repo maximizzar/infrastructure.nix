@@ -3,7 +3,8 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 {
   imports = [
-    ./forgejo.nix
+    ./configuration.nix
     ./mealie.nix
+    ./secrets.nix
   ];
 }

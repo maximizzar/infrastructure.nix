@@ -16,6 +16,7 @@
 
     authelia.enable = lib.mkEnableOption "Enable Authelia Proxy";
     forgejo.enable = lib.mkEnableOption "Enable Forgejo Proxy";
+    mealie.enable = lib.mkEnableOption "Enalbe Mealie Proxy";
     prometheus.enable = lib.mkEnableOption "Enable Prometheus Proxy";
   };
 }

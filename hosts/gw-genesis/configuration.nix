@@ -52,6 +52,7 @@ in
 
     authelia.enable = true;
     forgejo.enable = true;
+    mealie.enable = true;
   };
 
   networking.firewall.enable = false;

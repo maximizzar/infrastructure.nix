@@ -33,10 +33,13 @@ in
         "forgejo.srv.genesis.prod.maximizzar.org:443" = { };
       };
 
+      "mealie-backend".servers = {
+        "mealie.srv.genesis.prod.maximizzar.org:443" = { };
+      };
+
       "prometheus-backend".servers = {
         "prometheus.srv.genesis.prod.maximizzar.org:443" = { };
       };
-
     };
 
     services.nginx.virtualHosts = {
@@ -75,6 +78,25 @@ in
 
         locations."/" = {
           proxyPass = "https://forgejo-backend";
+        };
+      };
+
+      "mealie-vhost" = lib.mkIf cfg.mealie.enable {
+        serverName = "mealie.maximizzar.org";
+
+        forceSSL = true;
+        useACMEHost = "maximizzar.org";
+
+        sslCertificate = sslCertificate;
+        sslCertificateKey = sslCertificateKey;
+        sslTrustedCertificate = sslTrustedCertificate;
+
+        kTLS = true;
+        quic = true;
+        http3_hq = true;
+
+        locations."/" = {
+          proxyPass = "https://mealie-backend";
         };
       };
 

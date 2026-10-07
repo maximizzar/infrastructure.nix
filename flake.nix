@@ -126,6 +126,12 @@
           modules = modules ++ [ ./hosts/immich ];
         };
 
+        mealie = lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs inventory; };
+          modules = modules ++ [ ./hosts/mealie ];
+        };
+
         #
         # Client Computers
         #
@@ -160,6 +166,7 @@
         factorio = self.nixosConfigurations.factorio.config.system.build.diskoImages;
         paperless = self.nixosConfigurations.paperless.config.system.build.diskoImages;
         immich = self.nixosConfigurations.immich.config.system.build.diskoImages;
+        mealie = self.nixosConfigurations.mealie.config.system.build.diskoImages;
       };
 
       apps.${system} = {
