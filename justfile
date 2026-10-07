@@ -17,6 +17,9 @@ push-disk-image host remote_path:
 deploy flake host:
     nix run nixpkgs#nixos-rebuild -- switch --flake .#{{ flake }} --target-host "{{ host }}" --sudo
 
+deploy-all:
+    ./scripts/deploy.sh
+
 deploy-build-remote flake host:
     nix run nixpkgs#nixos-rebuild switch -- --flake .#{{ flake }} --target-host "{{ host }}" --build-host "{{ host }}" --sudo
 
