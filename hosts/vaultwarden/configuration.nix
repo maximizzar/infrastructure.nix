@@ -4,7 +4,6 @@
 {
   modulesPath,
   lib,
-  stateVersion,
   config,
   ...
 }:
@@ -38,7 +37,6 @@ in
   # User Settings
   security.sudo.wheelNeedsPassword = lib.mkDefault false;
   users.users.maximizzar.enable = true;
-  system.stateVersion = stateVersion;
 
   # Vaultwarden Service
   services.vaultwarden.enable = true;

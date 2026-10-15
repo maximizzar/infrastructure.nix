@@ -17,7 +17,7 @@ in
     localMacAddress = "02:B1:1B:66:8F:AD";
 
     config = { ... }: {
-      imports = [ ../../modules/default-container.nix ];
+      imports = [ ../../modules/default-ct.nix ];
 
       maximizzar.modules.networking.containerInterface = {
         enable = true;
@@ -30,7 +30,6 @@ in
         uuid = "b994f831-d0d1-49c8-a5ec-19a7f6b7606c";
       };
 
-      system.stateVersion = stateVersion;
     };
   };
 
@@ -42,7 +41,7 @@ in
     localMacAddress = "02:0D:EE:FB:11:0D";
 
     config = { ... }: {
-      imports = [ ../../modules/default-container.nix ];
+      imports = [ ../../modules/default-ct.nix ];
 
       maximizzar.modules.networking.containerInterface = {
         enable = true;
@@ -55,7 +54,6 @@ in
         uuid = "2e776556-9170-4622-bcd5-324f8c17ff02";
       };
 
-      system.stateVersion = stateVersion;
     };
   };
 }

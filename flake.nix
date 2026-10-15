@@ -18,6 +18,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
   outputs =
@@ -26,6 +31,7 @@
       nixpkgs,
       nixpkgs-unstable,
       nixos-facter-modules,
+      deploy-rs,
       ...
     }@inputs:
     let
@@ -173,6 +179,15 @@
         release = {
           type = "app";
           program = "${self.packages.${system}.release}/bin/release";
+        };
+      };
+
+      deploy.nodes.gw-nbg = {
+        hostname = "endpoint.nbg.prod.maximizzar.org";
+        profiles.system = {
+          user = "root";
+          sshUser = "maximizzar";
+          path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.gw-nbg;
         };
       };
     };

@@ -4,7 +4,6 @@
 {
   modulesPath,
   lib,
-  stateVersion,
   ...
 }:
 {
@@ -35,6 +34,4 @@
   # User Settings
   security.sudo.wheelNeedsPassword = lib.mkDefault false;
   users.users.maximizzar.enable = true;
-
-  system.stateVersion = stateVersion;
 }

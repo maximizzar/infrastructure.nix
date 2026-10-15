@@ -22,7 +22,7 @@
 
     };
 
-    passwordFile = "";
+    #passwordFile = "";
 
     configureTika = true;
     configureNginx = false;
