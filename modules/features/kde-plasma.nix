@@ -1,43 +1,55 @@
 # SPDX-FileCopyrightText: 2026 maximizzar <mail@maximizzar.de>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-{ self, inputs, ... }: {
+{ self, ... }: {
   flake.nixosModules.kdePlasma =
     {
-      config,
       lib,
       pkgs,
       ...
     }:
     {
+      imports = [
+        self.nixosModules.base
+        self.nixosModules.audio
+      ];
+
       # Enable networking
       networking.networkmanager.enable = lib.mkDefault true;
-      # Enable German locale settings
-      maximizzar.modules.applications.deLocale.enable = true;
 
-      # Enable the X11 windowing system.
-      services.xserver.enable = true;
+      services = {
+        # Enable the X11 windowing system.
+        xserver.enable = true;
 
-      # Enable the KDE Plasma Desktop Environment.
-      services.displayManager.sddm.enable = true;
-      services.desktopManager.plasma6.enable = true;
+        # Enable the KDE Plasma Desktop Environment.
+        displayManager.sddm.enable = true;
+        desktopManager.plasma6.enable = true;
 
-      # Enable CUPS to print documents.
-      services.printing.enable = true;
-
-      # Enable sound with pipewire.
-      maximizzar.modules.services.pipewire.enable = true;
-
-      # Add Programms
-      programs.firefox.enable = true;
-      programs.chromium = {
-        enable = true;
-        enablePlasmaBrowserIntegration = true;
+        # Enable CUPS to print documents.
+        printing = {
+          enable = true;
+          drivers = with pkgs; [ gutenprint ];
+          cups-pdf.enable = true;
+        };
       };
 
-      programs.kdeconnect.enable = true;
-      programs.mtr.enable = true;
-      maximizzar.modules.applications.ksshaskpass.enable = true;
+      # Add Programms
+      programs = {
+        firefox.enable = true;
+        chromium = {
+          enable = true;
+          enablePlasmaBrowserIntegration = true;
+        };
+
+        kdeconnect.enable = true;
+        mtr.enable = true;
+      };
+
+      # Use k-ssh ask-pass to store ssh passphrases in keyring
+      environment.sessionVariables = {
+        SSH_ASKPASS = lib.mkDefault "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
+        SSH_ASKPASS_REQUIRE = lib.mkDefault "prefer";
+      };
 
       # Allow unfree packages
       nixpkgs.config.allowUnfree = true;
@@ -50,6 +62,7 @@
         # Extra KDE Packages
         kdePackages.kcalc
         kdePackages.korganizer
+        kdePackages.ksshaskpass
       ];
 
       fonts = {

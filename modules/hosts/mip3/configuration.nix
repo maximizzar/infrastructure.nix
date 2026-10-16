@@ -36,6 +36,35 @@
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
 
+    # Enable services the host runs
+    services.openssh.enable = true;
+
+    # Own custom Modules
+    maximizzar = {
+      # Enable various cli tools
+      cliTools = {
+        enable = true;
+        dev = true;
+        sys = true;
+      };
+
+      # Enable qemu_kmv virtualization with libvirt virt-manager
+      virtualization = {
+        enable = true;
+        libvirt = {
+          enable = true;
+          useVirtmanager = true;
+        };
+      };
+
+    };
+
+    maximizzar.modules.security.knownHosts = {
+      gitRemotes.enable = true;
+      guests.enable = true;
+      machines.enable = true;
+    };
+
     # List packages installed in system profile.
     environment.systemPackages = with pkgs; [
       # bitwarden-desktop # currently insecure Electorn version
@@ -51,30 +80,5 @@
       maple-mono.NF-CN
     ];
 
-    # Own custom Modules
-    maximizzar = {
-      # Enable various cli tools
-      cliTools = {
-        enable = true;
-        dev = true;
-        sys = true;
-      };
-
-      # Enable qemu_kmv virtualization with libvirt virt-manager
-      maximizzar.virtualization = {
-        enable = true;
-        libvirt = {
-          enable = true;
-          useVirtmanager = true;
-        };
-      };
-
-    };
-
-    maximizzar.modules.security.knownHosts = {
-      gitRemotes.enable = true;
-      guests.enable = true;
-      machines.enable = true;
-    };
   };
 }
