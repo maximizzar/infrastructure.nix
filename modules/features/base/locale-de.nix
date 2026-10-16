@@ -1,13 +1,8 @@
 # SPDX-FileCopyrightText: 2026 maximizzar <mail@maximizzar.de>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-{ config, lib, ... }:
-let
-  cfg = config.maximizzar.modules.applications.deLocale;
-in
 {
-  options.maximizzar.modules.applications.deLocale.enable = lib.mkEnableOption "de_locale";
-  config = lib.mkIf cfg.enable {
+  flake.nixosModules.base = {
     # Set your time zone.
     time.timeZone = "Europe/Berlin";
 

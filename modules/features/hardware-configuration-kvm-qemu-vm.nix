@@ -1,13 +1,19 @@
-# SPDX-FileCopyrightText: 2026 maximizzar <mail@maximizzar.de>
-#
-# SPDX-License-Identifier: GPL-3.0-or-later
-{ config, lib, ... }:
-let
-  cfg = config.maximizzar.modules.hardware.rootDisk;
-in
-{
-  options.maximizzar.modules.hardware.rootDisk.enable = lib.mkEnableOption "root-disk";
-  config = lib.mkIf cfg.enable {
+{ self, inputs, ... }: {
+  flake.nixosModules.hardwareConfigurationKvmQemuVm = { pkgs, lib, ... }: {
+    imports = [
+      self.nixosModules.systemdBoot
+
+      inputs.disko.nixosModules.disko
+      inputs.nixos-facter-modules.nixosModules.facter
+    ];
+
+    hardware.facter.reportPath = ./_facter.json;
+    boot.growPartition = true;
+    fileSystems."/" = {
+      autoResize = true;
+      label = "nixos-root";
+    };
+
     disko.devices.disk.main.imageSize = lib.mkDefault "8G";
     disko.imageBuilder.imageFormat = "qcow2";
 
@@ -40,6 +46,10 @@ in
             content = {
               type = "filesystem";
               format = "ext4";
+              extraArgs = [
+                "-L"
+                "nixos-root"
+              ];
               mountpoint = "/";
               mountOptions = [ "noatime" ];
             };
@@ -47,5 +57,6 @@ in
         };
       };
     };
+
   };
 }
