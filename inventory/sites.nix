@@ -21,6 +21,11 @@
         publicKey = "O7sIQMesW+B2Y+8felV6FooQzBFtUlpzQlyEah8BWzU=";
       };
 
+      dev1 = {
+        address = "fd95:948f:5cae:ffff::1/128";
+        publicKey = "qt1ecj5l14X4UJg0cI1i6NlLYenPYzBGHXk6ZoQhI2Q=";
+      };
+
     };
   };
 

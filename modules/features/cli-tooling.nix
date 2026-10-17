@@ -13,50 +13,52 @@
       cfg = config.maximizzar.cliTooling;
     in
     {
-      options.cliTooling = {
+      options.maximizzar.cliTooling = {
         enable = lib.mkEnableOption "Enable basic cli tooling";
 
-        dev.enable = lib.mkEnableOption "development CLI tools";
-        sys.enable = lib.mkEnableOption "system administration CLI tools";
-        modern.enable = {
-          type = lib.type.bool;
+        dev = lib.mkEnableOption "development CLI tools";
+        sys = lib.mkEnableOption "system administration CLI tools";
+        modern = lib.mkOption {
+          type = lib.types.bool;
           description = "modern CLI replacements";
           default = cfg.enable;
         };
-
-        config = lib.mkIf cfg.enable {
-          environment.systemPackages =
-            lib.optionals cfg.modern.enable (
-              with pkgs;
-              [
-                bat
-                eza
-              ]
-            )
-            ++ lib.optionals cfg.dev.enable (
-              with pkgs;
-              [
-                delta
-                devenv
-                git
-                just
-              ]
-            )
-            ++ lib.optionals cfg.sys.enable (
-              with pkgs;
-              [
-                bandwhich
-                btop
-                curl
-                htop
-                dust
-                duf
-                wget
-              ]
-            );
-
-          programs.starship.enable = lib.mkDefault cfg.modern;
-        };
       };
+
+      config = lib.mkIf cfg.enable {
+        environment.systemPackages =
+          lib.optionals cfg.modern (
+            with pkgs;
+            [
+              bat
+              eza
+            ]
+          )
+          ++ lib.optionals cfg.dev (
+            with pkgs;
+            [
+              delta
+              devenv
+              git
+              just
+            ]
+          )
+          ++ lib.optionals cfg.sys (
+            with pkgs;
+            [
+              bandwhich
+              btop
+              curl
+              htop
+              dust
+              duf
+              wget
+            ]
+          );
+
+        programs.starship.enable = lib.mkDefault cfg.modern;
+      };
+
     };
+
 }

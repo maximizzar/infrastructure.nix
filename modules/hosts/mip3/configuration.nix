@@ -4,7 +4,6 @@
 { self, ... }: {
   flake.nixosModules.configurationMip3 = { pkgs, ... }: {
     imports = [
-      self.nixosModules.base
       self.nixosModules.systemdBoot
       ./_hardware-configuration.nix
 
@@ -42,7 +41,7 @@
     # Own custom Modules
     maximizzar = {
       # Enable various cli tools
-      cliTools = {
+      cliTooling = {
         enable = true;
         dev = true;
         sys = true;
@@ -57,12 +56,12 @@
         };
       };
 
-    };
+      knownHosts = {
+        gitRemotes.enable = true;
+        guests.enable = true;
+        machines.enable = true;
+      };
 
-    maximizzar.modules.security.knownHosts = {
-      gitRemotes.enable = true;
-      guests.enable = true;
-      machines.enable = true;
     };
 
     # List packages installed in system profile.

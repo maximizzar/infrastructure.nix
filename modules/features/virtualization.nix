@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2026 maximizzar <mail@maximizzar.de>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-{ self, inputs, ... }: {
+{
   flake.nixosModules.virtualization =
     {
       config,
@@ -20,7 +20,7 @@
       ];
     in
     {
-      options.virtualization = {
+      options.maximizzar.virtualization = {
         enable = lib.mkEnableOption "Enable host for guest systems";
         libvirt = {
           enable = lib.mkEnableOption "Use libvirt for vm config";
