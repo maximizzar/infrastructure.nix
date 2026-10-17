@@ -4,7 +4,7 @@
 { self, inputs, ... }: {
   flake.nixosConfigurations.mip3 = { pkgs, lib, ... }: {
     modules = [
-      self.nixosModules.mip3Configuration
+      self.nixosModules.configurationMip3
     ];
   };
 }
