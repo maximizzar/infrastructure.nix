@@ -18,7 +18,15 @@
 
     networking = {
       hostName = "mip3"; # Define your hostname.
-      wireless.enable = true; # Enables wireless support via wpa_supplicant.
+      domain = "infra.maximizzar.org";
+      stevenblack.enable = true;
+      wireless = {
+        enable = true; # Enables wireless support via wpa_supplicant.
+        extraConfig = ''
+          mac_addr=1
+        '';
+
+      };
     };
     # Enable touchpad support (enabled default in most desktopManager).
     services.xserver.libinput.enable = true;
