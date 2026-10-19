@@ -16,6 +16,11 @@
     boot.initrd.luks.devices."luks-35770c58-e4d0-40c2-ac88-8586d43fb541".device =
       "/dev/disk/by-uuid/35770c58-e4d0-40c2-ac88-8586d43fb541";
 
+    hardware.graphics.extraPackages = with pkgs; [
+      rocmPackages.clr.icd
+      libva
+    ];
+
     networking = {
       hostName = "mip3"; # Define your hostname.
       domain = "infra.maximizzar.org";
