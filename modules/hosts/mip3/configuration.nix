@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 { self, ... }: {
-  flake.nixosModules.configurationMip3 = { pkgs, ... }: {
+  flake.nixosModules.mip3Configuration = { pkgs, ... }: {
     imports = [
       self.nixosModules.systemdBoot
       ./_hardware-configuration.nix

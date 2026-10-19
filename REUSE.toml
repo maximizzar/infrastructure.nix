@@ -1,12 +1,25 @@
 version = 1
 
-# computer-generated files
+# general files
 [[annotations]]
-path                    = ["flake.lock", ".gitignore", "**/facter.json", "_sources/**"]
+path                    = ["justfile", ".gitignore", "**/facter.json", "_sources/**"]
 SPDX-FileCopyrightText  = "NONE"
 SPDX-License-Identifier = "CC0-1.0"
 
-# computer-generated files (sops)
+# devenv
+[[annotations]]
+path                    = ["devenv.nix", "devenv.lock", "devenv.yaml"]
+SPDX-FileCopyrightText  = "NONE"
+SPDX-License-Identifier = "CC0-1.0"
+
+
+# nix files 
+[[annotations]]
+path                    = ["flake.nix", "flake.lock"]
+SPDX-FileCopyrightText  = "NONE"
+SPDX-License-Identifier = "CC0-1.0"
+
+# sops files
 [[annotations]]
 path                    = [".sops.yaml", "**/secrets.yaml"]
 SPDX-FileCopyrightText  = "NONE"

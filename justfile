@@ -7,7 +7,7 @@ default:
 
 # Build a QCow2 Disk-Image
 build-disk-image flake:
-    nix build .#{{ flake }}
+    nix build .#{{ flake }}-image
 
 # Push a QCow2 Disk-Image to a remote
 push-disk-image host remote_path:

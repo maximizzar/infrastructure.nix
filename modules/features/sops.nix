@@ -2,12 +2,16 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 {
-  flake.nixosModules.sops = { config, lib, ... }: {
-    # General sops options
-    sops.age = {
-      sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-      keyFile = "/var/lib/sops-nix/key.txt";
-      generateKey = true;
+  flake.nixosModules.sops =
+    {
+      ...
+    }:
+    {
+      # General sops options
+      sops.age = {
+        sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+        keyFile = "/var/lib/sops-nix/key.txt";
+        generateKey = true;
+      };
     };
-  };
 }

@@ -11,6 +11,7 @@
     just
     deploy-rs
     nvfetcher
+    reuse
     sops
   ];
 

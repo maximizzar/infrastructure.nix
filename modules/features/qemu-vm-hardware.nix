@@ -1,5 +1,8 @@
+# SPDX-FileCopyrightText: 2026 maximizzar <mail@maximizzar.de>
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
 { self, inputs, ... }: {
-  flake.nixosModules.hardwareConfigurationKvmQemuVm = { pkgs, lib, ... }: {
+  flake.nixosModules.qemuVmHardware = { lib, ... }: {
     imports = [
       self.nixosModules.systemdBoot
 
@@ -7,19 +10,21 @@
       inputs.nixos-facter-modules.nixosModules.facter
     ];
 
-    hardware.facter.reportPath = ./_facter.json;
+    hardware.facter.reportPath = ./qemu-vm-facter.json;
     boot.growPartition = true;
+    fileSystems."/boot".device = lib.mkForce "/dev/disk/by-label/ESP";
     fileSystems."/" = {
       autoResize = true;
-      label = "nixos-root";
+      device = lib.mkForce "/dev/disk/by-label/nixos-root";
     };
 
-    disko.devices.disk.main.imageSize = lib.mkDefault "8G";
-    disko.imageBuilder.imageFormat = "qcow2";
+    disko = {
+      devices.disk.main.imageSize = lib.mkDefault "8G";
+      imageBuilder.imageFormat = "qcow2";
+    };
 
     disko.devices.disk.main = {
       type = "disk";
-      device = "/dev/vda";
 
       content = {
         type = "gpt";
@@ -33,6 +38,10 @@
             content = {
               type = "filesystem";
               format = "vfat";
+              extraArgs = [
+                "-n"
+                "ESP"
+              ];
               mountpoint = "/boot";
               mountOptions = [ "umask=0077" ];
             };
