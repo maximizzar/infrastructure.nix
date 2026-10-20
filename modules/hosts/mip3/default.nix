@@ -12,6 +12,7 @@ in
     ];
   };
 
-  perSystem = { ... }: {
+  perSystem = {
+    #packages."${host}-image" = self.nixosConfigurations.${host}.config.system.build.diskoImages;
   };
 }

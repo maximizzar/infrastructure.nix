@@ -4,7 +4,6 @@
 {
   self,
   inputs,
-  deploy-rs,
   ...
 }:
 let
@@ -22,7 +21,7 @@ in
     profiles.system = {
       user = "root";
       sshUser = "maximizzar";
-      path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations."${host}";
+      path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations."${host}";
     };
   };
 
