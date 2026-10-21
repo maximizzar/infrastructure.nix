@@ -36,6 +36,14 @@ in
         ];
       }
 
+      {
+        name = "Dev: dev1";
+        publicKey = peers.dev1.publicKey;
+        allowedIPs = [
+          peers.dev1.address
+        ];
+      }
+
     ];
   };
 
