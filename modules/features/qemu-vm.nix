@@ -15,5 +15,12 @@
     ];
 
     maximizzar.cliTooling.enable = true;
+
+    users.users.maximizzar.enable = true;
+    security.sudo.wheelNeedsPassword = false;
+
+    services = {
+      qemuGuest.enable = true;
+    };
   };
 }

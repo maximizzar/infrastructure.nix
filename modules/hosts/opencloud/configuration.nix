@@ -43,7 +43,6 @@
       };
 
       users.users.maximizzar.enable = true;
-      services.openssh.enable = true;
 
     };
 }

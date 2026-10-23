@@ -1,9 +1,22 @@
 # SPDX-FileCopyrightText: 2026 maximizzar <mail@maximizzar.de>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
+{
+  modulesPath,
+  inputs,
+  lib,
+  ...
+}:
+{
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+    (modulesPath + "/profiles/qemu-guest.nix")
 
-# gw-nbg/disk-config
-{ lib, ... }: {
+    inputs.nixos-facter-modules.nixosModules.facter
+  ];
+
+  hardware.facter.reportPath = ./facter.json;
+
   disko.devices = {
     disk.disk1 = {
       device = lib.mkDefault "/dev/sda";

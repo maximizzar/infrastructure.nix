@@ -5,14 +5,15 @@
 let
   sites = inventory.sites;
   peers = sites.transit.peers;
+  wgport = 51820;
 in
 {
-  networking.firewall.allowedUDPPorts = [ 51820 ];
+  networking.firewall.allowedUDPPorts = [ wgport ];
   networking.wireguard.interfaces.wg0 = {
     ips = [ "${peers.nbg.address}" ];
 
     # WireGuard Port
-    listenPort = 51820;
+    listenPort = wgport;
 
     # Path to the private key file.
     privateKeyFile = "/etc/wireguard/wg0.key";
