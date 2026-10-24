@@ -1,8 +1,9 @@
 # SPDX-FileCopyrightText: 2026 maximizzar <mail@maximizzar.de>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-{ inventory, ... }:
+{ inputs, ... }:
 let
+  inventory = inputs.inventory;
   sites = inventory.sites;
   peers = sites.transit.peers;
   wgport = 51820;
