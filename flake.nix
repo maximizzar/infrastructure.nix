@@ -10,6 +10,10 @@
 
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
 
+    psysonic = {
+      url = "github:Psysonic/psysonic?ref=release";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
