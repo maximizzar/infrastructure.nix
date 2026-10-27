@@ -8,11 +8,13 @@
 
 {
   packages = with pkgs; [
-    just
     deploy-rs
     nvfetcher
+    goreleaser
+    just
     reuse
     sops
+    ssh-to-age
   ];
 
   languages.nix = {

@@ -40,6 +40,7 @@
           machines.enable = true;
         };
 
+        networking.default.MACAddress = "02:96:C0:45:32:46";
       };
 
       users.users.maximizzar.enable = true;

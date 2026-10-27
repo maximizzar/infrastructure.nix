@@ -29,11 +29,11 @@ deploy-local flake:
 
 # Edit Secrets from a specified host
 edit-secrets host:
-    nix run nixpkgs#sops -- edit hosts/{{ host }}/secrets.yaml
+    sops edit hosts/{{ host }}/secrets.yaml
 
 # Get a Hosts age key using ssh-to-age
 get-agekey host:
-    nix-shell -p ssh-to-age --run 'ssh-keyscan {{ host }} | ssh-to-age'
+    ssh-to-age --run 'ssh-keyscan {{ host }} | ssh-to-age'
 
 # Updates nvfetcheres _sources and generates a git commit with changes
 nvfetcher:
@@ -41,7 +41,7 @@ nvfetcher:
     git stash push -m "temp-stash-for-nvfetcher"
 
     @echo "Updating nvfetcher sources"
-    nix run nixpkgs#nvfetcher
+    nvfetcher
 
     @echo "Committing sources"
     git add _sources
