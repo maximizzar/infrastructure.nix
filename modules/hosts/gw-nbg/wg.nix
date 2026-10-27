@@ -1,52 +1,55 @@
 # SPDX-FileCopyrightText: 2026 maximizzar <mail@maximizzar.de>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-{ inputs, ... }:
-let
-  inventory = inputs.inventory;
-  sites = inventory.sites;
-  peers = sites.transit.peers;
-  wgport = 51820;
-in
 {
-  networking.firewall.allowedUDPPorts = [ wgport ];
-  networking.wireguard.interfaces.wg0 = {
-    ips = [ "${peers.nbg.address}" ];
+  flake.nixosModules.gw-nbgConfiguration =
+    { inputs, ... }:
+    let
+      inventory = inputs.inventory;
+      sites = inventory.sites;
+      peers = sites.transit.peers;
+      wgport = 51820;
+    in
+    {
+      networking.firewall.allowedUDPPorts = [ wgport ];
+      networking.wireguard.interfaces.wg0 = {
+        ips = [ "${peers.nbg.address}" ];
 
-    # WireGuard Port
-    listenPort = wgport;
+        # WireGuard Port
+        listenPort = wgport;
 
-    # Path to the private key file.
-    privateKeyFile = "/etc/wireguard/wg0.key";
+        # Path to the private key file.
+        privateKeyFile = "/etc/wireguard/wg0.key";
 
-    peers = [
-      {
-        name = "Site: genesis";
-        publicKey = peers.genesis.publicKey;
-        allowedIPs = [
-          peers.genesis.address
-          sites.genesis.Prefix
+        peers = [
+          {
+            name = "Site: genesis";
+            publicKey = peers.genesis.publicKey;
+            allowedIPs = [
+              peers.genesis.address
+              sites.genesis.Prefix
+            ];
+          }
+
+          {
+            name = "Site: ext1";
+            publicKey = peers.ext1.publicKey;
+            allowedIPs = [
+              peers.ext1.address
+              sites.ext1.Prefix
+            ];
+          }
+
+          {
+            name = "Dev: dev1";
+            publicKey = peers.dev1.publicKey;
+            allowedIPs = [
+              peers.dev1.address
+            ];
+          }
+
         ];
-      }
+      };
 
-      {
-        name = "Site: ext1";
-        publicKey = peers.ext1.publicKey;
-        allowedIPs = [
-          peers.ext1.address
-          sites.ext1.Prefix
-        ];
-      }
-
-      {
-        name = "Dev: dev1";
-        publicKey = peers.dev1.publicKey;
-        allowedIPs = [
-          peers.dev1.address
-        ];
-      }
-
-    ];
-  };
-
+    };
 }
