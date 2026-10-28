@@ -8,6 +8,8 @@
 
     MACAddress = "02:96:C0:45:32:46";
     Ipv4Address = "";
+    Ipv6Address = "fd80:3aa8:691a:ff02:96:c0ff:fe45:3246";
 
+    network = "srv";
   };
 }

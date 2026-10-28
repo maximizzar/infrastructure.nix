@@ -11,6 +11,7 @@
     {
       imports = [
         self.nixosModules.qemuVm
+        self.nixosModules.nameserver
         self.nixosModules.webServer
       ];
 
