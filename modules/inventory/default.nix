@@ -2,8 +2,10 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 {
-  flake.nixosModules.inventory = {
-    overlay = import ./_overlay.nix;
-    transit = import ./_transit.nix;
+  flake.nixosModules.inventory = { ... }: {
+    _module.args.inventory = {
+      overlay = import ./_overlay.nix;
+      transit = import ./_transit.nix;
+    };
   };
 }

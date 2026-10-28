@@ -13,6 +13,7 @@
       #self.nixosModules.sops
 
       self.nixosModules.cliTooling
+      self.nixosModules.inventory
     ];
 
     maximizzar = {

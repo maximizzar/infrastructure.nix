@@ -31,7 +31,7 @@
 
       };
 
-      hosts = import ./_genesis-hosts.nix;
+      hosts = import ./hosts/_genesis-hosts.nix;
     };
 
     nbg = {
@@ -45,7 +45,7 @@
         };
       };
 
-      hosts = import ./_nbg-hosts.nix;
+      hosts = import ./hosts/_nbg-hosts.nix;
     };
 
     ext1 = {
@@ -60,7 +60,7 @@
 
       };
 
-      hosts = import ./_ext1-hosts.nix;
+      hosts = import ./hosts/_ext1-hosts.nix;
     };
 
   };

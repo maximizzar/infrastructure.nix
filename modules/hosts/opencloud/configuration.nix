@@ -3,10 +3,10 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 { self, ... }: {
   flake.nixosModules.opencloudConfiguration =
-    { config, ... }:
+    { config, inventory, ... }:
     let
-      domain = "maximizzar.org";
-      fqdn = "opencloud.services.genesis.${domain}";
+      host = inventory.overlay.sites.genesis.hosts.opencloud;
+      fqdn = host.hostName + "." + host.domain;
     in
     {
       imports = [
@@ -27,6 +27,15 @@
         };
       };
 
+      networking = {
+        inherit (host) hostName domain;
+        nftables.enable = true;
+        firewall = {
+          enable = true;
+
+        };
+      };
+
       # Own custom Modules
       maximizzar = {
         # Enable various cli tools
@@ -40,7 +49,7 @@
           machines.enable = true;
         };
 
-        networking.default.MACAddress = "02:96:C0:45:32:46";
+        networking.default.MACAddress = host.MACAddress;
       };
 
       users.users.maximizzar.enable = true;
