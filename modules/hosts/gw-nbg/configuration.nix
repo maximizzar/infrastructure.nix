@@ -8,10 +8,19 @@
       self.nixosModules.base
       self.nixosModules.inventory
 
+      self.nixosModules.containers
       self.nixosModules.cliTooling
     ];
 
     services.openssh.enable = true;
     services.qemuGuest.enable = true;
+
+    maximizzar.containers = {
+      resolver = {
+        mac = "02:82:27:f5:15:c0";
+        modules = [ ];
+      };
+    };
+
   };
 }
