@@ -2,10 +2,11 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 { self, ... }: {
-  flake.nixosModules.gw-nbgConfiguration = { config, ... }: {
+  flake.nixosModules.gw-nbgConfiguration = {
     imports = [
       self.nixosModules.grubBoot
-      ./_hardware-configuration.nix
+      self.nixosModules.base
+      self.nixosModules.inventory
 
       self.nixosModules.cliTooling
     ];

@@ -1,13 +1,12 @@
 # SPDX-FileCopyrightText: 2026 maximizzar <mail@maximizzar.de>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-{
+{ self, ... }: {
   flake.nixosModules.gw-nbgConfiguration =
-    { inputs, ... }:
+    { inventory, ... }:
     let
-      inventory = inputs.inventory;
-      sites = inventory.sites;
-      peers = sites.transit.peers;
+      sites = inventory.overlay.sites;
+      peers = inventory.transit.peers;
       wgport = 51820;
     in
     {

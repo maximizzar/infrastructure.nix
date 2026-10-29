@@ -4,28 +4,35 @@
 {
   self,
   inputs,
+  inventory,
   ...
 }:
 let
-  host = "opencloud";
+
+  host = inventory.overlay.sites.genesis.hosts.opencloud;
 in
 {
-  flake.nixosConfigurations."${host}" = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations."${host.hostName}" = inputs.nixpkgs.lib.nixosSystem {
     modules = [
-      self.nixosModules."${host}Configuration"
+      self.nixosModules."${host.hostName}Configuration"
     ];
   };
 
-  flake.deploy.nodes."${host}" = {
-    hostname = "fe80::1";
+  flake.deploy.nodes."${host.hostName}" = {
+    hostname = host.Ipv6Address;
     profiles.system = {
       user = "root";
       sshUser = "maximizzar";
-      path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations."${host}";
+      path =
+        inputs.deploy-rs.lib.${
+          self.nixosConfigurations."${host.hostName}".pkgs.stdenv.hostPlatform.system
+        }.activate.nixos
+          self.nixosConfigurations."${host.hostName}";
     };
   };
 
   perSystem = {
-    packages."${host}-image" = self.nixosConfigurations.${host}.config.system.build.diskoImages;
+    packages."${host.hostName}-image" =
+      self.nixosConfigurations.${host.hostName}.config.system.build.diskoImages;
   };
 }

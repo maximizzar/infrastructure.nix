@@ -16,10 +16,4 @@ in
     ];
   };
 
-  flake.deploy.nodes."${host}" = {
-    hostname = "endpoint.nbg.prod.maximizzar.org";
-    user = "root";
-    sshUser = "maximizzar";
-    path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations."${host}";
-  };
 }
