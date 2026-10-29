@@ -12,7 +12,6 @@
 
     psysonic = {
       url = "github:Psysonic/psysonic?ref=release";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     deploy-rs = {
