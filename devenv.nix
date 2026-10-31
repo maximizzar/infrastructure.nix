@@ -1,24 +1,17 @@
 {
   pkgs,
-  lib,
-  config,
-  inputs,
   ...
 }:
 
 {
   packages = with pkgs; [
+    nixos-rebuild
     deploy-rs
     nvfetcher
-    goreleaser
     just
-    reuse
     sops
     ssh-to-age
+    #(nixpkgs bug) reuse
+    goreleaser
   ];
-
-  languages.nix = {
-    enable = true;
-
-  };
 }
