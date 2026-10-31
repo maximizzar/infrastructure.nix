@@ -6,6 +6,17 @@ let
   infra_domain = "infra.genesis.maximizzar.org";
 in
 {
+  gw = {
+    hostName = "gw-genesis";
+    domain = infra_domain;
+
+    MACAddress = "02:4e:9f:83:50:a9";
+    Ipv4Address = "";
+    Ipv6Address = "";
+
+    network = "";
+  };
+
   mip3 = {
     hostName = "mip3";
     domain = infra_domain;
