@@ -1,9 +1,9 @@
 # SPDX-FileCopyrightText: 2026 maximizzar <mail@maximizzar.de>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-{ self, ... }: {
+{ self, inventory, ... }: {
   flake.nixosModules.mip3Configuration =
-    { pkgs, inventory, ... }:
+    { pkgs, ... }:
     let
       host = inventory.overlay.sites.genesis.hosts.mip3;
     in

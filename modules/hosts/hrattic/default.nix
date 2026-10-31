@@ -8,7 +8,7 @@
   ...
 }:
 let
-  host = inventory.overlay.sites.genesis.hosts.hrattic;
+  host = inventory.overlay.sites.hr.hosts.hrattic;
 in
 {
   flake.nixosConfigurations."${host.hostName}" = inputs.nixpkgs.lib.nixosSystem {
