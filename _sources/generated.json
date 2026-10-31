@@ -1,67 +1,67 @@
 {
     "hagezi-doh": {
         "cargoLock": null,
-        "date": "2026-10-26",
+        "date": "2026-10-31",
         "extract": null,
         "name": "hagezi-doh",
         "passthru": null,
         "pinned": false,
         "src": {
             "name": null,
-            "sha256": "sha256-G9PCXyto58o0kpRA99GwvD7kWLI2zwly2IFgXrO5X/Q=",
+            "sha256": "sha256-EDbScPYDibw1QUZ1vb5MEAESB6TDxwp7ZwjELCpQKgA=",
             "type": "url",
-            "url": "https://gitlab.com/hagezi/mirror/-/raw/571b4a6aac17f6db9d4557ad6b67dafaac2aaa5b/dns-blocklists/rpz/doh.txt"
+            "url": "https://gitlab.com/hagezi/mirror/-/raw/0b2cd496955264ed25329ffb7b13da0798402884/dns-blocklists/rpz/doh.txt"
         },
-        "version": "571b4a6aac17f6db9d4557ad6b67dafaac2aaa5b"
+        "version": "0b2cd496955264ed25329ffb7b13da0798402884"
     },
     "hagezi-gambling": {
         "cargoLock": null,
-        "date": "2026-10-26",
+        "date": "2026-10-31",
         "extract": null,
         "name": "hagezi-gambling",
         "passthru": null,
         "pinned": false,
         "src": {
             "name": null,
-            "sha256": "sha256-vCc7VkhKaCwy85Zq2jZt+5I3UqXKZWTIhJ7uk/PQo9g=",
+            "sha256": "sha256-lvo4LkGNWLs4Pw8ISZ4mY/Cz5wtwAu6U9FTTN11bJzA=",
             "type": "url",
-            "url": "https://gitlab.com/hagezi/mirror/-/raw/571b4a6aac17f6db9d4557ad6b67dafaac2aaa5b/dns-blocklists/rpz/gambling.txt"
+            "url": "https://gitlab.com/hagezi/mirror/-/raw/0b2cd496955264ed25329ffb7b13da0798402884/dns-blocklists/rpz/gambling.txt"
         },
-        "version": "571b4a6aac17f6db9d4557ad6b67dafaac2aaa5b"
+        "version": "0b2cd496955264ed25329ffb7b13da0798402884"
     },
     "hagezi-hoster": {
         "cargoLock": null,
-        "date": "2026-10-26",
+        "date": "2026-10-31",
         "extract": null,
         "name": "hagezi-hoster",
         "passthru": null,
         "pinned": false,
         "src": {
             "name": null,
-            "sha256": "sha256-D7PjTLLx6X081YYGP3Tpck7HwkZcdxkGYlXo+Egkjog=",
+            "sha256": "sha256-chpd9Lkuo9KQwAAMWmpR3b7+uNHRRq1yajaWI8h0nKE=",
             "type": "url",
-            "url": "https://gitlab.com/hagezi/mirror/-/raw/571b4a6aac17f6db9d4557ad6b67dafaac2aaa5b/dns-blocklists/rpz/hoster.txt"
+            "url": "https://gitlab.com/hagezi/mirror/-/raw/0b2cd496955264ed25329ffb7b13da0798402884/dns-blocklists/rpz/hoster.txt"
         },
-        "version": "571b4a6aac17f6db9d4557ad6b67dafaac2aaa5b"
+        "version": "0b2cd496955264ed25329ffb7b13da0798402884"
     },
     "hagezi-native-amazon": {
         "cargoLock": null,
-        "date": "2026-10-26",
+        "date": "2026-10-31",
         "extract": null,
         "name": "hagezi-native-amazon",
         "passthru": null,
         "pinned": false,
         "src": {
             "name": null,
-            "sha256": "sha256-ubobMIjnhXdbrm9tEXtzg8P+oUXuKVuzF6E9m8LrVQM=",
+            "sha256": "sha256-G8/bs7iVL8OnWyHzpz+4I+KdZgWtrIxu+z3l6xM+m4s=",
             "type": "url",
-            "url": "https://gitlab.com/hagezi/mirror/-/raw/571b4a6aac17f6db9d4557ad6b67dafaac2aaa5b/dns-blocklists/rpz/native.amazon.txt"
+            "url": "https://gitlab.com/hagezi/mirror/-/raw/0b2cd496955264ed25329ffb7b13da0798402884/dns-blocklists/rpz/native.amazon.txt"
         },
-        "version": "571b4a6aac17f6db9d4557ad6b67dafaac2aaa5b"
+        "version": "0b2cd496955264ed25329ffb7b13da0798402884"
     },
     "hagezi-native-apple": {
         "cargoLock": null,
-        "date": "2026-10-26",
+        "date": "2026-10-31",
         "extract": null,
         "name": "hagezi-native-apple",
         "passthru": null,
@@ -70,13 +70,13 @@
             "name": null,
             "sha256": "sha256-wN+2pQbJIA4e0NKRfENWdsozVxM0ZT/TPnj4bIMoFWw=",
             "type": "url",
-            "url": "https://gitlab.com/hagezi/mirror/-/raw/571b4a6aac17f6db9d4557ad6b67dafaac2aaa5b/dns-blocklists/rpz/native.apple.txt"
+            "url": "https://gitlab.com/hagezi/mirror/-/raw/0b2cd496955264ed25329ffb7b13da0798402884/dns-blocklists/rpz/native.apple.txt"
         },
-        "version": "571b4a6aac17f6db9d4557ad6b67dafaac2aaa5b"
+        "version": "0b2cd496955264ed25329ffb7b13da0798402884"
     },
     "hagezi-native-huawei": {
         "cargoLock": null,
-        "date": "2026-10-26",
+        "date": "2026-10-31",
         "extract": null,
         "name": "hagezi-native-huawei",
         "passthru": null,
@@ -85,43 +85,43 @@
             "name": null,
             "sha256": "sha256-j2kg43iTFLw5+3j9DOD/4cJWy5rK3LJ8aW3TAHvfT54=",
             "type": "url",
-            "url": "https://gitlab.com/hagezi/mirror/-/raw/571b4a6aac17f6db9d4557ad6b67dafaac2aaa5b/dns-blocklists/rpz/native.huawei.txt"
+            "url": "https://gitlab.com/hagezi/mirror/-/raw/0b2cd496955264ed25329ffb7b13da0798402884/dns-blocklists/rpz/native.huawei.txt"
         },
-        "version": "571b4a6aac17f6db9d4557ad6b67dafaac2aaa5b"
+        "version": "0b2cd496955264ed25329ffb7b13da0798402884"
     },
     "hagezi-native-lgwebos": {
         "cargoLock": null,
-        "date": "2026-10-26",
+        "date": "2026-10-31",
         "extract": null,
         "name": "hagezi-native-lgwebos",
         "passthru": null,
         "pinned": false,
         "src": {
             "name": null,
-            "sha256": "sha256-/V862rEfG2POO8a+gi58X43Som3Wr2afYU/QUzAgLNI=",
+            "sha256": "sha256-J8IXnBQByJHLr8iEHw/39KQbiwsleKUWd410eWMb3o0=",
             "type": "url",
-            "url": "https://gitlab.com/hagezi/mirror/-/raw/571b4a6aac17f6db9d4557ad6b67dafaac2aaa5b/dns-blocklists/rpz/native.lgwebos.txt"
+            "url": "https://gitlab.com/hagezi/mirror/-/raw/0b2cd496955264ed25329ffb7b13da0798402884/dns-blocklists/rpz/native.lgwebos.txt"
         },
-        "version": "571b4a6aac17f6db9d4557ad6b67dafaac2aaa5b"
+        "version": "0b2cd496955264ed25329ffb7b13da0798402884"
     },
     "hagezi-native-oppo-realme": {
         "cargoLock": null,
-        "date": "2026-10-26",
+        "date": "2026-10-31",
         "extract": null,
         "name": "hagezi-native-oppo-realme",
         "passthru": null,
         "pinned": false,
         "src": {
             "name": null,
-            "sha256": "sha256-ncBb+4goL5EPSoYxoeYC4Ru3qfhT72fr+HP7SioWzRc=",
+            "sha256": "sha256-E8R57zcAygaBaQnehXwGx9ta+iK0LxZ73Ifzwk7o7No=",
             "type": "url",
-            "url": "https://gitlab.com/hagezi/mirror/-/raw/571b4a6aac17f6db9d4557ad6b67dafaac2aaa5b/dns-blocklists/rpz/native.oppo-realme.txt"
+            "url": "https://gitlab.com/hagezi/mirror/-/raw/0b2cd496955264ed25329ffb7b13da0798402884/dns-blocklists/rpz/native.oppo-realme.txt"
         },
-        "version": "571b4a6aac17f6db9d4557ad6b67dafaac2aaa5b"
+        "version": "0b2cd496955264ed25329ffb7b13da0798402884"
     },
     "hagezi-native-roku": {
         "cargoLock": null,
-        "date": "2026-10-26",
+        "date": "2026-10-31",
         "extract": null,
         "name": "hagezi-native-roku",
         "passthru": null,
@@ -130,83 +130,83 @@
             "name": null,
             "sha256": "sha256-B17Q/GuEDF33FcD1CfHN0a7gIqGfcfVlJxmBs8jjqhk=",
             "type": "url",
-            "url": "https://gitlab.com/hagezi/mirror/-/raw/571b4a6aac17f6db9d4557ad6b67dafaac2aaa5b/dns-blocklists/rpz/native.roku.txt"
+            "url": "https://gitlab.com/hagezi/mirror/-/raw/0b2cd496955264ed25329ffb7b13da0798402884/dns-blocklists/rpz/native.roku.txt"
         },
-        "version": "571b4a6aac17f6db9d4557ad6b67dafaac2aaa5b"
+        "version": "0b2cd496955264ed25329ffb7b13da0798402884"
     },
     "hagezi-native-samsung": {
         "cargoLock": null,
-        "date": "2026-10-26",
+        "date": "2026-10-31",
         "extract": null,
         "name": "hagezi-native-samsung",
         "passthru": null,
         "pinned": false,
         "src": {
             "name": null,
-            "sha256": "sha256-ZrB3a/z73WDWE0YnNH6HFG5sykEonCLSllZK8NhxKFc=",
+            "sha256": "sha256-ufOVhWPFY71K9VgDI/FjT5m1+d0sNMVjxwWj02WM/gk=",
             "type": "url",
-            "url": "https://gitlab.com/hagezi/mirror/-/raw/571b4a6aac17f6db9d4557ad6b67dafaac2aaa5b/dns-blocklists/rpz/native.samsung.txt"
+            "url": "https://gitlab.com/hagezi/mirror/-/raw/0b2cd496955264ed25329ffb7b13da0798402884/dns-blocklists/rpz/native.samsung.txt"
         },
-        "version": "571b4a6aac17f6db9d4557ad6b67dafaac2aaa5b"
+        "version": "0b2cd496955264ed25329ffb7b13da0798402884"
     },
     "hagezi-native-tiktok": {
         "cargoLock": null,
-        "date": "2026-10-26",
+        "date": "2026-10-31",
         "extract": null,
         "name": "hagezi-native-tiktok",
         "passthru": null,
         "pinned": false,
         "src": {
             "name": null,
-            "sha256": "sha256-BCpXl3H+ITwtvBhZxoRWXwilVE4CXiTklXdVCaCZcpM=",
+            "sha256": "sha256-z5TWFj85bCAtPBqjZQJfO7n6Zm4p1L3633PSmVg8TvU=",
             "type": "url",
-            "url": "https://gitlab.com/hagezi/mirror/-/raw/571b4a6aac17f6db9d4557ad6b67dafaac2aaa5b/dns-blocklists/rpz/native.tiktok.extended.txt"
+            "url": "https://gitlab.com/hagezi/mirror/-/raw/0b2cd496955264ed25329ffb7b13da0798402884/dns-blocklists/rpz/native.tiktok.extended.txt"
         },
-        "version": "571b4a6aac17f6db9d4557ad6b67dafaac2aaa5b"
+        "version": "0b2cd496955264ed25329ffb7b13da0798402884"
     },
     "hagezi-native-vivo": {
         "cargoLock": null,
-        "date": "2026-10-26",
+        "date": "2026-10-31",
         "extract": null,
         "name": "hagezi-native-vivo",
         "passthru": null,
         "pinned": false,
         "src": {
             "name": null,
-            "sha256": "sha256-WJMCbXo/2XWYxXwShBwvfiBbOCxgSSwCw2FYk2fENj4=",
+            "sha256": "sha256-urGUoeQzr6EbyA/MVkWzpq84UaVUywz93Qim2hFCJw4=",
             "type": "url",
-            "url": "https://gitlab.com/hagezi/mirror/-/raw/571b4a6aac17f6db9d4557ad6b67dafaac2aaa5b/dns-blocklists/rpz/native.vivo.txt"
+            "url": "https://gitlab.com/hagezi/mirror/-/raw/0b2cd496955264ed25329ffb7b13da0798402884/dns-blocklists/rpz/native.vivo.txt"
         },
-        "version": "571b4a6aac17f6db9d4557ad6b67dafaac2aaa5b"
+        "version": "0b2cd496955264ed25329ffb7b13da0798402884"
     },
     "hagezi-native-winoffice": {
         "cargoLock": null,
-        "date": "2026-10-26",
+        "date": "2026-10-31",
         "extract": null,
         "name": "hagezi-native-winoffice",
         "passthru": null,
         "pinned": false,
         "src": {
             "name": null,
-            "sha256": "sha256-7k6rSv7nUKJp5990j082Bwt0dGjh0Tglro/H59eyFjo=",
+            "sha256": "sha256-kZrr+B55rQ6fqRFl3btHlanUtVDcGPg/zgNpoEFgfMY=",
             "type": "url",
-            "url": "https://gitlab.com/hagezi/mirror/-/raw/571b4a6aac17f6db9d4557ad6b67dafaac2aaa5b/dns-blocklists/rpz/native.winoffice.txt"
+            "url": "https://gitlab.com/hagezi/mirror/-/raw/0b2cd496955264ed25329ffb7b13da0798402884/dns-blocklists/rpz/native.winoffice.txt"
         },
-        "version": "571b4a6aac17f6db9d4557ad6b67dafaac2aaa5b"
+        "version": "0b2cd496955264ed25329ffb7b13da0798402884"
     },
     "hagezi-native-xiaomi": {
         "cargoLock": null,
-        "date": "2026-10-26",
+        "date": "2026-10-31",
         "extract": null,
         "name": "hagezi-native-xiaomi",
         "passthru": null,
         "pinned": false,
         "src": {
             "name": null,
-            "sha256": "sha256-wYN9dkSY9BUYkz0vLfKpVdewUP3yBd/889kZwXOKKoI=",
+            "sha256": "sha256-7kYF444PzFlhZ3EWOsXkTKUvvCIeviXvZJHtIElO8f8=",
             "type": "url",
-            "url": "https://gitlab.com/hagezi/mirror/-/raw/571b4a6aac17f6db9d4557ad6b67dafaac2aaa5b/dns-blocklists/rpz/native.xiaomi.txt"
+            "url": "https://gitlab.com/hagezi/mirror/-/raw/0b2cd496955264ed25329ffb7b13da0798402884/dns-blocklists/rpz/native.xiaomi.txt"
         },
-        "version": "571b4a6aac17f6db9d4557ad6b67dafaac2aaa5b"
+        "version": "0b2cd496955264ed25329ffb7b13da0798402884"
     }
 }
