@@ -63,5 +63,20 @@
       hosts = import ./hosts/_ext1-hosts.nix;
     };
 
+    hr = {
+      Domain = "hr.maximizzar.org";
+      Prefix = "fd80:3aa8:691a:fc00::/56";
+
+      networks = {
+        lan = {
+          Name = "Local Area Network";
+          Prefix = "fd80:3aa8:691a:fc00::/64";
+        };
+
+      };
+
+      hosts = import ./hosts/_hr-hosts.nix;
+    };
+
   };
 }

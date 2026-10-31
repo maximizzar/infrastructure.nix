@@ -12,10 +12,10 @@
       host = inventory.overlay.sites.genesis.hosts.resolver;
     in
     {
-      imports = [
-        self.nixosModules.qemuVm
-        self.nixosModules.containers
-        self.nixosModules.resolver
+      imports = with self.nixosModules; [
+        qemuVm
+        containers
+        resolver
       ];
 
       networking = {

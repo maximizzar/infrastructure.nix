@@ -52,7 +52,7 @@
       };
 
       # Allow unfree packages
-      nixpkgs.config.allowUnfree = true;
+      nixpkgs.config.allowUnfree = lib.mkDefault true;
 
       environment.systemPackages = with pkgs; [
         # Office

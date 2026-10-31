@@ -2,12 +2,18 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 let
-  service_domain = "opencloud.services.genesis.maximizzar.org";
+  service_domain = "services.genesis.maximizzar.org";
+  infra_domain = "infra.genesis.maximizzar.org";
 in
 {
+  mip3 = {
+    hostName = "mip3";
+    domain = infra_domain;
+  };
+
   opencloud = {
     hostName = "opencloud";
-    domain = "${service_domain}";
+    domain = service_domain;
 
     MACAddress = "02:96:C0:45:32:46";
     Ipv4Address = "";
@@ -18,7 +24,7 @@ in
 
   resolver = {
     hostName = "resolver";
-    domain = "services.genesis.maximizzar.org";
+    domain = service_domain;
 
     MACAddress = "02:4b:64:2d:81:69";
     Ipv4Address = "192.168.178.253";
