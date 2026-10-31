@@ -3,6 +3,10 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 { self, inputs, ... }: {
   flake.nixosModules.container = { config, lib, ... }: {
+    imports = [
+      self.nixosModules.base
+    ];
+
     networking = {
       useDHCP = false;
       useNetworkd = true;

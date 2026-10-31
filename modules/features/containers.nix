@@ -7,7 +7,12 @@
       type = lib.types.attrsOf (
         lib.types.submodule {
           options = {
-            mac = lib.mkOption {
+            hostBridge = lib.mkOption {
+              type = lib.types.str;
+              default = "br0";
+            };
+
+            localMacAddress = lib.mkOption {
               type = lib.types.str;
             };
 
@@ -25,8 +30,7 @@
       autoStart = true;
       restartIfChanged = true;
       privateNetwork = true;
-
-      localMacAddress = container.mac;
+      inherit (container) hostBridge localMacAddress;
 
       specialArgs = { inherit self inputs; };
       config = {

@@ -17,6 +17,9 @@
       services.opencloud = {
         enable = true;
         url = "https://${fqdn}";
+        environment = {
+          PROXY_TLS = "false"; # disable https when behind reverse-proxy
+        };
       };
 
       services.nginx.virtualHosts."${fqdn}" = {
@@ -24,6 +27,7 @@
         enableACME = true;
         locations."/" = {
           proxyPass = "http://${config.services.opencloud.address}:${toString config.services.opencloud.port}";
+          proxyWebsockets = false;
         };
       };
 
