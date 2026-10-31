@@ -8,6 +8,7 @@
   ...
 }:
 let
+  site = "genesis";
   host = inventory.overlay.sites.genesis.hosts.resolver;
 in
 {
@@ -20,6 +21,7 @@ in
   flake.deploy.nodes."${host.hostName}" = {
     hostname = host.Ipv6Address;
     profiles.system = {
+      groups = [ site ];
       user = "root";
       sshUser = "maximizzar";
       path =

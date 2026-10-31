@@ -9,16 +9,21 @@ in
   hrattic = {
     hostName = "hrattic";
     domain = infra_domain;
+
+    Ipv6Address = "fe80::1";
   };
 
   hroffice = {
     hostName = "hroffice";
     domain = infra_domain;
 
+    Ipv6Address = "fe80::1";
   };
 
   hrserver = {
     hostName = "hrserver";
     domain = infra_domain;
+
+    Ipv6Address = "fe80::1";
   };
 }

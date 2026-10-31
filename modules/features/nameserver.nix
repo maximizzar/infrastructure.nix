@@ -4,6 +4,7 @@
 { inputs, inventory, ... }: {
   flake.nixosModules.nameserver =
     {
+      self,
       lib,
       pkgs,
       ...
@@ -38,7 +39,7 @@
         SOA = {
           nameServer = "ns.${domain}.";
           adminEmail = "hostmaster.${domain}";
-          serial = 2026102801;
+          serial = self.lastModified;
         };
 
         useOrigin = true;
@@ -56,7 +57,7 @@
           lib.nameValuePair (recordName host) {
             AAAA = [ host.Ipv6Address ];
           }
-        ) (lib.filterAttrs (_: host: host.network == "srv") hosts);
+        ) (lib.filterAttrs (_: host: host.network != "lan") hosts);
       };
 
       zoneFile = dns.lib.toString domain zone;

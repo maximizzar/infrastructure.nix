@@ -11,17 +11,19 @@ push-disk-image host remote_path:
 
 # Deploy a flake target to a remote
 deploy flake host:
-    nix run nixpkgs#nixos-rebuild -- switch --flake .#{{ flake }} --target-host "{{ host }}" --sudo
+    nixos-rebuild switch --flake .#{{ flake }} --target-host "{{ host }}" --sudo
 
-deploy-all:
-    ./scripts/deploy.sh
-
+# Deploy and build a flake on a remote target
 deploy-build-remote flake host:
-    nix run nixpkgs#nixos-rebuild switch -- --flake .#{{ flake }} --target-host "{{ host }}" --build-host "{{ host }}" --sudo
+    nixos-rebuild switch --flake .#{{ flake }} --target-host "{{ host }}" --build-host "{{ host }}" --sudo
 
 # Deploy a flake to local system
 deploy-local flake:
     sudo nixos-rebuild switch --flake .#{{ flake }}
+
+# Use deploy-rs to deploy a group of hosts
+deploy-group group:
+    deploy . --log-dir ./logs --skip-checks --groups {{ group }} --fast-connection true
 
 # Edit Secrets from a specified host
 edit-secrets host:
