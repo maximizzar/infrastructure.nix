@@ -9,6 +9,19 @@ in
   mip3 = {
     hostName = "mip3";
     domain = infra_domain;
+
+    network = "lan";
+  };
+
+  factorio = {
+    hostName = "factorio";
+    domain = service_domain;
+
+    MACAddress = "02:b6:8f:5c:60:a8";
+    Ipv4Address = "";
+    Ipv6Address = "fd80:3aa8:691a:ff01:b6:8fff:fe5c:60a8";
+
+    network = "dmz";
   };
 
   opencloud = {
