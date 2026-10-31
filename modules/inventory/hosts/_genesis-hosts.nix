@@ -14,7 +14,7 @@ in
     Ipv4Address = "";
     Ipv6Address = "";
 
-    network = "";
+    network = "lan";
   };
 
   mip3 = {
