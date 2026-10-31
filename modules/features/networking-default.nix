@@ -55,6 +55,10 @@
             matchConfig.Name = br;
             networkConfig = {
               DHCP = "yes";
+
+              IPv4Forwarding = lib.mkDefault true;
+              IPv6Forwarding = lib.mkDefault true;
+
               IPv6AcceptRA = lib.mkDefault true;
               IPv6PrivacyExtensions = lib.mkDefault false;
               IPv6LinkLocalAddressGenerationMode = "eui64";

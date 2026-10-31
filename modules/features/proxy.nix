@@ -91,6 +91,10 @@
           active = lib.filterAttrs (_: host: host.enable) cfg.hosts;
         in
         {
+          maximizzar.webServer = {
+            inherit (cfg) enable openFirewall package;
+          };
+
           services.nginx.upstreams = lib.mapAttrs' (
             name: host:
             lib.nameValuePair "${name}-backend" {
@@ -104,8 +108,8 @@
               lib.recursiveUpdate {
                 serverName = "${host.subdomain}.${cfg.domain}";
 
-                forceSSL = true;
-                useACMEHost = cfg.domain;
+                forceSSL = false;
+                #useACMEHost = cfg.domain;
 
                 kTLS = true;
                 quic = true;

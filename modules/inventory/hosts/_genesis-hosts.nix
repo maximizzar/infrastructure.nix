@@ -12,9 +12,21 @@ in
 
     MACAddress = "02:4e:9f:83:50:a9";
     Ipv4Address = "";
-    Ipv6Address = "";
+    Ipv6Address = "fd80:3aa8:691a:ff03:4e:9fff:fe83:50a9";
 
-    network = "lan";
+    bridges = {
+      dmz = {
+        MACAddress = "02:54:29:6b:25:19";
+        Ipv6Address = "fd80:3aa8:691a:ff01:54:29ff:fe6b:2519";
+      };
+
+      srv = {
+        MACAddress = "02:39:18:6e:9f:e8";
+        Ipv6Address = "fd80:3aa8:691a:ff02:39:18ff:fe6e:9fe8";
+      };
+    };
+
+    network = "srv";
   };
 
   mip3 = {
