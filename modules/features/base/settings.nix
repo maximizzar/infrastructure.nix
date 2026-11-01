@@ -26,6 +26,7 @@
 
     nix.settings = {
       auto-optimise-store = true;
+      allowed-users = [ "@users" ];
       experimental-features = [
         "nix-command"
         "flakes"

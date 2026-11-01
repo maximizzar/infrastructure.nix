@@ -3,17 +3,19 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 { self, ... }: {
   flake.nixosModules.qemuVm = { lib, ... }: {
-    imports = [
-      self.nixosModules.systemdBoot
-      self.nixosModules.qemuVmHardware
+    imports = with self.nixosModules; [
+      systemdBoot
+      qemuVmHardware
 
-      self.nixosModules.base
-      self.nixosModules.networkingDefault
-      self.nixosModules.sshServer
+      base
+      kernelLockdown
+      nixHardened
+      networkingDefault
+      sshServer
       #self.nixosModules.sops
 
-      self.nixosModules.cliTooling
-      self.nixosModules.inventory
+      cliTooling
+      inventory
     ];
 
     maximizzar = {
