@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 { self, ... }: {
   flake.nixosModules.gw-genesisConfiguration =
-    { inventory, ... }:
+    { inventory, pkgs, ... }:
     let
       host = inventory.overlay.sites.genesis.hosts.gw;
       services_domain = "services.genesis.maximizzar.org";
@@ -21,6 +21,11 @@
         qemuVm
         dnsdist
         proxy
+      ];
+
+      environment.systemPackages = with pkgs; [
+        dnsutils
+        dig
       ];
 
       networking = {
@@ -73,7 +78,7 @@
               IPv6Forwarding = true;
 
               # Address Generation
-              IPv6AcceptRA = true;
+              IPv6AcceptRA = false;
               IPv6PrivacyExtensions = false;
               IPv6LinkLocalAddressGenerationMode = "eui64";
 
@@ -96,7 +101,7 @@
               IPv6Forwarding = true;
 
               # Address Generation
-              IPv6AcceptRA = true;
+              IPv6AcceptRA = false;
               IPv6PrivacyExtensions = false;
               IPv6LinkLocalAddressGenerationMode = "eui64";
 
@@ -132,8 +137,10 @@
         dnsdist = {
           enable = true;
           openFirewall = true;
-          backend = inventory.overlay.sites.genesis.hosts.resolver.Ipv6Address;
-          acl = inventory.overlay.sites.genesis.Prefix;
+          backend = "2620:fe::fe";
+          #backend = inventory.overlay.sites.genesis.hosts.resolver.Ipv6Address;
+          acl = "::/0";
+          #acl = inventory.overlay.sites.genesis.Prefix;
         };
 
         proxy = {

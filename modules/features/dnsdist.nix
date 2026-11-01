@@ -28,6 +28,7 @@
       };
 
       config = lib.mkIf cfg.enable {
+        networking.nameservers = [ "::1" ];
         services = {
           resolved.enable = lib.mkForce false;
           dnsdist = {
