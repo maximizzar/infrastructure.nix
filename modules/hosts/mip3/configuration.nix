@@ -10,6 +10,7 @@
     {
       imports = [
         self.nixosModules.systemdBoot
+        self.nixosModules.kernelLockdown
         ./_hardware-configuration.nix
 
         self.nixosModules.kdePlasma
