@@ -92,6 +92,20 @@
             inherit (cfg) enable repositoryRoot;
             lfs.enable = true;
 
+            dump = {
+              enable = true;
+
+              age = "5d";
+              type = "tar.xz";
+              interval = "19:00";
+            };
+
+            database = {
+              inherit (cfg) passwordFile;
+              socket = "/run/postgresql";
+              type = "postgres";
+            };
+
             settings = {
               DEFAULT = {
                 APP_NAME = "Forgejo <maximizzar.org>";

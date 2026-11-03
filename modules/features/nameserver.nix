@@ -43,10 +43,17 @@
         };
 
         useOrigin = true;
+        TTL = 300;
         NS = [ "ns.${domain}." ];
+
+        A = [ { address = hosts.gw.Ipv4Address; } ];
         AAAA = [ { address = hosts.gw.Ipv6Address; } ];
 
         subdomains = {
+          auth.AAAA = [ hosts.gw.Ipv6Address ];
+          ca.subdomains = {
+            root.AAAA = [ "fd80:3aa8:691a:ff01:be24:11ff:fe6c:5622" ];
+          };
           forgejo = {
             AAAA = [ hosts.gw.Ipv6Address ];
             subdomains = {

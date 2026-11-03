@@ -193,7 +193,7 @@
 
           hosts = {
             authelia = {
-              enable = false;
+              enable = true;
               subdomain = "auth";
               backend = {
                 name = "auth";

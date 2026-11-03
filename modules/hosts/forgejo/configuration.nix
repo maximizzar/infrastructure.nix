@@ -16,6 +16,7 @@
         qemuVm
         forgejo
         forgejoSecrets
+        forgejoAdmin
       ];
 
       disko.devices.disk.main = {

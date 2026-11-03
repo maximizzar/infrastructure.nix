@@ -69,13 +69,17 @@
 
       config = lib.mkIf cfg.enable {
         networking.firewall = lib.mkIf cfg.openFirewall {
-          allowedTCPPorts = [ cfg.port ];
+          allowedTCPPorts = [
+            cfg.port
+            80
+          ];
           allowedUDPPorts = [ cfg.port ];
         };
 
         security.acme.certs."${cfg.fqdn}" = {
           domain = cfg.fqdn;
-          webroot = "/var/lib/acme/acme-challenge";
+          #webroot = "/var/lib/acme/acme-challenge";
+          listenHTTP = "[::]:80";
           group = "authelia-maximizzar.org";
           postRun = "systemctl reload authelia-maximizzar.org";
         };

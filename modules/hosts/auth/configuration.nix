@@ -41,6 +41,7 @@
 
         authServer = {
           enable = true;
+          openFirewall = true;
 
           jwtSecretFile = config.sops.secrets."authelia/jwtSecret".path;
           oidcHmacSecretFile = config.sops.secrets."authelia/oidcHmacSecret".path;
