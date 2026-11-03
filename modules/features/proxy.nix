@@ -34,6 +34,11 @@
           description = "Public base domain of the vhosts (also the ACME host).";
         };
 
+        environmentFile = lib.mkOption {
+          type = lib.types.str;
+          description = "EnvironmentFile which contains api key";
+        };
+
         hosts = lib.mkOption {
           default = { };
           description = "Reverse-proxied services, key = service name.";
@@ -59,11 +64,13 @@
                       default = config.subdomain;
                       description = "Hostname of the backend (the part before the domain).";
                     };
+
                     domain = lib.mkOption {
                       type = lib.types.str;
                       default = cfg.domain;
                       description = "Domain of the backend.";
                     };
+
                     port = lib.mkOption {
                       type = lib.types.port;
                       example = 443;
@@ -89,10 +96,27 @@
       config =
         let
           active = lib.filterAttrs (_: host: host.enable) cfg.hosts;
+          sslCertificate = "/var/lib/acme/${cfg.domain}/fullchain.pem";
+          sslCertificateKey = "/var/lib/acme/${cfg.domain}/key.pem";
+          sslTrustedCertificate = "/var/lib/acme/${cfg.domain}/chain.pem";
         in
         {
           maximizzar.webServer = {
             inherit (cfg) enable openFirewall package;
+          };
+
+          security.acme.certs."${cfg.domain}" = {
+            dnsProvider = "ionos";
+            environmentFile = cfg.environmentFile;
+            dnsResolver = "[2620:fe::fe]:53";
+            dnsPropagationCheck = false;
+
+            domain = cfg.domain;
+            extraDomainNames = [ "*.${cfg.domain}" ];
+            group = config.services.nginx.group;
+
+            email = "mail@maximizzar.de";
+            server = "https://acme-v02.api.letsencrypt.org/directory";
           };
 
           services.nginx.upstreams = lib.mapAttrs' (
@@ -108,8 +132,9 @@
               lib.recursiveUpdate {
                 serverName = "${host.subdomain}.${cfg.domain}";
 
-                forceSSL = false;
-                #useACMEHost = cfg.domain;
+                forceSSL = true;
+                useACMEHost = cfg.domain;
+                inherit sslCertificate sslCertificateKey sslTrustedCertificate;
 
                 kTLS = true;
                 quic = true;

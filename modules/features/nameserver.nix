@@ -44,13 +44,17 @@
 
         useOrigin = true;
         NS = [ "ns.${domain}." ];
-
-        AAAA = [
-          { address = "fe80::1"; }
-        ];
+        AAAA = [ { address = hosts.gw.Ipv6Address; } ];
 
         subdomains = {
-          ns.AAAA = [ "fd80:3aa8:691a:ff02::53" ];
+          forgejo = {
+            AAAA = [ hosts.gw.Ipv6Address ];
+            subdomains = {
+              ssh.AAAA = [ hosts.forgejo.Ipv6Address ];
+            };
+          };
+
+          ns.AAAA = [ hosts.resolver.containers.nameserver.Ipv6Address ];
         }
         // lib.mapAttrs' (
           name: host:
@@ -64,6 +68,11 @@
 
     in
     {
+      environment.systemPackages = with pkgs; [
+        dnsutils
+        dig
+      ];
+
       services.bind = {
         enable = true;
         zones.${domain} = {

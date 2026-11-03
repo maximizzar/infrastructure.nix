@@ -8,7 +8,7 @@
       defaults = {
         email = "mail@maximizzar.de";
         server = "https://root.ca.maximizzar.org/acme/acme/directory";
-        webroot = "/var/lib/acme/acme-challenge";
+        #webroot = "/var/lib/acme/acme-challenge";
 
         enableDebugLogs = false;
         dnsResolver = "[2620:fe::fe]:53";

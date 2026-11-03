@@ -3,22 +3,29 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 { self, ... }: {
   flake.nixosModules.gw-genesisConfiguration =
-    { inventory, pkgs, ... }:
+    {
+      config,
+      inventory,
+      pkgs,
+      ...
+    }:
     let
-      host = inventory.overlay.sites.genesis.hosts.gw;
+      site = inventory.overlay.sites.genesis;
+      host = site.hosts.gw;
       services_domain = "services.genesis.maximizzar.org";
 
       upstream_interface = "br0";
 
-      dmz_bridge = "br-dmz";
+      dmz_bridge = "br1-dmz";
       dmz_interface = "ens19";
 
-      srv_bridge = "br-srv";
+      srv_bridge = "br2-srv";
       srv_interface = "ens20";
     in
     {
       imports = with self.nixosModules; [
         qemuVm
+        gw-genesisSecrets
         dnsdist
         proxy
       ];
@@ -27,6 +34,10 @@
         dnsutils
         dig
       ];
+
+      boot.kernel.sysctl = {
+        "net.ipv6.conf.all.forwarding" = "1";
+      };
 
       networking = {
         inherit (host) hostName domain;
@@ -72,6 +83,12 @@
 
         # Configure Bridges on L3
         networks = {
+          "30${upstream_interface}" = {
+            dhcpV6Config = {
+              PrefixDelegationHint = "::/62";
+            };
+          };
+
           "30-${dmz_bridge}" = {
             matchConfig.Name = dmz_bridge;
             networkConfig = {
@@ -83,7 +100,6 @@
               IPv6LinkLocalAddressGenerationMode = "eui64";
 
               IPv6SendRA = true;
-              DHCP = "ipv6";
               DHCPPrefixDelegation = true;
             };
 
@@ -92,6 +108,20 @@
               SubnetId = "0";
               Announce = true;
             };
+
+            ipv6SendRAConfig = {
+              DNS = host.bridges.dmz.Ipv6Address;
+              EmitDNS = true;
+              OtherInformation = true;
+            };
+
+            # Static ULA config
+            ipv6Prefixes = [
+              {
+                Assign = true;
+                Prefix = site.networks.dmz.Prefix;
+              }
+            ];
 
           };
 
@@ -106,7 +136,6 @@
               IPv6LinkLocalAddressGenerationMode = "eui64";
 
               IPv6SendRA = true;
-              DHCP = "ipv6";
               DHCPPrefixDelegation = true;
             };
 
@@ -115,6 +144,20 @@
               SubnetId = "1";
               Announce = true;
             };
+
+            ipv6SendRAConfig = {
+              DNS = host.bridges.srv.Ipv6Address;
+              EmitDNS = true;
+              OtherInformation = true;
+            };
+
+            # Static ULA config
+            ipv6Prefixes = [
+              {
+                Assign = true;
+                Prefix = site.networks.srv.Prefix;
+              }
+            ];
 
           };
         };
@@ -137,19 +180,20 @@
         dnsdist = {
           enable = true;
           openFirewall = true;
-          backend = "2620:fe::fe";
-          #backend = inventory.overlay.sites.genesis.hosts.resolver.Ipv6Address;
+          backend = inventory.overlay.sites.genesis.hosts.resolver.Ipv6Address;
           acl = "::/0";
           #acl = inventory.overlay.sites.genesis.Prefix;
         };
 
         proxy = {
-          enable = false;
+          enable = true;
           openFirewall = true;
           domain = "maximizzar.org";
+          environmentFile = config.sops.secrets.ionos-acme.path;
+
           hosts = {
             authelia = {
-              enable = true;
+              enable = false;
               subdomain = "auth";
               backend = {
                 name = "auth";

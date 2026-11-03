@@ -13,15 +13,24 @@
     in
     {
       imports = [
+        ./_clients
+        ./_access_control.nix
+        ./_cookies.nix
+        ./_secrets.nix
         ./_settings.nix
       ];
+
       options.maximizzar.authServer = {
         enable = lib.mkEnableOption "Enable Auth Server for domain";
-        openFirewall = lib.mkEnableOption "";
+        openFirewall = lib.mkEnableOption "Open Authelia port 9091";
+        port = lib.mkOption {
+          default = 9091;
+          type = lib.types.int;
+        };
 
         hostName = lib.mkOption {
           type = lib.types.str;
-          default = "auth";
+          default = config.networking.hostName;
         };
         domain = lib.mkOption {
           type = lib.types.str;
@@ -29,7 +38,7 @@
         };
         fqdn = lib.mkOption {
           type = lib.types.str;
-          default = "${cfg.hostName}.${cfg.domain}";
+          default = config.networking.fqdn;
         };
 
         jwtSecretFile = lib.mkOption {
@@ -59,9 +68,31 @@
       };
 
       config = lib.mkIf cfg.enable {
-        services.authelia.instances."${cfg.domain}" = {
-          enable = true;
+        networking.firewall = lib.mkIf cfg.openFirewall {
+          allowedTCPPorts = [ cfg.port ];
+          allowedUDPPorts = [ cfg.port ];
         };
+
+        security.acme.certs."${cfg.fqdn}" = {
+          domain = cfg.fqdn;
+          webroot = "/var/lib/acme/acme-challenge";
+          group = "authelia-maximizzar.org";
+          postRun = "systemctl reload authelia-maximizzar.org";
+        };
+
+        services.authelia.instances."${cfg.domain}" = {
+          inherit (cfg) enable;
+
+          settings.server = {
+            address = "tcp://[::]:${toString cfg.port}";
+            tls = {
+              certificate = "/var/lib/acme/${cfg.fqdn}/fullchain.pem";
+              key = "/var/lib/acme/${cfg.fqdn}/key.pem";
+            };
+          };
+
+        };
+
       };
 
     };

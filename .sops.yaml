@@ -1,14 +1,17 @@
 keys:
+  # Clients
   - &workstation age1gfcez3w4rnjslewnuj4w9lct4gs2rvw0tkejlgqltml9wzqh398s7y73ev
 
-  - &gw-genesis age1ltkwfnrm22hsptmqszkz0ln5x2trsyhgmf8jxfgk73q0vxhtvqcqzqcf3z
+  # Servers
+  - &gw-genesis age17h655a66j9y08jk45fhdy9muaw5u5tsj3a87g83h356xmcazf56scpt7aq
+
   - &gw-nbg age1aqu6m6uggfjm9w7v8tcmg9j4c3cazwm6vfsflzvuev64sucm5yzsr9cgvm
   - &forgejo age1ckewh7qqxhmdknr7ctm5t3tmcjv996mhkwh3x5vq6vn66yqkn36q4ksjc4
   - &auth age1ppt46rmrw5lzaphhq3cwqpmkrfkhadhv6qtn2s9e74z0360aap3qwwm64z
   - &mealie age16yp0dpsl0sj0zysu3xrgpg4fr092t466lmrjdudy2fhmlst79esqtd5awm
 
 creation_rules:
-  - path_regex: hosts/gw-genesis/secrets\.yaml$
+  - path_regex: modules/hosts/gw-genesis/secrets\.yaml$
     age:
       - *workstation
       - *gw-genesis
@@ -18,19 +21,15 @@ creation_rules:
       - *workstation
       - *gw-nbg
 
-  - path_regex: hosts/forgejo/secrets\.yaml$
+  - path_regex: modules/hosts/forgejo/secrets\.yaml$
     age:
       - *workstation
       - *forgejo
 
-  - path_regex: hosts/auth/secrets\.yaml$
+  - path_regex: modules/hosts/auth/secrets\.yaml$
     age:
       - *workstation
       - *auth
-
-  - path_regex: hosts/factorio/secrets\.yaml$
-    age:
-      - *workstation
 
   - path_regex: hosts/mealie/secrets\.yaml$
     age:

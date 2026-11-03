@@ -9,6 +9,10 @@
 }:
 let
   site = "genesis";
+  service_types = [
+    "dns"
+    "proxy"
+  ];
   host = inventory.overlay.sites.genesis.hosts.gw;
 in
 {
@@ -20,7 +24,7 @@ in
 
   flake.deploy.nodes."${host.hostName}" = {
     hostname = host.Ipv6Address;
-    groups = [ site ];
+    groups = service_types ++ [ site ];
     profiles.system = {
       user = "root";
       sshUser = "maximizzar";

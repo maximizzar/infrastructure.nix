@@ -33,13 +33,15 @@
           resolved.enable = lib.mkForce false;
           dnsdist = {
             enable = true;
-            listenAddress = "[::]";
             extraConfig = ''
+              addLocal("[::]:53")
+
               -- Backend-Server
               newServer({address="${cfg.backend}"})
 
               -- access rules
-              setACL({"${cfg.acl}"})
+              addACL("192.168.178.0/24")
+              addACL("fd80:3aa8:691a::/48")
             '';
           };
         };

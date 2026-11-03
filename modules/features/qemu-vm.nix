@@ -12,7 +12,7 @@
       nixHardened
       networkingDefault
       sshServer
-      #self.nixosModules.sops
+      sops
 
       cliTooling
       inventory

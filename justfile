@@ -27,11 +27,14 @@ deploy-group group:
 
 # Edit Secrets from a specified host
 edit-secrets host:
-    sops edit hosts/{{ host }}/secrets.yaml
+    sops edit modules/hosts/{{ host }}/secrets.yaml
+
+update-secrets host:
+    sops updatekeys modules/hosts/{{ host }}/secrets.yaml
 
 # Get a Hosts age key using ssh-to-age
 get-agekey host:
-    ssh-to-age --run 'ssh-keyscan {{ host }} | ssh-to-age'
+    nix-shell -p ssh-to-age --run 'ssh-keyscan {{ host }} | ssh-to-age'
 
 # Updates nvfetcheres _sources and generates a git commit with changes
 nvfetcher:
