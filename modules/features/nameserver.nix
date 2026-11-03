@@ -50,18 +50,18 @@
         AAAA = [ { address = hosts.gw.Ipv6Address; } ];
 
         subdomains = {
-          auth.AAAA = [ hosts.gw.Ipv6Address ];
+          ns.AAAA = [ hosts.resolver.containers.nameserver.Ipv6Address ];
           ca.subdomains = {
             root.AAAA = [ "fd80:3aa8:691a:ff01:be24:11ff:fe6c:5622" ];
           };
+
+          auth.AAAA = [ hosts.gw.Ipv6Address ];
           forgejo = {
             AAAA = [ hosts.gw.Ipv6Address ];
             subdomains = {
               ssh.AAAA = [ hosts.forgejo.Ipv6Address ];
             };
           };
-
-          ns.AAAA = [ hosts.resolver.containers.nameserver.Ipv6Address ];
         }
         // lib.mapAttrs' (
           name: host:

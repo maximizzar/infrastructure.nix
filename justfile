@@ -5,6 +5,10 @@ default:
 build-disk-image flake:
     nix build .#{{ flake }}-image
 
+# Get Rid of log files from deploy-rs
+clean-logs:
+    rm logs/*.log
+
 # Push a QCow2 Disk-Image to a remote
 push-disk-image host remote_path:
     scp result/main.qcow2 {{ host }}:{{ remote_path }}
