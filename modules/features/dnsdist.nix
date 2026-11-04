@@ -21,19 +21,7 @@
         };
 
         acl = lib.mkOption {
-          type = lib.types.listOf (
-            lib.types.submodule {
-              Prefix = lib.mkOption {
-                type = lib.types.str;
-                description = "A Prefix like '2001:db8::'";
-              };
-
-              Size = lib.mkOption {
-                type = lib.types.int;
-                description = "The Prefix Size as an int: i.e. 32";
-              };
-            }
-          );
+          type = lib.types.listOf lib.types.str;
           default = [ ];
           description = "List of IP networks";
         };
@@ -53,7 +41,7 @@
               newServer({address="${cfg.backend}"})
 
               -- access rules
-              ${lib.concatStringsSep "\n" (map (net: ''addACL("${net.Prefix}/${toString net.Size}")'') cfg.acl)}
+              ${lib.concatStringsSep "\n" (map (net: ''addACL("${net}")'') cfg.acl)}
             '';
           };
         };

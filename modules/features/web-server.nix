@@ -48,20 +48,21 @@
           defaultText = lib.literalExpression "pkgs.nginxMainline";
           type = lib.types.package;
         };
+
         metrics = {
-          type = lib.types.submodule {
-            enable = lib.mkEnableOption "Enable NGINX Metrics Exporter";
-            allowed_hosts = {
-              type = lib.types.listOf lib.types.str;
-              default = [ ];
-            };
-            users = lib.types.listOf (
+          enable = lib.mkEnableOption "NGINX Metrics Exporter";
+
+          allowed_hosts = lib.mkOption {
+            type = lib.types.listOf lib.types.str;
+            default = [ ];
+          };
+
+          users = lib.mkOption {
+            type = lib.types.listOf (
               lib.types.submodule {
-                name = lib.mkOption {
-                  type = lib.types.str;
-                };
-                password = lib.mkOption {
-                  type = lib.types.str;
+                options = {
+                  name = lib.mkOption { type = lib.types.str; };
+                  password = lib.mkOption { type = lib.types.str; };
                 };
               }
             );
@@ -73,7 +74,7 @@
       config = lib.mkIf cfg.enable {
 
         # NGINX Metrics Exporter Configuration
-        services.prometheus.exporters.nginx = {
+        services.prometheus.exporters.nginx = lib.mkIf cfg.metrics.enable {
           inherit (cfg.metrics) enable;
 
           extraFlags = [
