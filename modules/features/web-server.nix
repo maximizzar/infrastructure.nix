@@ -11,6 +11,33 @@
     }:
     let
       cfg = config.maximizzar.webServer;
+      webConfig = {
+        tls_server_config = {
+          cert_file = "";
+          key_file = "";
+
+          client_auth_type = "RequireAndVerifyClientCert";
+          client_ca_file = "";
+
+          min_version = "TLS13";
+
+          http_server_config = {
+            http2 = true;
+            headers = {
+              X-Frame-Options = "deny";
+            };
+          };
+
+        };
+
+        basic_auth_users = builtins.listToAttrs (
+          map (user: {
+            inherit (user) name password;
+          }) cfg.users
+        );
+      };
+
+      webConfigFile = (pkgs.formats.yaml { }).generate "nginx-exporter-web-config.yml" webConfig;
     in
     {
       options.maximizzar.webServer = {
@@ -21,9 +48,38 @@
           defaultText = lib.literalExpression "pkgs.nginxMainline";
           type = lib.types.package;
         };
+        metrics = {
+          type = lib.types.submodule {
+            enable = lib.mkEnableOption "Enable NGINX Metrics Exporter";
+            allowed_hosts = {
+              type = lib.types.listOf lib.types.str;
+              default = [ ];
+            };
+            users = lib.types.listOf (
+              lib.types.submodule {
+                name = lib.mkOption {
+                  type = lib.types.str;
+                };
+                password = lib.mkOption {
+                  type = lib.types.str;
+                };
+              }
+            );
+            default = [ ];
+          };
+        };
       };
 
       config = lib.mkIf cfg.enable {
+
+        # NGINX Metrics Exporter Configuration
+        services.prometheus.exporters.nginx = {
+          inherit (cfg.metrics) enable;
+
+          extraFlags = [
+            "--web.config.file=${webConfigFile}"
+          ];
+        };
 
         # common NGINX settings
         services.nginx = {
