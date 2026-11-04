@@ -9,8 +9,8 @@
       Prefix = "fd80:3aa8:691a:ff00::/56";
 
       networks = {
-        gwbr = {
-          Name = "Containers on the gateway";
+        exec = {
+          Name = "Network for code runner";
           Prefix = "fd80:3aa8:691a:ff00::/64";
         };
 

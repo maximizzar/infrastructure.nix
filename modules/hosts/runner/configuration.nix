@@ -15,6 +15,7 @@
       imports = with self.nixosModules; [
         qemuVm
         forgejoRunner
+        forgejoRunnerSecrets
       ];
 
       disko.devices.disk.main = {
@@ -49,7 +50,8 @@
           url = "https://forgejo.maximizzar.org";
           instances.worker1 = {
             capacity = 2;
-            tokenFile = ""; # TODO (sops-nix)
+            uuid = "6a3ba246-adac-44c0-8fa7-e4bafaaaa9a0";
+            tokenFile = config.sops.secrets."runner/worker1/token".path;
           };
         };
 

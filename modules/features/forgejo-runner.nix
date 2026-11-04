@@ -35,6 +35,10 @@
                   default = cfg.url;
                 };
 
+                uuid = lib.mkOption {
+                  type = lib.types.str;
+                };
+
                 tokenFile = lib.mkOption {
                   type = lib.types.str;
                 };
@@ -59,29 +63,79 @@
         };
       };
 
-      config = lib.mkIf cfg.enable {
-        services.gitea-actions-runner = {
-          package = pkgs.forgejo-runner;
+      config = lib.mkIf cfg.enable (
+        let
+          yaml = pkgs.formats.yaml { };
 
-          instances = lib.mapAttrs (name: instance: {
-            inherit (instance) enable url tokenFile;
+          baseHostPackages = with pkgs; [
+            bash
+            coreutils
+            curl
+            gawk
+            gitMinimal
+            gnused
+            nodejs
+            wget
 
-            name = "${config.networking.hostName}-${name}";
-            labels = [ "nixos:host" ] ++ instance.labels;
-            hostPackages =
-              with pkgs;
-              [
-                bash
-                coreutils
-                git
-                nodejs
-                nix
-              ]
-              ++ instance.hostPackages;
-            settings.runner.capacity = instance.capacity;
-          }) cfg.instances;
-        };
-      };
+            nix
+          ];
+        in
+        {
+          systemd.services = lib.mapAttrs' (
+            name: instance:
+            let
+              unit = "forgejo-runner-${name}";
 
+              configFile = yaml.generate "${unit}.yml" {
+                runner = {
+                  inherit (instance) capacity;
+
+                  timeout = "1h";
+                  shutdown_timeout = "30s";
+                  labels = [ "nixos:host" ] ++ instance.labels;
+                };
+                server.connections = {
+                  "${name}" = {
+                    inherit (instance) url uuid;
+                    token_url = "file:///run/credentials/${unit}.service/token";
+                    fetch_interval = "30s";
+                  };
+                };
+              };
+            in
+            lib.nameValuePair unit {
+              description = "Forgejo runner ${name}";
+              wantedBy = [ "multi-user.target" ];
+              wants = [ "network-online.target" ];
+              after = [ "network-online.target" ];
+
+              path = baseHostPackages ++ instance.hostPackages;
+              environment.HOME = "/var/lib/${unit}";
+              restartIfChanged = false;
+
+              serviceConfig = {
+                ExecStart = lib.escapeShellArgs [
+                  (lib.getExe pkgs.forgejo-runner)
+                  "daemon"
+                  "--config"
+                  configFile
+                ];
+                LoadCredential = "token:${instance.tokenFile}";
+
+                DynamicUser = true;
+                StateDirectory = unit;
+                WorkingDirectory = "/var/lib/${unit}";
+                Restart = "on-failure";
+                RestartSec = 5;
+
+                PrivateTmp = true;
+                ProtectHome = true;
+                NoNewPrivileges = true;
+              };
+            }
+          ) (lib.filterAttrs (_: instance: instance.enable) cfg.instances);
+        }
+      );
     };
+
 }

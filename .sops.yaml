@@ -4,9 +4,11 @@ keys:
 
   # Servers
   - &gw-genesis age17h655a66j9y08jk45fhdy9muaw5u5tsj3a87g83h356xmcazf56scpt7aq
-
   - &gw-nbg age1aqu6m6uggfjm9w7v8tcmg9j4c3cazwm6vfsflzvuev64sucm5yzsr9cgvm
+
   - &forgejo age1ckewh7qqxhmdknr7ctm5t3tmcjv996mhkwh3x5vq6vn66yqkn36q4ksjc4
+  - &runner age13c5spyg0exmdf40qsnxhevefl8atse78yacdta4r5067a3m5su6su44x9r
+
   - &auth age1ppt46rmrw5lzaphhq3cwqpmkrfkhadhv6qtn2s9e74z0360aap3qwwm64z
   - &mealie age16yp0dpsl0sj0zysu3xrgpg4fr092t466lmrjdudy2fhmlst79esqtd5awm
 
@@ -25,6 +27,11 @@ creation_rules:
     age:
       - *workstation
       - *forgejo
+
+  - path_regex: modules/hosts/runner/secrets\.yaml$
+    age:
+      - *workstation
+      - *runner
 
   - path_regex: modules/hosts/auth/secrets\.yaml$
     age:

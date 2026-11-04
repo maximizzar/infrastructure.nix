@@ -16,6 +16,9 @@
 
       upstream_interface = "br0";
 
+      exec_bridge = "br3-exec";
+      exec_interface = "ens21";
+
       dmz_bridge = "br1-dmz";
       dmz_interface = "ens19";
 
@@ -51,6 +54,14 @@
       systemd.network = {
         # Create L2 Bridge Interfaces
         netdevs = {
+          "10-${exec_bridge}" = {
+            netdevConfig = {
+              Name = exec_bridge;
+              Kind = "bridge";
+              inherit (host.bridges.exec) MACAddress;
+            };
+          };
+
           "10-${dmz_bridge}" = {
             netdevConfig = {
               Name = dmz_bridge;
@@ -66,10 +77,16 @@
               inherit (host.bridges.srv) MACAddress;
             };
           };
+
         };
 
         # Attach interface to bridge
         networks = {
+          "20-${exec_interface}" = {
+            matchConfig.Name = exec_interface;
+            networkConfig.Bridge = exec_bridge;
+          };
+
           "20-${dmz_interface}" = {
             matchConfig.Name = dmz_interface;
             networkConfig.Bridge = dmz_bridge;
@@ -89,6 +106,42 @@
             };
           };
 
+          "30-${exec_bridge}" = {
+            matchConfig.Name = exec_bridge;
+            networkConfig = {
+              IPv6Forwarding = true;
+
+              # Address Generation
+              IPv6AcceptRA = false;
+              IPv6PrivacyExtensions = false;
+              IPv6LinkLocalAddressGenerationMode = "eui64";
+
+              IPv6SendRA = true;
+              DHCPPrefixDelegation = true;
+            };
+
+            dhcpPrefixDelegationConfig = {
+              UplinkInterface = upstream_interface;
+              SubnetId = "0";
+              Announce = true;
+            };
+
+            ipv6SendRAConfig = {
+              DNS = host.bridges.exec.Ipv6Address;
+              EmitDNS = true;
+              OtherInformation = true;
+            };
+
+            # Static ULA config
+            ipv6Prefixes = [
+              {
+                Assign = true;
+                Prefix = site.networks.exec.Prefix;
+              }
+            ];
+
+          };
+
           "30-${dmz_bridge}" = {
             matchConfig.Name = dmz_bridge;
             networkConfig = {
@@ -105,7 +158,7 @@
 
             dhcpPrefixDelegationConfig = {
               UplinkInterface = upstream_interface;
-              SubnetId = "0";
+              SubnetId = "1";
               Announce = true;
             };
 
@@ -141,7 +194,7 @@
 
             dhcpPrefixDelegationConfig = {
               UplinkInterface = upstream_interface;
-              SubnetId = "1";
+              SubnetId = "2";
               Announce = true;
             };
 
@@ -182,15 +235,8 @@
           openFirewall = true;
           backend = inventory.overlay.sites.genesis.hosts.resolver.Ipv6Address;
           acl = [
-            {
-              Prefix = "192.168.178.0";
-              Size = 24;
-            }
-
-            {
-              Prefix = "fd80:3aa8:691a::";
-              Size = 48;
-            }
+            "192.168.178.0/24"
+            inventory.overlay.Prefix
           ];
         };
 
