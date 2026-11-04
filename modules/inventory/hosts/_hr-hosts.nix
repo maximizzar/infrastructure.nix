@@ -20,10 +20,11 @@ in
     Ipv6Address = "fe80::1";
   };
 
-  hrserver = {
+  server = {
     hostName = "hrserver";
     domain = infra_domain;
 
+    Ipv4Address = "192.168.178.64";
     Ipv6Address = "fe80::1";
   };
 }

@@ -11,8 +11,4 @@ in
       self.nixosModules."${host}Configuration"
     ];
   };
-
-  perSystem = {
-    #packages."${host}-image" = self.nixosConfigurations.${host}.config.system.build.diskoImages;
-  };
 }
