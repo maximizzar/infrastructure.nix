@@ -47,6 +47,12 @@
           machines.enable = true;
         };
 
+        networking.default = {
+          enable = true;
+          Interface = "enp1s0";
+          MACAddress = host.MACAddress;
+        };
+
       };
 
       # List packages installed in system profile.

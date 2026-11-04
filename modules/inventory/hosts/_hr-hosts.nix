@@ -24,6 +24,7 @@ in
     hostName = "hrserver";
     domain = infra_domain;
 
+    MACAddress = "02:3c:3e:58:2e:95";
     Ipv4Address = "192.168.178.64";
     Ipv6Address = "fe80::1";
   };
