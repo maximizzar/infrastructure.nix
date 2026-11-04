@@ -1,7 +1,6 @@
 # SPDX-FileCopyrightText: 2026 maximizzar <mail@maximizzar.de>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-{ self, ... }:
 {
   flake.nixosModules.dnsdist =
     {
@@ -22,7 +21,21 @@
         };
 
         acl = lib.mkOption {
-          type = lib.types.str;
+          type = lib.types.listOf (
+            lib.types.submodule {
+              Prefix = lib.mkOption {
+                type = lib.types.str;
+                description = "A Prefix like '2001:db8::'";
+              };
+
+              Size = lib.mkOption {
+                type = lib.types.int;
+                description = "The Prefix Size as an int: i.e. 32";
+              };
+            }
+          );
+          default = [ ];
+          description = "List of IP networks";
         };
 
       };
@@ -40,8 +53,7 @@
               newServer({address="${cfg.backend}"})
 
               -- access rules
-              addACL("192.168.178.0/24")
-              addACL("fd80:3aa8:691a::/48")
+              ${lib.concatStringsSep "\n" (map (net: ''addACL("${net.Prefix}/${toString net.Size}")'') cfg.acl)}
             '';
           };
         };

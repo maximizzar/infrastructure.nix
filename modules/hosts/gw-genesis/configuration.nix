@@ -181,8 +181,17 @@
           enable = true;
           openFirewall = true;
           backend = inventory.overlay.sites.genesis.hosts.resolver.Ipv6Address;
-          acl = "::/0";
-          #acl = inventory.overlay.sites.genesis.Prefix;
+          acl = [
+            {
+              Prefix = "192.168.178.0";
+              Size = 24;
+            }
+
+            {
+              Prefix = "fd80:3aa8:691a::";
+              Size = 48;
+            }
+          ];
         };
 
         proxy = {
