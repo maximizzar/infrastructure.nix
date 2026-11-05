@@ -71,7 +71,7 @@
         # NGINX Metrics Exporter Configuration
         services = {
           nginx.statusPage = cfg.metrics.enable;
-          maximizzar.metrics.targets.nginx.port = config.services.prometheus.exporters.nginx.port;
+          #maximizzar.metrics.targets.nginx.port = config.services.prometheus.exporters.nginx.port;
           prometheus.exporters.nginx = lib.mkIf cfg.metrics.enable {
             inherit (cfg.metrics) enable;
 

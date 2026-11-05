@@ -62,6 +62,7 @@
               ssh.AAAA = [ hosts.forgejo.Ipv6Address ];
             };
           };
+          navidrome.AAAA = [ hosts.gw.Ipv6Address ];
         }
         // lib.mapAttrs' (
           name: host:

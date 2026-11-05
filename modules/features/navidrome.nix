@@ -21,6 +21,12 @@
         enable = lib.mkEnableOption "Navidrome Service";
         openFirewall = lib.mkEnableOption "Open Ports 80/443 (TCP) and 443 UDP";
 
+        environmentFile = lib.mkOption {
+          type = lib.types.str;
+          description = "Environment file, used to set any secret ND_* environment variables.";
+          default = null;
+        };
+
         subdomain = lib.mkOption {
           type = lib.types.str;
           default = config.networking.hostName;
@@ -52,7 +58,7 @@
         services = {
           # Navidrome Service configuration
           navidrome = {
-            inherit (cfg) enable;
+            inherit (cfg) enable environmentFile;
 
             plugins = with pkgs.navidromePlugins; [
               apple-music
@@ -61,9 +67,9 @@
 
             settings = {
               # Basic configuration
-              MusicFolder = "/mnt/music";
+              MusicFolder = "/media/music";
               LogLevel = "WARN";
-              Address = "unix:/server.socket";
+              Address = "unix:/navidrome.sock";
               BaseUrl = "https://${cfg.subdomain}.${cfg.domain}";
               EnableInsightsCollector = true;
 
@@ -79,12 +85,10 @@
               EnableWebPEncoding = true;
               ImageCacheSize = "256GB";
               LastFM = {
-                Enabled = false;
-                ApiKey = ""; # TODO add key with sops
-                Secret = ""; # TODO add key with sops
+                Enabled = true;
                 Language = "de,en";
               };
-              PasswordEncryptionKey = ""; # TODO add key with sops
+              # PasswordEncryptionKey = ""; # TODO add key with sops
               Prometheus = {
                 Enabled = false;
                 Password = ""; # TODO add key with sops
@@ -113,7 +117,7 @@
           };
 
           # VHost configuration
-          nginx.virtualHosts."forgejo" = {
+          nginx.virtualHosts."navidrome" = {
             serverName = cfg.fqdn;
 
             sslCertificate = "/var/lib/acme/${cfg.fqdn}/fullchain.pem";
@@ -128,10 +132,20 @@
             extraConfig = ''
               add_header Alt-Svc 'h3=":443"; ma=86400' always;
             '';
-            locations."/".proxyPass = "http://unix:/run/navidrome/server.socket:/";
+            locations."/".proxyPass = "http://unix:/run/navidrome/navidrome.sock:/";
           };
-
         };
+
+        # Ensure UNIX socket read can work
+
+        # Add navidrome group to NGINX groups
+        users.users.nginx.extraGroups = [
+          config.services.navidrome.group
+        ];
+
+        # This is needed for nginx to be able to read other processes
+        # directories in `/run`. Else it will fail with (13: Permission denied)
+        systemd.services.nginx.serviceConfig.ProtectHome = false;
       };
 
     };

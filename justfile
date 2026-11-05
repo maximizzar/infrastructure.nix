@@ -30,8 +30,8 @@ deploy-group group:
     deploy . --log-dir ./logs --skip-checks --groups {{ group }} --fast-connection true
 
 # Edit Secrets from a specified host
-edit-secrets host:
-    sops edit modules/hosts/{{ host }}/secrets.yaml
+edit-secrets site host:
+    sops edit modules/hosts/{{ site }}/{{ host }}/secrets.yaml
 
 update-secrets host:
     sops updatekeys modules/hosts/{{ host }}/secrets.yaml

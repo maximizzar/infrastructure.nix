@@ -94,6 +94,16 @@ in
     network = "runner";
   };
 
+  navidrome = {
+    hostName = "navidrome";
+    domain = service_domain;
+
+    MACAddress = "02:9d:b3:6c:ef:e1";
+    Ipv6Address = "fd80:3aa8:691a:ff02:9d:b3ff:fe6c:efe1";
+
+    network = "srv";
+  };
+
   opencloud = {
     hostName = "opencloud";
     domain = service_domain;
