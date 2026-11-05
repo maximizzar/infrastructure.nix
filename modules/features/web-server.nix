@@ -51,11 +51,7 @@
 
         metrics = {
           enable = lib.mkEnableOption "NGINX Metrics Exporter";
-
-          allowed_hosts = lib.mkOption {
-            type = lib.types.listOf lib.types.str;
-            default = [ ];
-          };
+          openFirewall = lib.mkEnableOption "";
 
           users = lib.mkOption {
             type = lib.types.listOf (
@@ -72,14 +68,17 @@
       };
 
       config = lib.mkIf cfg.enable {
-
         # NGINX Metrics Exporter Configuration
-        services.prometheus.exporters.nginx = lib.mkIf cfg.metrics.enable {
-          inherit (cfg.metrics) enable;
+        services = {
+          nginx.statusPage = cfg.metrics.enable;
+          maximizzar.metrics.targets.nginx.port = config.services.prometheus.exporters.nginx.port;
+          prometheus.exporters.nginx = lib.mkIf cfg.metrics.enable {
+            inherit (cfg.metrics) enable;
 
-          extraFlags = [
-            "--web.config.file=${webConfigFile}"
-          ];
+            extraFlags = [
+              "--web.config.file=${webConfigFile}"
+            ];
+          };
         };
 
         # common NGINX settings

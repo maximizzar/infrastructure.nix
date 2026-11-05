@@ -12,6 +12,7 @@
       nixHardened
       networkingDefault
       sshServer
+      metrics
       sops
 
       cliTooling

@@ -112,6 +112,12 @@
                 APP_SLOGAN = "Yet another forgejo instance!";
               };
 
+              actions = {
+                enabled = true;
+                LOG_RETENTION_DAYS = 90;
+                ARTIFACT_RETENTION_DAYS = 60;
+              };
+
               server = {
                 DOMAIN = "${cfg.fqdn}";
                 ROOT_URL = "https://forgejo.${cfg.baseDomain}/";
