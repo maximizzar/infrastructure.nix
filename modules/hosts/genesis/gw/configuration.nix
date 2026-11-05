@@ -265,8 +265,8 @@
               };
             };
 
-            mealie = {
-              enable = false;
+            navidrome = {
+              enable = true;
               backend = {
                 domain = services_domain;
                 port = 443;

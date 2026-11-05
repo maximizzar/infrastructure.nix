@@ -1,6 +1,13 @@
 default:
     just --list
 
+annotate *files:
+    reuse annotate \
+        --copyright="maximizzar <mail.maximizzar.de>" \
+        --license="GPL-3.0-or-later" "{{ files }}"
+
+    reuse lint
+
 # Build a QCow2 Disk-Image
 build-disk-image flake:
     nix build .#{{ flake }}-image
@@ -33,8 +40,8 @@ deploy-group group:
 edit-secrets site host:
     sops edit modules/hosts/{{ site }}/{{ host }}/secrets.yaml
 
-update-secrets host:
-    sops updatekeys modules/hosts/{{ host }}/secrets.yaml
+update-secrets site host:
+    sops updatekeys modules/hosts/{{ site }}/{{ host }}/secrets.yaml
 
 # Get a Hosts age key using ssh-to-age
 get-agekey host:

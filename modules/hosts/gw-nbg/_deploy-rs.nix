@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 maximizzar <mail.maximizzar.de>
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 {
   flake.deploy.nodes."${host.hostName}" = {
     hostname = "endpoint.nbg.prod.maximizzar.org";
