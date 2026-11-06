@@ -26,6 +26,8 @@
       };
 
       config = lib.mkIf cfg.enable {
+        # Ensure kernel has bridge modul loaded
+        boot.kernelModules = [ "bridge" ];
 
         # Ensure systemd-networkd is used
         networking = {
@@ -41,7 +43,7 @@
             netdevConfig = {
               Name = br;
               Kind = "bridge";
-              MACAddress = cfg.MACAddress;
+              inherit (cfg) MACAddress;
             };
           };
 
