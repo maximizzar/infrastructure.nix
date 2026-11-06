@@ -7,7 +7,7 @@
   peers = {
     genesis = {
       address = "fd95:948f:5cae::1/128";
-      publicKey = "7Uj9ff/olpiC3HbU+/6lRADIy1jjgrDoCWqw8DqqBxU=";
+      publicKey = "jRL5dyHo3fMuNiWNL84eEjwbrtca/3bBbxw9ua03QAo=";
     };
 
     nbg = {

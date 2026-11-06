@@ -29,6 +29,8 @@
       imports = with self.nixosModules; [
         qemuVm
         gw-genesisSecrets
+
+        vpn
         dnsdist
         proxy
       ];
@@ -228,6 +230,26 @@
           gitRemotes.enable = true;
           guests.enable = true;
           machines.enable = true;
+        };
+
+        vpn = {
+          enable = true;
+          openFirewall = true;
+          ips = [ inventory.transit.peers.genesis.address ];
+          privateKeyFile = config.sops.secrets."wg/private_key".path;
+          peers = [
+            {
+              name = "nbg";
+              publicKey = inventory.transit.peers.nbg.publicKey;
+              allowedIPs = [
+                inventory.transit.Prefix
+                inventory.overlay.Prefix
+              ];
+            }
+          ];
+
+          persistentKeepalive = 25;
+          endpoint = "[2a01:4f8:c2c:bd86:a2:57ff:fea0:dd70]:51820";
         };
 
         dnsdist = {

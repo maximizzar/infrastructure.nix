@@ -7,6 +7,7 @@
       defaultSopsFile = ./secrets.yaml;
       secrets = {
         "ionos-acme" = { };
+        "wg/private_key" = { };
       };
     };
   };

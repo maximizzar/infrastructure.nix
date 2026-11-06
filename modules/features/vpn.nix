@@ -6,7 +6,6 @@
     {
       config,
       lib,
-      pkgs,
       ...
     }:
     let
@@ -36,6 +35,15 @@
                   type = lib.types.str;
                 };
 
+                publicKey = lib.mkOption {
+                  type = lib.types.str;
+                };
+
+                allowedIPs = lib.mkOption {
+                  type = lib.types.listOf lib.types.str;
+                  default = [ ];
+                };
+
                 persistentKeepalive = lib.mkOption {
                   type = lib.types.int;
                   default = cfg.persistentKeepalive;
@@ -63,8 +71,10 @@
       };
 
       config = lib.mkIf cfg.enable {
+        boot.kernelModules = [ "wireguard" ];
+
         networking = {
-          firewall.allowedUDPPorts = lib.mkIf lib.openFirewall [
+          firewall.allowedUDPPorts = lib.mkIf cfg.openFirewall [
             cfg.port
           ];
 
@@ -72,9 +82,9 @@
             inherit (cfg) enable;
 
             interfaces.wg0 = {
+              allowedIPsAsRoutes = true;
               inherit (cfg) ips privateKeyFile;
 
-              allowedIPsAsRoutes = true;
               listenPort = cfg.port;
 
               peers = map (peer: {
