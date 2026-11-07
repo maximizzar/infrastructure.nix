@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 {
-  flake.nixosModules.grubBoot = { config, lib, ... }: {
+  flake.nixosModules.grubBoot = { config, ... }: {
     boot.loader.grub.enable = !config.boot.isContainer;
     boot.loader.grub = {
       efiSupport = true;

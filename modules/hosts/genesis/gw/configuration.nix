@@ -102,7 +102,9 @@
 
         # Configure Bridges on L3
         networks = {
-          "30${upstream_interface}" = {
+          "30-${upstream_interface}" = {
+            matchConfig.Name = upstream_interface;
+
             dhcpV6Config = {
               PrefixDelegationHint = "::/62";
             };

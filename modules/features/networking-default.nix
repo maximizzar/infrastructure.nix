@@ -56,7 +56,7 @@
           networks."30-${br}" = {
             matchConfig.Name = br;
             networkConfig = {
-              DHCP = "yes";
+              DHCP = lib.mkDefault "yes";
 
               IPv4Forwarding = lib.mkDefault true;
               IPv6Forwarding = lib.mkDefault true;

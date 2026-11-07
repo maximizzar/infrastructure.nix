@@ -14,12 +14,13 @@ keys:
   - &mealie age16yp0dpsl0sj0zysu3xrgpg4fr092t466lmrjdudy2fhmlst79esqtd5awm
 
 creation_rules:
-  - path_regex: hosts/gw-nbg/secrets\.yaml$
+  # site (nbg)
+  - path_regex: modules/hosts/nbg/gw/secrets\.yaml$
     age:
       - *workstation
       - *gw-nbg
 
-      # site (genesis)
+  # site (genesis)
   - path_regex: modules/hosts/genesis/gw/secrets\.yaml$
     age:
       - *workstation

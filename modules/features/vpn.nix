@@ -50,7 +50,7 @@
                 };
 
                 endpoint = lib.mkOption {
-                  type = lib.types.str;
+                  type = lib.types.nullOr lib.types.str;
                   default = cfg.endpoint;
                 };
 
@@ -66,7 +66,8 @@
         };
 
         endpoint = lib.mkOption {
-          type = lib.types.str;
+          type = lib.types.nullOr lib.types.str;
+          default = null;
         };
       };
 
@@ -94,7 +95,7 @@
                   persistentKeepalive
                   endpoint
                   ;
-                name = "Site: ${peer.name}";
+                name = "peer-${peer.name}";
               }) cfg.peers;
             };
           };
