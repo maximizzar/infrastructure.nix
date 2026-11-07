@@ -17,7 +17,7 @@
       ];
 
       disko.devices.disk.main = {
-        imageSize = "12G";
+        imageSize = "16G";
       };
 
       networking = {

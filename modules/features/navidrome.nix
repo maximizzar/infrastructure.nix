@@ -96,6 +96,8 @@
               RecentlyAddedByModTime = false;
 
               Scanner = {
+                GroupAlbumReleases = true;
+
                 WatcherWait = "30s";
                 ScanOnStartup = false;
                 PurgeMissing = "never";

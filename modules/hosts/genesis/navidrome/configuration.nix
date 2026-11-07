@@ -12,12 +12,15 @@
       host = inventory.overlay.sites.genesis.hosts.navidrome;
     in
     {
-
       imports = with self.nixosModules; [
         qemuVm
         navidromeSecrets
         navidrome
       ];
+
+      disko.devices.disk.main = {
+        imageSize = "12G";
+      };
 
       fileSystems."/media/music" = {
         device = "music";
