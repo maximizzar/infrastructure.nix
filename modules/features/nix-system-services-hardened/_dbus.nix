@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 maximizzar <mail.maximizzar.de>
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+{
+  systemd.services.dbus-broker.serviceConfig = {
+    NoNewPrivileges = true;
+    ProtectSystem = "strict";
+    ProtectControlGroups = true;
+    ProtectHome = true;
+    ProtectHostname = true;
+    ProtectKernelTunables = true;
+    ProtectKernelModules = true;
+    ProtectKernelLogs = true;
+    PrivateMounts = true;
+    PrivateDevices = true;
+    PrivateTmp = true;
+    RestrictSUIDSGID = true;
+    RestrictRealtime = true;
+    RestrictAddressFamilies = [
+      "AF_UNIX"
+    ];
+    RestrictNamespaces = true;
+    SystemCallErrorNumber = "EPERM";
+    SystemCallArchitectures = "native";
+    SystemCallFilter = [
+      "~@obsolete"
+      "~@resources"
+      "~@debug"
+      "~@mount"
+      "~@reboot"
+      "~@swap"
+      "~@cpu-emulation"
+    ];
+    LockPersonality = true;
+    IPAddressDeny = [
+      "0.0.0.0/0"
+      "::/0"
+    ];
+    MemoryDenyWriteExecute = true;
+    DevicePolicy = "closed";
+    UMask = 0077;
+  };
+}

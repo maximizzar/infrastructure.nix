@@ -1,13 +1,20 @@
-# SPDX-FileCopyrightText: 2026 maximizzar <mail@maximizzar.de>
-#
-# SPDX-License-Identifier: GPL-3.0-or-later
-
 default:
     just --list
 
+annotate *files:
+    reuse annotate \
+        --copyright="maximizzar <mail.maximizzar.de>" \
+        --license="GPL-3.0-or-later" "{{ files }}"
+
+    reuse lint
+
 # Build a QCow2 Disk-Image
 build-disk-image flake:
-    nix build .#{{ flake }}
+    nix build .#{{ flake }}-image
+
+# Get Rid of log files from deploy-rs
+clean-logs:
+    rm logs/*.log
 
 # Push a QCow2 Disk-Image to a remote
 push-disk-image host remote_path:
@@ -15,18 +22,26 @@ push-disk-image host remote_path:
 
 # Deploy a flake target to a remote
 deploy flake host:
-    nix run nixpkgs#nixos-rebuild -- switch --flake .#{{ flake }} --target-host "{{ host }}" --sudo
+    nixos-rebuild switch --flake .#{{ flake }} --target-host "{{ host }}" --sudo
 
+# Deploy and build a flake on a remote target
 deploy-build-remote flake host:
-    nix run nixpkgs#nixos-rebuild switch -- --flake .#{{ flake }} --target-host "{{ host }}" --build-host "{{ host }}" --sudo
+    nixos-rebuild switch --flake .#{{ flake }} --target-host "{{ host }}" --build-host "{{ host }}" --sudo
 
 # Deploy a flake to local system
 deploy-local flake:
     sudo nixos-rebuild switch --flake .#{{ flake }}
 
+# Use deploy-rs to deploy a group of hosts
+deploy-group group:
+    deploy . --log-dir ./logs --skip-checks --groups {{ group }} --fast-connection true
+
 # Edit Secrets from a specified host
-edit-secrets host:
-    nix run nixpkgs#sops -- edit hosts/{{ host }}/secrets.yaml
+edit-secrets site host:
+    sops edit modules/hosts/{{ site }}/{{ host }}/secrets.yaml
+
+update-secrets site host:
+    sops updatekeys modules/hosts/{{ site }}/{{ host }}/secrets.yaml
 
 # Get a Hosts age key using ssh-to-age
 get-agekey host:
@@ -38,7 +53,7 @@ nvfetcher:
     git stash push -m "temp-stash-for-nvfetcher"
 
     @echo "Updating nvfetcher sources"
-    nix run nixpkgs#nvfetcher
+    nvfetcher
 
     @echo "Committing sources"
     git add _sources
