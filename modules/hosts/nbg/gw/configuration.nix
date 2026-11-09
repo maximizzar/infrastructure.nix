@@ -25,6 +25,7 @@
         networkingDefault
         gw-nbgSecrets
         sops
+        containers
 
         self.nixosModules.inventory
         cliTooling
@@ -145,6 +146,31 @@
           gitRemotes.enable = true;
           guests.enable = true;
           machines.enable = true;
+        };
+
+        containers = {
+          pforgejo = {
+            localMacAddress = host.containers.pforgejo.MACAddress;
+            modules = [
+              {
+                networking.firewall.allowedTCPPorts = [ 22 ];
+                services.nginx = {
+                  enable = true;
+                  streamConfig = ''
+                    server {
+                      listen [::]:22;
+
+                      proxy_connect_timeout 10s;
+                      proxy_timeout 20s;
+
+                      proxy_pass [${inventory.overlay.sites.genesis.hosts.forgejo.Ipv6Address}]:22;
+                    }
+                  '';
+
+                };
+              }
+            ];
+          };
         };
 
         vpn = {
