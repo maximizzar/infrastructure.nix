@@ -5,13 +5,18 @@
 
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
-
-    wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
+    wrappers = {
+      url = "github:BirdeeHub/nix-wrapper-modules";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
 
-    psysonic = {
-      url = "github:Psysonic/psysonic?ref=release";
+    # Apps
+    psysonic.url = "github:Psysonic/psysonic?ref=release";
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     deploy-rs = {
