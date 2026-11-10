@@ -7,7 +7,6 @@
       self.nixosModules.systemdBoot
 
       inputs.disko.nixosModules.disko
-      inputs.nixos-facter-modules.nixosModules.facter
     ];
 
     hardware.facter.reportPath = ./qemu-vm-facter.json;
