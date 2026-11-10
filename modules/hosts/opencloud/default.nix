@@ -8,8 +8,11 @@
   ...
 }:
 let
-
-  host = inventory.overlay.sites.genesis.hosts.opencloud;
+  site = "genesis";
+  service_types = [
+    "web-service"
+  ];
+  host = inventory.overlay.sites."${site}".hosts.opencloud;
 in
 {
   flake.nixosConfigurations."${host.hostName}" = inputs.nixpkgs.lib.nixosSystem {
@@ -20,6 +23,7 @@ in
 
   flake.deploy.nodes."${host.hostName}" = {
     hostname = host.Ipv6Address;
+    groups = service_types ++ [ site ];
     profiles.system = {
       user = "root";
       sshUser = "maximizzar";

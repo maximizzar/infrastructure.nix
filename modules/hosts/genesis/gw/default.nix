@@ -13,7 +13,7 @@ let
     "dns"
     "proxy"
   ];
-  host = inventory.overlay.sites.genesis.hosts.gw;
+  host = inventory.overlay.sites."${site}".hosts.gw;
 in
 {
   flake.nixosConfigurations."${host.hostName}" = inputs.nixpkgs.lib.nixosSystem {

@@ -56,7 +56,6 @@ in
     domain = service_domain;
 
     MACAddress = "02:4d:b1:4b:74:4a";
-    Ipv4Address = "";
     Ipv6Address = "fd80:3aa8:691a:ff02:4d:b1ff:fe4b:744a";
 
     network = "srv";
@@ -67,7 +66,6 @@ in
     domain = service_domain;
 
     MACAddress = "02:b6:8f:5c:60:a8";
-    Ipv4Address = "";
     Ipv6Address = "fd80:3aa8:691a:ff01:b6:8fff:fe5c:60a8";
 
     network = "dmz";
@@ -78,7 +76,6 @@ in
     domain = service_domain;
 
     MACAddress = "02:c1:fa:65:d8:1e";
-    Ipv4Address = "";
     Ipv6Address = "fd80:3aa8:691a:ff02:c1:faff:fe65:d81e";
 
     network = "srv";
@@ -109,7 +106,6 @@ in
     domain = service_domain;
 
     MACAddress = "02:96:C0:45:32:46";
-    Ipv4Address = "";
     Ipv6Address = "fd80:3aa8:691a:ff02:96:c0ff:fe45:3246";
 
     network = "srv";
@@ -129,7 +125,6 @@ in
         domain = "${service_domain}";
 
         MACAddress = "02:38:58:c6:d3:83";
-        Ipv4Address = "";
         Ipv6Address = "fd80:3aa8:691a:ff02:38:58ff:fec6:d383";
       };
     };

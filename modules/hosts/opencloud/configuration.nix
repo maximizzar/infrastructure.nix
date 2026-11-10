@@ -6,57 +6,38 @@
     { config, inventory, ... }:
     let
       host = inventory.overlay.sites.genesis.hosts.opencloud;
-      fqdn = host.hostName + "." + host.domain;
+      modules = with self.nixosModules; [
+        qemuVm
+        opencloud
+      ];
     in
     {
-      imports = [
-        self.nixosModules.qemuVm
-        self.nixosModules.webServer
-      ];
-
-      services.opencloud = {
-        enable = true;
-        url = "https://${fqdn}";
-        environment = {
-          PROXY_TLS = "false"; # disable https when behind reverse-proxy
-        };
-      };
-
-      services.nginx.virtualHosts."${fqdn}" = {
-        forceSSL = true;
-        enableACME = true;
-        locations."/" = {
-          proxyPass = "http://${config.services.opencloud.address}:${toString config.services.opencloud.port}";
-          proxyWebsockets = false;
-        };
-      };
-
+      imports = modules;
       networking = {
         inherit (host) hostName domain;
         nftables.enable = true;
         firewall = {
           enable = true;
-
         };
       };
 
       # Own custom Modules
       maximizzar = {
-        # Enable various cli tools
-        cliTooling = {
-          enable = true;
-        };
-
         knownHosts = {
           gitRemotes.enable = true;
           guests.enable = true;
           machines.enable = true;
         };
 
+        opencloud = {
+          enable = true;
+          openFirewall = true;
+          domain = config.networking.domain + ":9200";
+        };
+
         networking.default.MACAddress = host.MACAddress;
       };
 
       users.users.maximizzar.enable = true;
-
     };
 }
