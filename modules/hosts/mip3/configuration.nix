@@ -10,7 +10,6 @@
     {
       imports = [
         self.nixosModules.systemdBoot
-        self.nixosModules.kernelLockdown
         ./_hardware-configuration.nix
 
         self.nixosModules.kdePlasma
@@ -31,13 +30,6 @@
       networking = {
         inherit (host) hostName domain;
         stevenblack.enable = true;
-        wireless = {
-          enable = true; # Enables wireless support via wpa_supplicant.
-          extraConfig = ''
-            mac_addr=1
-          '';
-
-        };
       };
 
       # Define a user account. Don't forget to set a password with ‘passwd’.
