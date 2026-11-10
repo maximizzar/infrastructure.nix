@@ -288,6 +288,11 @@
           enable = true;
           openFirewall = true;
           backend = inventory.overlay.sites.genesis.hosts.resolver.Ipv6Address;
+          backend64 = inventory.overlay.sites.genesis.hosts.resolver.containers.resolver64.Ipv6Address;
+          nat64Networks = [
+            inventory.overlay.sites.genesis.networks.srv.Prefix
+          ];
+
           acl = [
             "192.168.178.0/24"
             inventory.overlay.Prefix

@@ -129,8 +129,14 @@ in
         domain = "${service_domain}";
 
         MACAddress = "02:38:58:c6:d3:83";
-        Ipv4Address = "";
         Ipv6Address = "fd80:3aa8:691a:ff02:38:58ff:fec6:d383";
+      };
+      resolver64 = {
+        hostName = "resolver64";
+        domain = "${service_domain}";
+
+        MACAddress = "02:14:76:46:14:82";
+        Ipv6Address = "fd80:3aa8:691a:ff02:14:76ff:fe46:1482";
       };
     };
 

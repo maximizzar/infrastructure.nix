@@ -27,7 +27,6 @@
         sops
         containers
 
-        self.nixosModules.inventory
         cliTooling
 
         vpn

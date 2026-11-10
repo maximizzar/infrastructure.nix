@@ -3,11 +3,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 {
   flake.nixosModules.dnsdist =
-    {
-      config,
-      lib,
-      ...
-    }:
+    { config, lib, ... }:
     let
       cfg = config.maximizzar.dnsdist;
     in
@@ -18,6 +14,16 @@
 
         backend = lib.mkOption {
           type = lib.types.str;
+        };
+
+        backend64 = lib.mkOption {
+          type = lib.types.str;
+          default = cfg.backend;
+        };
+
+        nat64Networks = lib.mkOption {
+          type = lib.types.listOf lib.types.str;
+          default = [ ];
         };
 
         acl = lib.mkOption {
@@ -37,11 +43,32 @@
             extraConfig = ''
               addLocal("[::]:53")
 
-              -- Backend-Server
-              newServer({address="${cfg.backend}"})
+              local nat64nets = newNMG()
+              ${lib.concatStringsSep "\n" (map (net: ''nat64nets:addMask("${net}")'') cfg.nat64Networks)}
 
-              -- access rules
+              -- backends
+              newServer({
+                address = "${cfg.backend64}",
+                pool = "dns64"
+              })
+
+              newServer({
+                address = "${cfg.backend}",
+                pool = "default"
+              })
+
+              -- access-rules
               ${lib.concatStringsSep "\n" (map (net: ''addACL("${net}")'') cfg.acl)}
+
+              addAction(
+                NetmaskGroupRule(nat64nets),
+                PoolAction("dns64")
+              )
+
+              addAction(
+                AllRule(),
+                PoolAction("default")
+              )
             '';
           };
         };

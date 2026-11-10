@@ -6,6 +6,11 @@
     { config, ... }:
     let
       cfg = config.maximizzar.resolver;
+      quad9 = {
+        primary = "2620:fe::11";
+        secondary = "2620:fe::fe:11";
+        domain = "dns11.quad9.net";
+      };
     in
     {
       services.pdns-recursor = {
@@ -28,8 +33,8 @@
             {
               zone = ".";
               forwarders = [
-                "[2620:fe::11]:853"
-                "[2620:fe::fe:11]:853"
+                "[${quad9.primary}]:853"
+                "[${quad9.secondary}]:853"
               ];
             }
           ];
@@ -39,10 +44,10 @@
           {
             name = "Forward to Quad9";
             subnets = [
-              "2620:fe::11/128"
-              "2620:fe::fe:11/128"
+              "${quad9.primary}/128"
+              "${quad9.secondary}/128"
             ];
-            subject_name = "dns11.quad9.net";
+            subject_name = quad9.domain;
             validate_certificate = true;
           }
         ];

@@ -16,7 +16,6 @@
       sops
 
       cliTooling
-      inventory
     ];
 
     maximizzar = {
