@@ -10,7 +10,7 @@
     {
       options.maximizzar.resolver = {
         enable = lib.mkEnableOption "Enable Resolver";
-        blocklists.enable = lib.mkEnableOption "Enable DNS Blocking";
+        blocklists = lib.mkEnableOption "DNS Blocking";
         openFirewall = lib.mkEnableOption "Open Ports in Firewall";
         forward_zones = lib.mkOption {
           type = lib.types.listOf (
@@ -35,6 +35,8 @@
       };
 
       config = lib.mkIf cfg.openFirewall {
+        services.resolved.enable = lib.mkForce false;
+
         networking.firewall = {
           allowedTCPPorts = [ 53 ];
           allowedUDPPorts = [ 53 ];

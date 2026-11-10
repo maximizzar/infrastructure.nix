@@ -10,12 +10,19 @@
     }:
     let
       host = inventory.overlay.sites.genesis.hosts.resolver;
-    in
-    {
-      imports = with self.nixosModules; [
+      modules = with self.nixosModules; [
         qemuVm
         containers
         resolver
+      ];
+    in
+    {
+      imports = modules;
+
+      # DNS debug tooling
+      environment.systemPackages = with pkgs; [
+        dnsutils
+        dig
       ];
 
       networking = {
@@ -27,20 +34,12 @@
         };
       };
 
-      # Disable resolved, we roll own dns on this machine
-      services.resolved.enable = false;
-
-      # DNS debug tooling
-      environment.systemPackages = with pkgs; [
-        dnsutils
-        dig
-      ];
-
       # Own custom Modules
       maximizzar = {
         resolver = {
           enable = true;
           openFirewall = true;
+          blocklists = true;
 
           forward_zones = [
             {
@@ -67,6 +66,39 @@
               self.nixosModules.nameserver
             ];
           };
+
+          resolver64 = {
+            localMacAddress = host.containers.resolver64.MACAddress;
+            modules = [
+              self.nixosModules.resolver
+              {
+                maximizzar.resolver = {
+                  enable = true;
+                  openFirewall = true;
+                  blocklists = true;
+
+                  forward_zones = [
+                    {
+                      zone = "maximizzar.org";
+                      forwarders = [
+                        "[${host.containers.nameserver.Ipv6Address}]:53"
+                      ];
+                    }
+
+                    {
+                      zone = "maximizzar.io";
+                      forwarders = [
+                        "[fd80:3aa8:691a:ff03:fcd4:d2ff:fe1d:db65]:53"
+                      ];
+                    }
+
+                  ];
+                };
+                services.pdns-recursor.settings.recursor.dns64_prefix = "64:ff9b::/96";
+              }
+            ];
+          };
+
         };
 
         networking.default.MACAddress = host.MACAddress;

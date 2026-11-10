@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 {
-  flake.nixosModules.base = { lib, ... }: {
+  flake.nixosModules.nixSettings = { lib, ... }: {
     nix = {
       enable = true;
 
