@@ -13,7 +13,6 @@
         (modulesPath + "/installer/scan/not-detected.nix")
         (modulesPath + "/profiles/qemu-guest.nix")
 
-        inputs.nixos-facter-modules.nixosModules.facter
         inputs.disko.nixosModules.disko
       ];
 

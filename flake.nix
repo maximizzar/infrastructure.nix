@@ -5,10 +5,10 @@
 
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
-
-    wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
-
-    nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
+    wrapper-modules = {
+      url = "github:BirdeeHub/nix-wrapper-modules";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     psysonic = {
       url = "github:Psysonic/psysonic?ref=release";
