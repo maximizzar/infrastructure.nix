@@ -12,6 +12,15 @@
     let
       site = inventory.overlay.sites.genesis;
       host = site.hosts.gw;
+      modules = with self.nixosModules; [
+        qemuVm
+        gw-genesisSecrets
+
+        vpn
+        dnsdist
+        proxy
+      ];
+
       services_domain = "services.genesis.maximizzar.org";
 
       upstream_interface = "br0";
@@ -26,14 +35,8 @@
       srv_interface = "ens20";
     in
     {
-      imports = with self.nixosModules; [
-        qemuVm
-        gw-genesisSecrets
-
-        vpn
-        dnsdist
-        proxy
-      ];
+      imports = modules;
+      boot.kernelModules = [ "jool" ];
 
       environment.systemPackages = with pkgs; [
         dnsutils
@@ -41,7 +44,10 @@
       ];
 
       boot.kernel.sysctl = {
+        "net.ipv4.ip_forward" = "1";
         "net.ipv6.conf.all.forwarding" = "1";
+
+        "net.ipv4.conf.br0.rp_filter" = "2";
       };
 
       networking = {
@@ -50,6 +56,30 @@
         firewall = {
           enable = true;
 
+        };
+        jool = {
+          enable = true;
+          nat64.default = {
+            global.pool6 = "64:ff9b::/96";
+            pool4 = [
+              {
+                protocol = "TCP";
+                prefix = host.Ipv4Address + "/32";
+                "port range" = "1024-32767";
+              }
+              {
+                protocol = "UDP";
+                prefix = host.Ipv4Address + "/32";
+                "port range" = "1024-32767";
+              }
+              {
+                protocol = "ICMP";
+                prefix = host.Ipv4Address + "/32";
+                "port range" = "1024-32767";
+              }
+
+            ];
+          };
         };
       };
 
