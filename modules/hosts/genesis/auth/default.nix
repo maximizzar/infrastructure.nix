@@ -9,6 +9,7 @@
 }:
 let
   site = "genesis";
+  service_types = [ "auth" ];
   host = inventory.overlay.sites.genesis.hosts.auth;
 in
 {
@@ -20,7 +21,7 @@ in
 
   flake.deploy.nodes."${host.hostName}" = {
     hostname = host.Ipv6Address;
-    groups = [ site ];
+    groups = service_types ++ [ site ];
     profiles.system = {
       user = "root";
       sshUser = "maximizzar";
