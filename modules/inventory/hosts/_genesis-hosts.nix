@@ -78,8 +78,17 @@ in
     domain = service_domain;
 
     MACAddress = "02:c1:fa:65:d8:1e";
-    Ipv4Address = "";
     Ipv6Address = "fd80:3aa8:691a:ff02:c1:faff:fe65:d81e";
+
+    network = "srv";
+  };
+
+  monitoring = {
+    hostName = "monitoring";
+    domain = service_domain;
+
+    MACAddress = "02:7f:b7:59:d0:7a";
+    Ipv6Address = "fd80:3aa8:691a:ff02:7f:b7ff:fe59:d07a";
 
     network = "srv";
   };
