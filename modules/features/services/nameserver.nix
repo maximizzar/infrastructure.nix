@@ -51,23 +51,27 @@
 
         subdomains = {
           ns.AAAA = [ hosts.resolver.containers.nameserver.Ipv6Address ];
-          ca.subdomains = {
-            root.AAAA = [ "fd80:3aa8:691a:ff01:be24:11ff:fe6c:5622" ];
-          };
+          ca.subdomains.root.AAAA = [ "fd80:3aa8:691a:ff01:be24:11ff:fe6c:5622" ];
 
           auth.AAAA = [ hosts.gw.Ipv6Address ];
           forgejo = {
+            # Catchall does not work with subdomains that have subdomains.
+            # so we set an AAAA for forgejo as well
             AAAA = [ hosts.gw.Ipv6Address ];
             subdomains = {
               ssh.AAAA = [ hosts.forgejo.Ipv6Address ];
             };
           };
+          grafana.AAAA = [ hosts.gw.Ipv6Address ];
           navidrome.AAAA = [ hosts.gw.Ipv6Address ];
         }
         // lib.mapAttrs' (
           name: host:
           lib.nameValuePair (recordName host) {
             AAAA = [ host.Ipv6Address ];
+            subdomains = {
+              "*".CNAME = [ "${recordName host}" ];
+            };
           }
         ) (lib.filterAttrs (_: host: host.network != "lan") hosts);
       };

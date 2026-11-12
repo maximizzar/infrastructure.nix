@@ -6,10 +6,12 @@ keys:
   - &gw-genesis age17h655a66j9y08jk45fhdy9muaw5u5tsj3a87g83h356xmcazf56scpt7aq
   - &gw-nbg age1aqu6m6uggfjm9w7v8tcmg9j4c3cazwm6vfsflzvuev64sucm5yzsr9cgvm
 
+  - &monitoring age1vc80h4fpwzem6mskwp4ky8z7y47yhfrffl5qwyfrnvh8lq2qt59swu6mda
+  - &auth age1ppt46rmrw5lzaphhq3cwqpmkrfkhadhv6qtn2s9e74z0360aap3qwwm64z
+
   - &forgejo age1ckewh7qqxhmdknr7ctm5t3tmcjv996mhkwh3x5vq6vn66yqkn36q4ksjc4
   - &runner age13c5spyg0exmdf40qsnxhevefl8atse78yacdta4r5067a3m5su6su44x9r
 
-  - &auth age1ppt46rmrw5lzaphhq3cwqpmkrfkhadhv6qtn2s9e74z0360aap3qwwm64z
   - &navidrome age1l8lnc6slgm590pce6lwxgwl49wjgw52hg6gwzcltfpd3wrmcrqnq2s326w
   - &mealie age16yp0dpsl0sj0zysu3xrgpg4fr092t466lmrjdudy2fhmlst79esqtd5awm
 
@@ -26,6 +28,16 @@ creation_rules:
       - *workstation
       - *gw-genesis
 
+  - path_regex: modules/hosts/genesis/auth/secrets\.yaml$
+    age:
+      - *workstation
+      - *auth
+
+  - path_regex: modules/hosts/genesis/monitoring/secrets\.yaml$
+    age:
+      - *workstation
+      - *monitoring
+
   - path_regex: modules/hosts/genesis/forgejo/secrets\.yaml$
     age:
       - *workstation
@@ -35,11 +47,6 @@ creation_rules:
     age:
       - *workstation
       - *runner
-
-  - path_regex: modules/hosts/genesis/auth/secrets\.yaml$
-    age:
-      - *workstation
-      - *auth
 
   - path_regex: modules/hosts/genesis/navidrome/secrets\.yaml$
     age:

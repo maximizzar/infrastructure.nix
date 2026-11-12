@@ -36,6 +36,9 @@ deploy-local flake:
 deploy-group group:
     deploy . --log-dir ./logs --skip-checks --groups {{ group }} --fast-connection true
 
+generate-client-secret:
+    authelia crypto hash generate pbkdf2 --variant sha512 --random --random.length 48 --random.charset alphanumeric
+
 # Edit Secrets from a specified host
 edit-secrets site host:
     sops edit modules/hosts/{{ site }}/{{ host }}/secrets.yaml

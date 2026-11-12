@@ -9,6 +9,7 @@
         sources
 
         nixSettings
+        myLib
       ];
     in
     {

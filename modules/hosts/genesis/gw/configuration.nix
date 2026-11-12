@@ -324,6 +324,11 @@
               };
             };
 
+            grafana = {
+              enable = true;
+              backend.domain = "monitoring." + services_domain;
+            };
+
             navidrome = {
               enable = true;
               backend = {

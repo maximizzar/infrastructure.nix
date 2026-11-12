@@ -73,7 +73,7 @@
 
                     port = lib.mkOption {
                       type = lib.types.port;
-                      example = 443;
+                      default = 443;
                     };
                   };
 
