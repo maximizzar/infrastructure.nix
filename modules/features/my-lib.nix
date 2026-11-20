@@ -10,7 +10,7 @@
       ...
     }:
     {
-      _module.args.myLib = import ../lib {
+      _module.args.myLib = import ../../lib {
         inherit config lib pkgs;
       };
     };
