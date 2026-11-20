@@ -44,7 +44,6 @@
       maximizzar = {
         navidrome = {
           enable = true;
-          openFirewall = true;
           environmentFile = config.sops.secrets.navidrome_env.path;
         };
 

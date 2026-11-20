@@ -8,6 +8,14 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 Documentation for my Homelab!
 
+## TODOs:
+
+- [ ] extend gw-nbg with external ip fields and use them in endpoint and deploy
+      config
+- [ ] secure NGINX mertics endpoints with ip acls
+- [ ] put at least node exporter on all nodes in deployment
+- [ ] get other exporters up and running as needed
+
 ## Hosts
 
 - auth: Contains authelia for sso
@@ -16,10 +24,14 @@ Documentation for my Homelab!
 - gw-nbg: the cloud(tm) with site-to-site VPN
 - hrattic: a client-pc
 - mip3: a client-pc
-- prometheus: wip monitoring
+- monitoring: Prometheus and Grafana
 - resolver: dns resolution for my home
 - runner: WIP forgejo-runner
-- vaultwarden: WIP password manager Host
+
+## Planed
+
+- "homepage-dashboard" as a landing page to select a service
+- "wakapi" to track some stats. (maybe add to monitoring insted to own VM)
 
 ## Get started
 

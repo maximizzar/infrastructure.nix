@@ -147,6 +147,10 @@
           machines.enable = true;
         };
 
+        metrics = {
+          enable = true;
+        };
+
         containers = {
           pforgejo = {
             localMacAddress = host.containers.pforgejo.MACAddress;
@@ -210,8 +214,6 @@
         };
 
         proxy = {
-          enable = true;
-          openFirewall = true;
           domain = "maximizzar.org";
           environmentFile = config.sops.secrets.ionos-acme.path;
 
@@ -234,6 +236,11 @@
               };
             };
 
+            grafana = {
+              enable = true;
+              backend.domain = "monitoring." + services_domain;
+            };
+
             navidrome = {
               enable = true;
               backend = {
@@ -245,7 +252,7 @@
             prometheus = {
               enable = false;
               backend = {
-                domain = services_domain;
+                domain = "monitoring." + services_domain;
                 port = 443;
               };
             };

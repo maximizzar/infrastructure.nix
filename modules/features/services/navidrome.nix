@@ -19,7 +19,6 @@
 
       options.maximizzar.navidrome = {
         enable = lib.mkEnableOption "Navidrome Service";
-        openFirewall = lib.mkEnableOption "Open Ports 80/443 (TCP) and 443 UDP";
 
         environmentFile = lib.mkOption {
           type = lib.types.str;
@@ -29,25 +28,26 @@
 
         subdomain = lib.mkOption {
           type = lib.types.str;
+          description = "Subdomain under which the service gets consumed by clients";
           default = config.networking.hostName;
         };
 
         domain = lib.mkOption {
           type = lib.types.str;
+          description = "Domain under which the service gets consumed by clients";
           default = "maximizzar.org";
         };
 
         fqdn = lib.mkOption {
           type = lib.types.str;
+          description = "Should be the FQDN which points to the navidrome backend it self.";
           default = config.networking.fqdn;
         };
+
+        metrics.enable = lib.mkEnableOption "exposing navidrome server metrics";
       };
 
       config = lib.mkIf cfg.enable {
-        maximizzar.webServer = {
-          inherit (cfg) enable openFirewall;
-        };
-
         # ACME
         security.acme.certs.${cfg.fqdn} = {
           domain = cfg.fqdn;
@@ -90,7 +90,7 @@
               };
               # PasswordEncryptionKey = ""; # TODO add key with sops
               Prometheus = {
-                Enabled = false;
+                Enabled = cfg.metrics.enable;
                 Password = ""; # TODO add key with sops
               };
               RecentlyAddedByModTime = false;
@@ -119,22 +119,29 @@
           };
 
           # VHost configuration
-          nginx.virtualHosts."navidrome" = {
-            serverName = cfg.fqdn;
+          nginx.virtualHosts = {
+            "navidrome" = {
+              serverName = cfg.fqdn;
 
-            sslCertificate = "/var/lib/acme/${cfg.fqdn}/fullchain.pem";
-            sslCertificateKey = "/var/lib/acme/${cfg.fqdn}/key.pem";
-            sslTrustedCertificate = "/var/lib/acme/${cfg.fqdn}/chain.pem";
+              sslCertificate = "/var/lib/acme/${cfg.fqdn}/fullchain.pem";
+              sslCertificateKey = "/var/lib/acme/${cfg.fqdn}/key.pem";
+              sslTrustedCertificate = "/var/lib/acme/${cfg.fqdn}/chain.pem";
 
-            forceSSL = true;
-            kTLS = true;
-            enableACME = true;
+              forceSSL = true;
+              kTLS = true;
+              enableACME = true;
 
-            quic = true;
-            extraConfig = ''
-              add_header Alt-Svc 'h3=":443"; ma=86400' always;
-            '';
-            locations."/".proxyPass = "http://unix:/run/navidrome/navidrome.sock:/";
+              quic = true;
+              extraConfig = ''
+                add_header Alt-Svc 'h3=":443"; ma=86400' always;
+              '';
+              locations."/".proxyPass = "http://unix:/run/navidrome/navidrome.sock:/";
+            };
+
+            # Exposes the navidrome servers metrics under the metrics subdomain on /navidrome
+            "metrics".locations."/navidrome" = {
+              proxyPass = "http://unix:/run/navidrome/navidrome.sock:/metrics";
+            };
           };
         };
 

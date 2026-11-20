@@ -3,18 +3,21 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 {
   flake.nixosModules.vpn =
-    {
-      config,
-      lib,
-      ...
-    }:
+    { config, lib, ... }:
     let
       cfg = config.maximizzar.vpn;
+      modules = [
+        ./_exporter.nix
+        ./_firewall.nix
+        ./_kernelmodules.nix
+        ./_wireguard.nix
+      ];
     in
     {
+      imports = modules;
       options.maximizzar.vpn = {
         enable = lib.mkEnableOption "VPN Overlay Network Peer";
-        openFirewall = lib.mkEnableOption "";
+        openFirewall = lib.mkEnableOption "Let Peers initiate connection to this server by opening its port.";
         port = lib.mkOption {
           type = lib.types.int;
           default = 51820;
@@ -60,6 +63,20 @@
           );
         };
 
+        metrics = {
+          enable = lib.mkOption {
+            default = config.maximizzar.metrics.enable;
+            description = "NGINX protected metrics";
+          };
+
+          domain = lib.mkOption {
+            type = lib.types.str;
+            description = "Under which domain the hosts metrics will be exposed.";
+            default = config.maximizzar.metrics.domain;
+          };
+
+        };
+
         persistentKeepalive = lib.mkOption {
           type = lib.types.int;
           default = 25;
@@ -71,37 +88,5 @@
         };
       };
 
-      config = lib.mkIf cfg.enable {
-        boot.kernelModules = [ "wireguard" ];
-
-        networking = {
-          firewall.allowedUDPPorts = lib.mkIf cfg.openFirewall [
-            cfg.port
-          ];
-
-          wireguard = {
-            inherit (cfg) enable;
-
-            interfaces.wg0 = {
-              allowedIPsAsRoutes = true;
-              inherit (cfg) ips privateKeyFile;
-
-              listenPort = cfg.port;
-
-              peers = map (peer: {
-                inherit (peer)
-                  publicKey
-                  allowedIPs
-                  persistentKeepalive
-                  endpoint
-                  ;
-                name = "peer-${peer.name}";
-              }) cfg.peers;
-            };
-          };
-
-        };
-
-      };
     };
 }

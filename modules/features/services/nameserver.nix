@@ -9,12 +9,11 @@
       pkgs,
       ...
     }:
-
     let
       dns = inputs.dns;
       domain = "maximizzar.org";
-
       hosts = inventory.overlay.sites.genesis.hosts;
+      nbg_hosts = inventory.overlay.sites.nbg.hosts;
 
       # Convert the inventory FQDN into a zone-relative record name
       recordName =
@@ -51,29 +50,43 @@
 
         subdomains = {
           ns.AAAA = [ hosts.resolver.containers.nameserver.Ipv6Address ];
-          ca.subdomains = {
-            root.AAAA = [ "fd80:3aa8:691a:ff01:be24:11ff:fe6c:5622" ];
-          };
+          ca.subdomains.root.AAAA = [ "fd80:3aa8:691a:ff01:be24:11ff:fe6c:5622" ];
 
           auth.AAAA = [ hosts.gw.Ipv6Address ];
           forgejo = {
+            # Catchall does not work with subdomains that have subdomains.
+            # so we set an AAAA for forgejo as well
             AAAA = [ hosts.gw.Ipv6Address ];
             subdomains = {
               ssh.AAAA = [ hosts.forgejo.Ipv6Address ];
             };
           };
+          grafana.AAAA = [ hosts.gw.Ipv6Address ];
           navidrome.AAAA = [ hosts.gw.Ipv6Address ];
         }
+        # Site genesis
         // lib.mapAttrs' (
-          name: host:
+          _name: host:
           lib.nameValuePair (recordName host) {
             AAAA = [ host.Ipv6Address ];
+            subdomains = {
+              "*".CNAME = [ "${recordName host}" ];
+            };
           }
-        ) (lib.filterAttrs (_: host: host.network != "lan") hosts);
+        ) (lib.filterAttrs (_: host: host.network != "lan") hosts)
+        # Site nbg
+        // lib.mapAttrs' (
+          _name: host:
+          lib.nameValuePair (recordName host) {
+            AAAA = [ host.Ipv6Address ];
+            subdomains = {
+              "*".CNAME = [ "${recordName host}" ];
+            };
+          }
+        ) (lib.filterAttrs (_: host: host.network != "lan") nbg_hosts);
       };
 
       zoneFile = dns.lib.toString domain zone;
-
     in
     {
       environment.systemPackages = with pkgs; [

@@ -1,8 +1,7 @@
 # SPDX-FileCopyrightText: 2026 maximizzar <mail@maximizzar.de>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-{ self, ... }:
-{
+{ self, ... }: {
   flake.nixosModules.proxy =
     {
       config,
@@ -12,16 +11,10 @@
     }:
     let
       cfg = config.maximizzar.proxy;
-      services_domain = "services.genesis.maximizzar.org";
     in
     {
-      imports = with self.nixosModules; [
-        webServer
-      ];
-
+      imports = with self.nixosModules; [ webServer ];
       options.maximizzar.proxy = {
-        enable = lib.mkEnableOption "Enable a NGINX based reverse Proxy on this target";
-        openFirewall = lib.mkEnableOption "Open common web-ports in FW";
         package = lib.mkOption {
           default = pkgs.nginxMainline;
           defaultText = lib.literalExpression "pkgs.nginxMainline";
@@ -73,7 +66,7 @@
 
                     port = lib.mkOption {
                       type = lib.types.port;
-                      example = 443;
+                      default = 443;
                     };
                   };
 
@@ -101,17 +94,12 @@
           sslTrustedCertificate = "/var/lib/acme/${cfg.domain}/chain.pem";
         in
         {
-          maximizzar.webServer = {
-            inherit (cfg) enable openFirewall package;
-          };
-
           security.acme.certs."${cfg.domain}" = {
+            inherit (cfg) environmentFile domain;
             dnsProvider = "ionos";
-            environmentFile = cfg.environmentFile;
             dnsResolver = "[2620:fe::fe]:53";
             dnsPropagationCheck = false;
 
-            domain = cfg.domain;
             extraDomainNames = [ "*.${cfg.domain}" ];
             group = config.services.nginx.group;
 

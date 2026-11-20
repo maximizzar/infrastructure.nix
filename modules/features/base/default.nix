@@ -9,6 +9,9 @@
         sources
 
         nixSettings
+        myLib
+
+        metrics
       ];
     in
     {

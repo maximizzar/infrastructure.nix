@@ -12,7 +12,7 @@
       nixHardened
       networkingDefault
       sshServer
-      metrics
+      #metrics
       sops
 
       cliTooling
