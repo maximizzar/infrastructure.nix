@@ -5,13 +5,17 @@
   flake.nixosModules.base =
     let
       modules = with self.nixosModules; [
+        # nix-config
         inventory
         sources
-
         nixSettings
         myLib
 
+        # Services
         metrics
+
+        # programs
+        bash
       ];
     in
     {

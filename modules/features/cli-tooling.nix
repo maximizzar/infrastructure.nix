@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2026 maximizzar <mail@maximizzar.de>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-{
+{ self, ... }: {
   flake.nixosModules.cliTooling =
     {
       config,
@@ -25,12 +25,22 @@
         };
       };
 
+      imports =
+        let
+          modern = with self.nixosModules; [ bat ];
+          dev = with self.nixosModules; [ lazygit ];
+          sys = with self.nixosModules; [
+            bandwhich
+            htop
+          ];
+        in
+        lib.options cfg.modern modern ++ lib.options cfg.dev dev ++ lib.options cfg.sys sys;
+
       config = lib.mkIf cfg.enable {
         environment.systemPackages =
           lib.optionals cfg.modern (
             with pkgs;
             [
-              bat
               eza
             ]
           )
@@ -46,10 +56,8 @@
           ++ lib.optionals cfg.sys (
             with pkgs;
             [
-              bandwhich
               btop
               curl
-              htop
               dust
               duf
               wget
