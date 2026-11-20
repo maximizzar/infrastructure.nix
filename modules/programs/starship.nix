@@ -5,11 +5,11 @@
   flake.nixosModules.starship = { config, ... }: {
     programs.starship = {
       enable = true;
-      enableBashIntegration = config.programs.bash.enable;
-      enableFishIntegration = config.programs.fish.enable;
-      enableZshIntegration = config.programs.zsh.enable;
+      #enableBashIntegration = config.programs.bash.enable;
+      #enableFishIntegration = config.programs.fish.enable;
+      #enableZshIntegration = config.programs.zsh.enable;
 
-      presets = { };
+      presets = [ ];
       settings = {
         "$schema" = "https://starship.rs/config-schema.json";
         add_newline = true;
