@@ -300,8 +300,6 @@
         };
 
         proxy = {
-          enable = true;
-          openFirewall = true;
           domain = "maximizzar.org";
           environmentFile = config.sops.secrets.ionos-acme.path;
 
@@ -322,6 +320,11 @@
                 domain = services_domain;
                 port = 443;
               };
+            };
+
+            grafana = {
+              enable = true;
+              backend.domain = "monitoring." + services_domain;
             };
 
             navidrome = {

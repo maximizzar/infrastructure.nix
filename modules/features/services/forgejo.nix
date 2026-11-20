@@ -39,10 +39,6 @@
       };
 
       config = lib.mkIf cfg.enable {
-        maximizzar.webServer = {
-          inherit (cfg) enable openFirewall;
-        };
-
         # ACME
         security.acme.certs.${cfg.fqdn} = {
           domain = cfg.fqdn;

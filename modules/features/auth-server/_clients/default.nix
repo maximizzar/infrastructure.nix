@@ -4,6 +4,7 @@
 {
   imports = [
     ./forgejo.nix
+    ./grafana.nix
     ./mealie.nix
   ];
 }
