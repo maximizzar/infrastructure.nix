@@ -8,7 +8,7 @@
       host = inventory.overlay.sites.genesis.hosts.mip3;
     in
     {
-      imports = [
+      imports = with self.nixosModules; [
         self.nixosModules.systemdBoot
         ./_hardware-configuration.nix
 
@@ -17,6 +17,9 @@
         self.nixosModules.gaming
         self.nixosModules.virtualization
         self.nixosModules.psysonic
+
+        bash
+        carapace
       ];
 
       boot.initrd.luks.devices."luks-35770c58-e4d0-40c2-ac88-8586d43fb541".device =
