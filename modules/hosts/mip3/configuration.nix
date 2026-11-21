@@ -73,10 +73,7 @@
       # List packages installed in system profile.
       environment.systemPackages = with pkgs; [
         # bitwarden-desktop # currently insecure Electorn version
-        git
-        ffmpeg
 
-        home-manager
         keepassxc
         translate-shell
 
