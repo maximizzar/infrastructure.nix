@@ -5,4 +5,8 @@
   imports = [
     inputs.home-manager.flakeModules.home-manager
   ];
+  home-manager = {
+    useUserPackages = true;
+    useGlobalPkgs = true;
+  };
 }
