@@ -1,11 +1,12 @@
 # SPDX-FileCopyrightText: 2026 maximizzar <mail@maximizzar.de>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
+let
+  program = "ausweisapp";
+in
 {
-  flake.nixosModules.ausweisapp = {
-    programs.ausweisapp = {
-      enable = true;
-      openFirewall = true;
-    };
+  flake.nixosModules."${program}".programs."${program}" = {
+    enable = true;
+    openFirewall = true;
   };
 }
