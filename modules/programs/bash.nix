@@ -13,7 +13,6 @@
       programs.bash = {
         enable = true;
         blesh.enable = true;
-
       };
     };
 }
