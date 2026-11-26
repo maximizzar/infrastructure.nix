@@ -1,13 +1,9 @@
 # SPDX-FileCopyrightText: 2026 maximizzar <mail@maximizzar.de>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-{ self, inputs, ... }: {
+{ self, ... }: {
   flake.nixosModules.qemuVmHardware = { lib, ... }: {
-    imports = [
-      self.nixosModules.systemdBoot
-
-      inputs.disko.nixosModules.disko
-    ];
+    imports = [ self.nixosModules.systemdBoot ];
 
     hardware.facter.reportPath = ./qemu-vm-facter.json;
     boot.growPartition = true;

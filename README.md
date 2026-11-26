@@ -15,6 +15,7 @@ Documentation for my Homelab!
 - [ ] secure NGINX mertics endpoints with ip acls
 - [ ] put at least node exporter on all nodes in deployment
 - [ ] get other exporters up and running as needed
+- [ ] move users def into own modul, so it is not in base anymore
 
 ## Hosts
 

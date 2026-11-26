@@ -2,10 +2,10 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 let
-  service = "services-aria2";
+  service = "aria2";
 in
 {
-  flake.nixosModules."${service}".services."${service}" = {
+  flake.nixosModules."services-${service}".services."${service}" = {
     enable = true;
     settings = {
       enable-rpc = true;

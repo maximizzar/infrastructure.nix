@@ -11,12 +11,11 @@
       imports = with self.nixosModules; [
         hrserverHardware
 
-        base
+        host
         kernelLockdown
         nixHardened
         networkingDefault
         sshServer
-        sops
 
         cliTooling
       ];

@@ -9,17 +9,15 @@
     in
     {
       imports = with self.nixosModules; [
-        self.nixosModules.systemdBoot
+        systemdBoot
         ./_hardware-configuration.nix
 
-        self.nixosModules.kdePlasma
-        self.nixosModules.cliTooling
-        self.nixosModules.gaming
-        self.nixosModules.virtualization
-        self.nixosModules.psysonic
+        kdePlasma
+        cliTooling
+        music-production
+        gaming
 
-        bash
-        carapace
+        psysonic
       ];
 
       boot.initrd.luks.devices."luks-35770c58-e4d0-40c2-ac88-8586d43fb541".device =
@@ -47,6 +45,11 @@
       # Enable services the host runs
       services.openssh.enable = true;
 
+      musnix = {
+        kernel.realtime = false;
+        soundcardPciId = "03:00.6";
+      };
+
       # Own custom Modules
       maximizzar = {
         # Enable various cli tools
@@ -54,15 +57,6 @@
           enable = true;
           dev = true;
           sys = true;
-        };
-
-        # Enable qemu_kmv virtualization with libvirt virt-manager
-        virtualization = {
-          enable = true;
-          libvirt = {
-            enable = true;
-            useVirtmanager = true;
-          };
         };
 
         knownHosts = {

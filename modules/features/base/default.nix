@@ -16,6 +16,7 @@
 
         # programs
         bash
+
       ];
     in
     {

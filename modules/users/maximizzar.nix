@@ -2,11 +2,11 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 {
-  flake.nixosModules.base = { lib, ... }: {
+  flake.nixosModules.users = { config, lib, ... }: {
     users.users.maximizzar = {
       enable = lib.mkDefault false;
       description = "Maximilian";
-      extraGroups = lib.mkDefault [ "wheel" ];
+      extraGroups = [ "wheel" ] ++ lib.optional config.musnix.enable "audio";
       isNormalUser = true;
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDgHDCy2Ba2v4p71bY5pFr3YcYEbZi2ND9IMPrYMCgsc maximizzar@workstation"

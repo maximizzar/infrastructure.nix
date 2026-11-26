@@ -5,9 +5,6 @@
   flake.nixosModules.hrserverHardware = { lib, ... }: {
     imports = [
       self.nixosModules.systemdBoot
-
-      inputs.disko.nixosModules.disko
-      inputs.nixos-facter-modules.nixosModules.facter
     ];
 
     hardware.facter.reportPath = ./facter.json;

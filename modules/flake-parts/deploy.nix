@@ -15,7 +15,6 @@
       default = { };
     };
   };
-
   config.perSystem = { system, ... }: {
     checks = inputs.deploy-rs.lib.${system}.deployChecks self.deploy;
   };

@@ -21,10 +21,11 @@
     {
       imports = with self.nixosModules; [
         grubBoot
-        base
+        # Prevents infinite recursion
+        self.nixosModules.host
+
         networkingDefault
         gw-nbgSecrets
-        sops
         containers
 
         cliTooling

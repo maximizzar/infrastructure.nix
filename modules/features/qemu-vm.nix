@@ -4,17 +4,13 @@
 { self, ... }: {
   flake.nixosModules.qemuVm = { lib, ... }: {
     imports = with self.nixosModules; [
-      systemdBoot
       qemuVmHardware
+      host
 
-      base
       kernelLockdown
       nixHardened
       networkingDefault
       sshServer
-      #metrics
-      sops
-
       cliTooling
     ];
 
